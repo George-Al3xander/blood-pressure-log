@@ -3,9 +3,11 @@ import useZodValidate from '@/hooks/useZodValidate'
 import React from 'react'
 import { TUserRegisterData, UserRegisterSchema } from '../../../lib/auth/zodSchemas'
 import { Field } from '@/types/types'
-import { TextField } from '@mui/material'
+import { Button, Grid, Grid2Props, TextField } from '@mui/material'
 import { checkIfUserExists } from '../../../lib/mongo/utils'
 import toast from 'react-hot-toast'
+import { useTranslations } from 'next-intl'
+
 
 const registerUser = async (data: TUserRegisterData) => {
   const res =  await fetch(`/api/mongo/users`, {
@@ -22,50 +24,54 @@ const registerUser = async (data: TUserRegisterData) => {
      
 } 
 
-const RegisterForm = () => {
+const RegisterForm = () => {  
+  const t = useTranslations('auth');
 
-  const fields : Field<TUserRegisterData>[] = [
+  const fields : (Field<TUserRegisterData> & Grid2Props & {item?: boolean})[] = [
     { 
       name: "name_first", 
-      label: "First name" 
+      xs: 12,
+      md: 6,
     },
     { 
       name: "name_last", 
-      label: "Last name" 
+      xs: 12,
+      md: 6,
     },
     { 
       name: "email" , 
-      label: "Email"
+      xs: 12
     },
     { 
       name: "password",
       type: "password", 
-      label: 'Password' 
+      xs: 12
     },
     { 
       name: "confirmPassword",
-      label: "Confirm Password",
-      type: "password" 
+      type: "password",      
+      xs: 12
     },
-  ]
-  
-
+  ];
  
-  const {formState: {errors},isBusy,submitForm,register} = useZodValidate({
-    schema: UserRegisterSchema,
+  const {formState: {errors},isBusy,submitForm,register} = useZodValidate({    
     onValidationSuccess: registerUser, 
     type: "register",
     additionalCheck: [{
       path: "email",
-      message: "User with this email already exists",
+      messagePath: "existingUser",
       func: checkIfUserExists
     }]
   })
 
   return (<form onSubmit={submitForm}>
-    {fields.map(({name,type, ...props}) => {
-      return <TextField 
-        required
+    <Grid  spacing={2} container>
+    {fields.map(({name,type,xs,md, ...props}) => {
+      return <Grid  key={name +"-grid"}  xs={xs} md={md} item>
+        <TextField 
+        required  
+        fullWidth      
+        label={t(name)}
         type={type ?? 'text'}
         error={errors[name] != undefined}
         helperText={(errors[name] && errors) ? errors[name]!.message as string : "" }       
@@ -73,8 +79,10 @@ const RegisterForm = () => {
         {...props}
         {...register(name)}
       />
+      </Grid>
     })}
-    <button disabled={isBusy}>Click{isBusy && "ing"}</button>
+    </Grid>      
+    <Button type='submit' variant='contained' disabled={isBusy}>{isBusy ? t("btn_process") : t("btn")}</Button>
   </form>
   
   )

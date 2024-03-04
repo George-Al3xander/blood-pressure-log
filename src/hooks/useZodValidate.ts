@@ -4,14 +4,33 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { BodyReq, Schemas } from "@/app/api/zodValidate/route";
 import toast from "react-hot-toast";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import { UserRegisterSchema } from "../../lib/auth/zodSchemas";
+import { getRegisterSchema } from "../../lib/auth/actions";
 
 
 
-const useZodValidate = ({onValidationSuccess, schema,type,additionalCheck}:{onValidationSuccess: Function, schema: ZodSchema, type: Schemas, additionalCheck?: {func: (data: string) => Promise<boolean> | boolean, path: string,message: string}[]}) => {
 
+const useZodValidate = ({
+        onValidationSuccess,     
+        type,
+        additionalCheck
+    }:{
+        onValidationSuccess: Function,       
+        type: Schemas, 
+        additionalCheck?: {
+            func: (data: string) => Promise<boolean> | boolean, 
+            path: string,
+            messagePath: string
+        }[]
+    }) => {
 
-    const [extraCheck, setExtraCheck] = useState(false)
+   
+    const [extraCheck, setExtraCheck] = useState(false);
+    const t = useTranslations("zod")
+    const schema = UserRegisterSchema(t)
+   
     const formReturn = useForm({
         resolver: zodResolver(schema)
     });
@@ -23,8 +42,7 @@ const useZodValidate = ({onValidationSuccess, schema,type,additionalCheck}:{onVa
         const res = await fetch("/api/zodValidate", {
             method: "POST",
             body: JSON.stringify(body)
-        })
-
+        })      
         if(!res.ok) {
             toast.error("Submitting failed")
             return
@@ -49,7 +67,7 @@ const useZodValidate = ({onValidationSuccess, schema,type,additionalCheck}:{onVa
             setExtraCheck(true);
             let errCount = 0
             try {
-                for (const { func, path, message } of additionalCheck) {
+                for (const { func, path, messagePath } of additionalCheck) {
                     const val = getValues(path);
                     const res = await func(val);
             
@@ -58,7 +76,7 @@ const useZodValidate = ({onValidationSuccess, schema,type,additionalCheck}:{onVa
             
                         setError(path, {
                             type: "server",
-                            message
+                            message: t(`${path}.${messagePath}`)
                         });
                     }
                 }
@@ -68,13 +86,16 @@ const useZodValidate = ({onValidationSuccess, schema,type,additionalCheck}:{onVa
             if(errCount > 0) return;
         }       
         await onValidationSuccess(data)
-    }
+    };
     
     const submitForm = (e: FormEvent<HTMLFormElement>) => handleSubmit(onSubmit)(e);
     
-    const isBusy = [isSubmitting , isLoading, isValidating , extraCheck].includes(true)
     
-    return {...formReturn,extraCheck,isBusy, submitForm}
+    const isBusy = [isSubmitting , isLoading, isValidating ,extraCheck].includes(true);
+    
+    return {...formReturn,
+        extraCheck,
+        isBusy, submitForm}
 }
 
 export default useZodValidate

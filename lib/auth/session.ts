@@ -19,4 +19,4 @@ export const sessionOptions: SessionOptions ={
 
 export const defaultSession:SessionData = {
     isLoggedIn:false
-  }
+}

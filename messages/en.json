@@ -1,0 +1,44 @@
+{
+    "Index": {
+      "title": "Hello world!"
+    },
+    "auth": {
+      "name_first": "First name",
+      "name_last": "Last name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "btn": "Register",
+      "btn_process": "Registering..."
+    },
+    "zod": {
+      "name_first": {
+        "min": "First name must be at least 3 characters at length",
+        "max": "First name can't be longer than 256 characters"
+      },
+      "name_last": {
+        "min": "Last name must be at least 3 characters at length",
+        "max": "Last name can't be longer than 256 characters"
+      },
+      "email": {
+        "email": "Enter a valid email",
+        "min": "This field has to be filled.",
+        "length": "This field must be at least 3 characters at length.",
+        "existingUser": "User with this email already exists"
+      },
+      "password": {
+        "min": "Password must be at least 8 characters in length",
+        "max": "Password can't be longer than 15 characters",
+        "lowercase": "Password must contain at least one lowercase letter.",
+        "uppercase": "Password must contain at least one uppercase letter.",
+        "numeric": "Password must contain at least one numeric digit.",
+        "specialCharacter": "Password must contain at least one special character."
+      },
+      "confirmPassword": {
+        "min": "Password must be at least 8 characters in length",
+        "max": "Password can't be longer than 15 characters",
+        "equality": "Confirm password and password are not equal"
+      }
+    }
+    
+  }
