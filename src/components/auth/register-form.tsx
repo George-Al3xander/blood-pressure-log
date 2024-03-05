@@ -1,28 +1,14 @@
 "use client"
 import useZodValidate from '@/hooks/useZodValidate'
 import React from 'react'
-import { TUserRegisterData, UserRegisterSchema } from '../../../lib/auth/zodSchemas'
+import { TUserRegisterData } from '../../../lib/auth/zodSchemas'
 import { Field } from '@/types/types'
 import { Button, Grid, Grid2Props, TextField } from '@mui/material'
-import { checkIfUserExists } from '../../../lib/mongo/utils'
-import toast from 'react-hot-toast'
+import { checkIfUserExists, registerUser } from '../../../lib/mongo/utils'
 import { useTranslations } from 'next-intl'
 
 
-const registerUser = async (data: TUserRegisterData) => {
-  const res =  await fetch(`/api/mongo/users`, {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-type": "application/json"
-    }
-  }) 
-  const dataRes = await res.json()
-  if(dataRes.status == 500) {
-    toast.error("Failed creating user")
-  }
-     
-} 
+
 
 const RegisterForm = () => {  
   const t = useTranslations('auth');
@@ -56,10 +42,10 @@ const RegisterForm = () => {
  
   const {formState: {errors},isBusy,submitForm,register} = useZodValidate({    
     onValidationSuccess: registerUser, 
-    type: "register",
+    type: "register",   
     additionalCheck: [{
       path: "email",
-      messagePath: "existingUser",
+      messagePath: "email.existingUser",
       func: checkIfUserExists
     }]
   })
@@ -82,7 +68,7 @@ const RegisterForm = () => {
       </Grid>
     })}
     </Grid>      
-    <Button type='submit' variant='contained' disabled={isBusy}>{isBusy ? t("btn_process") : t("btn")}</Button>
+    <Button type='submit' variant='contained' disabled={isBusy}>{isBusy ? t("btn_register.process") : t("btn_register.default")}</Button>
   </form>
   
   )

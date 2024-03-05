@@ -2,37 +2,33 @@
 import {  ZodSchema } from "zod";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { BodyReq, Schemas } from "@/app/api/zodValidate/route";
+import { BodyReq, Schemas, schemas } from "@/app/api/zodValidate/route";
 import toast from "react-hot-toast";
 import { FormEvent, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { UserRegisterSchema } from "../../lib/auth/zodSchemas";
 import { getRegisterSchema } from "../../lib/auth/actions";
+import { AdditionalCheckItem, IntlSchema } from "@/types/types";
 
 
 
 
 const useZodValidate = ({
         onValidationSuccess,     
-        type,
+        type,        
         additionalCheck
     }:{
         onValidationSuccess: Function,       
-        type: Schemas, 
-        additionalCheck?: {
-            func: (data: string) => Promise<boolean> | boolean, 
-            path: string,
-            messagePath: string
-        }[]
+        type: Schemas,        
+        additionalCheck?: AdditionalCheckItem[]
     }) => {
 
    
     const [extraCheck, setExtraCheck] = useState(false);
-    const t = useTranslations("zod")
-    const schema = UserRegisterSchema(t)
-   
+    const t = useTranslations("zod")    
+    const schema = schemas[type]
     const formReturn = useForm({
-        resolver: zodResolver(schema)
+        resolver: zodResolver(schema(t))
     });
 
     const {handleSubmit,setError, getValues, formState: {isSubmitting,errors,isLoading, isValidating}} = formReturn
@@ -44,7 +40,7 @@ const useZodValidate = ({
             body: JSON.stringify(body)
         })      
         if(!res.ok) {
-            toast.error("Submitting failed")
+            toast.error(t("submit.fail"))
             return
         }
     
@@ -65,20 +61,39 @@ const useZodValidate = ({
   
         if(additionalCheck) {
             setExtraCheck(true);
-            let errCount = 0
+            let errCount = 0;   
             try {
                 for (const { func, path, messagePath } of additionalCheck) {
-                    const val = getValues(path);
-                    const res = await func(val);
-            
-                    if (!res) {
-                        errCount = errCount + 1;
-            
-                        setError(path, {
-                            type: "server",
-                            message: t(`${path}.${messagePath}`)
-                        });
-                    }
+                    if(typeof path == "string") {                     
+                        const val = getValues(path);
+                        const res = await func(val);
+                        console.log(res)
+                        if(!res) {
+                            errCount = errCount + 1;
+                            setError(path, {
+                                type: "server",
+                                message: t(`${path}.${messagePath}`)
+                            });
+                        }
+                    } else {
+                        const val = getValues(path);
+                        const pathMap = path.map((p,index) => [p, val[index]]) as readonly (readonly [unknown, unknown])[]
+                        const entries = new Map(pathMap);
+                        const obj = Object.fromEntries(entries)
+                        
+                        const res = await func(obj);
+                        
+                        if (!res) {
+                            errCount = errCount + 1;
+                            for(const pathItem of path) {
+                                setError(pathItem, {
+                                    type: "server",
+                                    message: t(messagePath)
+                                });
+                            }
+                        }
+                    }         
+                    
                 }
             } finally {
                 setExtraCheck(false);               

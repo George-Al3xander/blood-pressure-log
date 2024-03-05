@@ -1,8 +1,5 @@
 import {z} from "zod"
-import User from "../mongo/schemas/user"
-import {  connectToDatabase, disconnectFromDatabase } from "../mongo"
-// import bcrypt from "bcrypt"
- import bcrypt from "bcryptjs"
+
 
 
 export const UserRegisterSchema =  (t: (arg: string) => string) => z.object({

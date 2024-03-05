@@ -6,10 +6,10 @@ import { getTranslations } from "next-intl/server";
 export type Schemas = "login" | "register" | "report"
 export type BodyReq = {data: unknown, type: Schemas}
 
-const schemas = {
+export const schemas = {
     login: UserLoginSchema,
     register:UserRegisterSchema,
-    //report:  UserLoginSchema
+    report:  UserLoginSchema
     //report: ReportSchema
 }
 

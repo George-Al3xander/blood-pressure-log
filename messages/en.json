@@ -8,8 +8,18 @@
       "email": "Email",
       "password": "Password",
       "confirmPassword": "Confirm Password",
-      "btn": "Register",
-      "btn_process": "Registering..."
+      "btn_login": {
+        "default": "Login",
+        "process": "Logging"
+      },
+      "btn_register": {
+        "default": "Register",
+        "process": "Registering"
+      },      
+      "loginResult": {
+        "success": "Successful login",
+        "fail": "Login failed."
+      }
     },
     "zod": {
       "name_first": {
@@ -38,6 +48,15 @@
         "min": "Password must be at least 8 characters in length",
         "max": "Password can't be longer than 15 characters",
         "equality": "Confirm password and password are not equal"
+      },
+      "submit": {
+        "success": "Successfully submitted.",
+        "fail": "Submitting failed."
+      },
+      "invalidCredentials": "Invalid email or password.",
+      "userCreation": {
+        "success": "User created",
+        "fail": "Failed creating user"
       }
     }
     
