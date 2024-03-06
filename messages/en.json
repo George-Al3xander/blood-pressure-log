@@ -19,7 +19,12 @@
       "loginResult": {
         "success": "Successful login",
         "fail": "Login failed."
-      }
+      },
+      "loginPageLink":"Don't have an account? Sign up",
+      "registerPageLink": "Already have an account? Log in",
+      "welcomeTitle": "Welcome to BPL!👋🏻",
+      "loginMessage": "Please sign in to your account and start the tracking",      
+      "registerMessage": "Please register to create an account and start the tracking"
     },
     "zod": {
       "name_first": {

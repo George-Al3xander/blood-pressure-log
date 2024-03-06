@@ -1,5 +1,3 @@
-import { Typography } from '@mui/material';
-import {useTranslations} from 'next-intl';
 import { redirect } from 'next/navigation';
 
 

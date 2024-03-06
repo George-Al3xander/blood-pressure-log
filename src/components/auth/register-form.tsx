@@ -3,15 +3,17 @@ import useZodValidate from '@/hooks/useZodValidate'
 import React from 'react'
 import { TUserRegisterData } from '../../../lib/auth/zodSchemas'
 import { Field } from '@/types/types'
-import { Button, Grid, Grid2Props, TextField } from '@mui/material'
+import { Button, Grid, Grid2Props,  TextField } from '@mui/material'
 import { checkIfUserExists, registerUser } from '../../../lib/mongo/utils'
 import { useTranslations } from 'next-intl'
 
 
 
 
+
 const RegisterForm = () => {  
-  const t = useTranslations('auth');
+  
+  const t = useTranslations("auth")
 
   const fields : (Field<TUserRegisterData> & Grid2Props & {item?: boolean})[] = [
     { 
@@ -39,8 +41,8 @@ const RegisterForm = () => {
       xs: 12
     },
   ];
- 
-  const {formState: {errors},isBusy,submitForm,register} = useZodValidate({    
+
+  const {formState: {errors},isBusy,submitForm,register} = useZodValidate({  
     onValidationSuccess: registerUser, 
     type: "register",   
     additionalCheck: [{
@@ -50,8 +52,8 @@ const RegisterForm = () => {
     }]
   })
 
-  return (<form onSubmit={submitForm}>
-    <Grid  spacing={2} container>
+  return (<Grid item component={"form"} onSubmit={submitForm}>
+    <Grid  spacing={2} container>   
     {fields.map(({name,type,xs,md, ...props}) => {
       return <Grid  key={name +"-grid"}  xs={xs} md={md} item>
         <TextField 
@@ -67,10 +69,15 @@ const RegisterForm = () => {
       />
       </Grid>
     })}
+      <Grid item xs={12}>
+          <Button 
+            fullWidth
+            type='submit' 
+            variant='contained' 
+            disabled={isBusy}>{isBusy ? t("btn_register.process") : t("btn_register.default")}</Button>
+      </Grid>      
     </Grid>      
-    <Button type='submit' variant='contained' disabled={isBusy}>{isBusy ? t("btn_register.process") : t("btn_register.default")}</Button>
-  </form>
-  
+  </Grid>  
   )
 }
 

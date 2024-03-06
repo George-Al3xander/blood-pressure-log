@@ -1,7 +1,6 @@
 import {z} from "zod"
 
 
-
 export const UserRegisterSchema =  (t: (arg: string) => string) => z.object({
   name_first: z.string().min(3, t("name_first.min")).max(256, t("name_first.max")),
   name_last: z.string().min(3, t("name_last.min")).max(256, t("name_last.max")),
@@ -22,6 +21,8 @@ export const UserRegisterSchema =  (t: (arg: string) => string) => z.object({
   message: t("confirmPassword.equality"), 
   path: ["confirmPassword"]
 })
+
+
 
 
 export const UserLoginSchema = (t: (arg: string) => string) =>  z.object({

@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { UserRegisterSchema } from "../../lib/auth/zodSchemas";
 import { getRegisterSchema } from "../../lib/auth/actions";
 import { AdditionalCheckItem, IntlSchema } from "@/types/types";
+import { getTranslations } from "next-intl/server";
 
 
 
@@ -16,8 +17,8 @@ import { AdditionalCheckItem, IntlSchema } from "@/types/types";
 const useZodValidate = ({
         onValidationSuccess,     
         type,        
-        additionalCheck
-    }:{
+        additionalCheck    
+    }:{      
         onValidationSuccess: Function,       
         type: Schemas,        
         additionalCheck?: AdditionalCheckItem[]
@@ -25,8 +26,12 @@ const useZodValidate = ({
 
    
     const [extraCheck, setExtraCheck] = useState(false);
-    const t = useTranslations("zod")    
+ 
     const schema = schemas[type]
+    const t = useTranslations("zod")
+    
+   
+
     const formReturn = useForm({
         resolver: zodResolver(schema(t))
     });
@@ -40,7 +45,7 @@ const useZodValidate = ({
             body: JSON.stringify(body)
         })      
         if(!res.ok) {
-            toast.error(t("submit.fail"))
+            //toast.error(t("submit.fail"))
             return
         }
     
@@ -112,5 +117,8 @@ const useZodValidate = ({
         extraCheck,
         isBusy, submitForm}
 }
+
+
+export type UseZodValidateResult = ReturnType<typeof useZodValidate>
 
 export default useZodValidate

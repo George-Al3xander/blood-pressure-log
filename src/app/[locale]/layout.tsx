@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast';
 const inter = Inter({ subsets: ["latin"] });
 import { Container } from '@mui/material';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
+import Header from '@/components/header';
 
 export const metadata: Metadata = {
   title: "Blood Pressure Log",
@@ -24,11 +25,12 @@ export default function RootLayout({
     <html lang={locale}>
       <body className={inter.className}>
       <AppRouterCacheProvider>
-        <Container component={"div"}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-        {children}
-        </NextIntlClientProvider>
-        </Container>
+        <Header locale={locale}/>
+          <Container sx={{mt:"5rem"}} component={"div"}>
+            <NextIntlClientProvider locale={locale} messages={messages}>
+                  {children}
+            </NextIntlClientProvider>
+          </Container>
         <Toaster />
       </AppRouterCacheProvider>
         </body>
