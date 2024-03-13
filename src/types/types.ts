@@ -1,4 +1,6 @@
-import {TextFieldProps } from "@mui/material"
+import {SxProps, TableCellProps, TableRowProps, TextFieldProps, TypographyProps } from "@mui/material"
+import { OpUnitType } from "dayjs";
+import { Control } from "react-hook-form";
 import { ZodSchema, string } from "zod"
 
 
@@ -21,3 +23,27 @@ export type AdditionalCheckItem = {
     path:  string | readonly string[],
     messagePath: string
 }
+
+export type LogReport = {
+    date: string,
+    sys:number,
+    dia: number,
+    _id: string,
+    pulse: number,
+    rating: 5 | 4 | 3 | 2 | 1  ,
+    notes: string, // e.g.
+}
+//'Excellent' | 'Very Good' | 'Good' | 'Fair' | 'Poor',
+
+export type GroupCell = string | TableCellProps
+
+export type GroupItem = {
+    property: OpUnitType,
+    children?: GroupItem
+}
+
+export type GroupByTypes = { [key: string]: GroupItem }
+
+export type LabelStyling = { [key in OpUnitType]: TypographyProps}
+
+export type CustomInput = {control: Control, defaultValue?:string, error?:string}

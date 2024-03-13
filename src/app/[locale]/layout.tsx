@@ -6,7 +6,10 @@ const inter = Inter({ subsets: ["latin"] });
 import { Container } from '@mui/material';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import Header from '@/components/header';
-
+import dayjs from 'dayjs';
+import 'dayjs/locale/uk';
+import 'dayjs/locale/en-gb';
+import "../../globals.css"
 export const metadata: Metadata = {
   title: "Blood Pressure Log",
   description: "Watch your pressure",
@@ -20,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const messages = useMessages();
-  
+  dayjs.locale(locale)
   return (
     <html lang={locale}>
       <body className={inter.className}>

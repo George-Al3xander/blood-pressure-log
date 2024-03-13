@@ -8,6 +8,32 @@ import { checkIfUserExists, registerUser } from '../../../lib/mongo/utils'
 import { useTranslations } from 'next-intl'
 
 
+const fields : (Field<TUserRegisterData> & Grid2Props & {item?: boolean})[] = [
+  { 
+    name: "name_first", 
+    xs: 12,
+    md: 6,
+  },
+  { 
+    name: "name_last", 
+    xs: 12,
+    md: 6,
+  },
+  { 
+    name: "email" , 
+    xs: 12
+  },
+  { 
+    name: "password",
+    type: "password", 
+    xs: 12
+  },
+  { 
+    name: "confirmPassword",
+    type: "password",      
+    xs: 12
+  },
+];
 
 
 
@@ -15,32 +41,6 @@ const RegisterForm = () => {
   
   const t = useTranslations("auth")
 
-  const fields : (Field<TUserRegisterData> & Grid2Props & {item?: boolean})[] = [
-    { 
-      name: "name_first", 
-      xs: 12,
-      md: 6,
-    },
-    { 
-      name: "name_last", 
-      xs: 12,
-      md: 6,
-    },
-    { 
-      name: "email" , 
-      xs: 12
-    },
-    { 
-      name: "password",
-      type: "password", 
-      xs: 12
-    },
-    { 
-      name: "confirmPassword",
-      type: "password",      
-      xs: 12
-    },
-  ];
 
   const {formState: {errors},isBusy,submitForm,register} = useZodValidate({  
     onValidationSuccess: registerUser, 

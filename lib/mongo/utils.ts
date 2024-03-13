@@ -1,5 +1,5 @@
 import toast from "react-hot-toast"
-import { TUserLoginData, TUserRegisterData } from "../auth/zodSchemas"
+import { TReportData, TUserLoginData, TUserRegisterData } from "../auth/zodSchemas"
 import { getTranslations } from "next-intl/server"
 //import { login } from "../auth/actions"
 
@@ -30,6 +30,23 @@ export const registerUser = async (data: TUserRegisterData) => {
     toast.error(t("userCreation.fail"))
   }     
 } 
+
+
+export const createReport = async (data: TReportData) => {
+  const res =  await fetch(`/api/mongo/reports`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-type": "application/json"
+    }
+  }) 
+  const dataRes = await res.json()
+  
+  if(dataRes.status == 500) {    
+    return {success: false}
+  }   
+  return {success: true}
+}
 
 export const comparePassword = async (loginData: TUserLoginData) => {  
   const res =  await fetch(`/api/mongo/users/login`, {

@@ -10,22 +10,22 @@ import { useRouter } from 'next/navigation'
 
 
 
+const fields : (Field<TUserRegisterData> & Grid2Props & {item?: boolean})[] = [   
+  { 
+    name: "email" , 
+    xs: 12
+  },
+  { 
+    name: "password",
+    type: "password", 
+    xs: 12
+  },    
+];
 
 
 const LoginForm = () => {  
   const t = useTranslations('auth');
-   const router = useRouter();
-  const fields : (Field<TUserRegisterData> & Grid2Props & {item?: boolean})[] = [   
-    { 
-      name: "email" , 
-      xs: 12
-    },
-    { 
-      name: "password",
-      type: "password", 
-      xs: 12
-    },    
-  ];
+  const router = useRouter();
  
   const {formState: {errors},isBusy,submitForm,register, getValues} = useZodValidate({    
     onValidationSuccess: () => router.push("/"), 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { UserLoginSchema, UserRegisterSchema } from "../../../../lib/auth/zodSchemas";
+import { ReportSchema, UserLoginSchema, UserRegisterSchema } from "../../../../lib/auth/zodSchemas";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
@@ -9,8 +9,7 @@ export type BodyReq = {data: unknown, type: Schemas}
 export const schemas = {
     login: UserLoginSchema,
     register:UserRegisterSchema,
-    report:  UserLoginSchema
-    //report: ReportSchema
+    report:  ReportSchema    
 }
 
 

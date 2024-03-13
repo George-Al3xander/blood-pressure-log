@@ -1,15 +1,13 @@
 "use client"
-import {  ZodSchema } from "zod";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { BodyReq, Schemas, schemas } from "@/app/api/zodValidate/route";
 import toast from "react-hot-toast";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent,  useState } from "react";
 import { useTranslations } from "next-intl";
-import { UserRegisterSchema } from "../../lib/auth/zodSchemas";
-import { getRegisterSchema } from "../../lib/auth/actions";
-import { AdditionalCheckItem, IntlSchema } from "@/types/types";
-import { getTranslations } from "next-intl/server";
+
+import { AdditionalCheckItem} from "@/types/types";
+
 
 
 
@@ -17,11 +15,13 @@ import { getTranslations } from "next-intl/server";
 const useZodValidate = ({
         onValidationSuccess,     
         type,        
-        additionalCheck    
+        additionalCheck,
+        defaultValues
     }:{      
         onValidationSuccess: Function,       
         type: Schemas,        
-        additionalCheck?: AdditionalCheckItem[]
+        additionalCheck?: AdditionalCheckItem[],
+        defaultValues?: any
     }) => {
 
    
@@ -33,10 +33,11 @@ const useZodValidate = ({
    
 
     const formReturn = useForm({
-        resolver: zodResolver(schema(t))
+        resolver: zodResolver(schema(t)),
+        defaultValues,
     });
 
-    const {handleSubmit,setError, getValues, formState: {isSubmitting,errors,isLoading, isValidating}} = formReturn
+    const {handleSubmit,setError, getValues, formState: {isLoading}} = formReturn
 
     const onSubmit = async (data: unknown) => {
         const body: BodyReq = {data, type}
@@ -45,7 +46,7 @@ const useZodValidate = ({
             body: JSON.stringify(body)
         })      
         if(!res.ok) {
-            //toast.error(t("submit.fail"))
+            toast.error(t("submit.fail"));
             return
         }
     
@@ -111,7 +112,7 @@ const useZodValidate = ({
     const submitForm = (e: FormEvent<HTMLFormElement>) => handleSubmit(onSubmit)(e);
     
     
-    const isBusy = [isSubmitting , isLoading, isValidating ,extraCheck].includes(true);
+    const isBusy = [isLoading,extraCheck].includes(true);
     
     return {...formReturn,
         extraCheck,

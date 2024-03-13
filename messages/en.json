@@ -10,11 +10,11 @@
       "confirmPassword": "Confirm Password",
       "btn_login": {
         "default": "Login",
-        "process": "Logging"
+        "process": "Logging..."
       },
       "btn_register": {
         "default": "Register",
-        "process": "Registering"
+        "process": "Registering..."
       },      
       "loginResult": {
         "success": "Successful login",
@@ -27,33 +27,62 @@
       "registerMessage": "Please register to create an account and start the tracking"
     },
     "zod": {
+      "number":{
+        "min":"Minimum allowed number is {length}",
+          "max":"Maximum allowed number is {length}"
+      },
+      "string": {
+        "length": {
+          "min":"{title} must be at least {length} characters at length",
+          "max":"{title} can't be longer than {length} characters"
+        },
+        "validFormat": "Enter a valid {title}"
+      },
       "name_first": {
-        "min": "First name must be at least 3 characters at length",
-        "max": "First name can't be longer than 256 characters"
+        "min": "First name must be at least {length} characters at length",
+        "max": "First name can't be longer than {length} characters"
       },
       "name_last": {
-        "min": "Last name must be at least 3 characters at length",
-        "max": "Last name can't be longer than 256 characters"
+        "min": "Last name must be at least {length} characters at length",
+        "max": "Last name can't be longer than {length} characters"
       },
       "email": {
         "email": "Enter a valid email",
         "min": "This field has to be filled.",
-        "length": "This field must be at least 3 characters at length.",
+        "length": "This field must be at least {length} characters at length.",
         "existingUser": "User with this email already exists"
       },
       "password": {
-        "min": "Password must be at least 8 characters in length",
-        "max": "Password can't be longer than 15 characters",
+        "min": "Password must be at least {length} characters in length",
+        "max": "Password can't be longer than {length} characters",
         "lowercase": "Password must contain at least one lowercase letter.",
         "uppercase": "Password must contain at least one uppercase letter.",
         "numeric": "Password must contain at least one numeric digit.",
         "specialCharacter": "Password must contain at least one special character."
       },
       "confirmPassword": {
-        "min": "Password must be at least 8 characters in length",
-        "max": "Password can't be longer than 15 characters",
+        "min": "Password must be at least {length} characters in length",
+        "max": "Password can't be longer than {length} characters",
         "equality": "Confirm password and password are not equal"
       },
+      "sys": {
+        "min": "Systolic pressure must be at least {length}"
+      },
+      "dia": {
+        "min": "Diastolic pressure must be at least {length}"
+      },
+      "pulse": {
+        "min": "Pulse must be at least {length}"
+      },
+      "rating": {
+        "min": "This field has to selected",
+        "max": "This field has to selected"
+      },
+      "notes": {
+        "min": "Notes must be at least {length} characters long",
+        "max": "Notes must not exceed {length} characters"
+      }
+      ,
       "submit": {
         "success": "Successfully submitted.",
         "fail": "Submitting failed."
@@ -62,7 +91,43 @@
       "userCreation": {
         "success": "User created",
         "fail": "Failed creating user"
+      },
+      "reportCreation": {
+        "success": "Report created",
+        "fail": "Failed creating report"
       }
+    },
+    "table": {
+        "sys": "Systolic",
+        "sys_additon": "(upper #)",
+        "dia": "Diastolic",
+        "dia_additon": "(lower #)",
+        "time": "Time",
+        "pressure": "Blood Pressure",
+        "pulse": "Heart rate",
+        "pulse_addition": "(pulse per minute)",
+        "rating": "Rating",
+        "notes" : "Notes/Observation",
+        "month": "Month",
+        "week": "Week starting",
+        "date": "Date",
+
+        "year": "Year",
+        "btn_create": {
+          "default": "Create",
+          "process": "Creating..."
+        },
+        "btn_edit": {
+          "default": "Edit",
+          "process": "Editing..."
+        },
+        "rating_range": {
+          "5": "Excellent",
+          "4": "Very Good",
+          "3": "Good",
+          "2": "Fair",
+          "1": "Poor"
+        }
     }
     
   }
