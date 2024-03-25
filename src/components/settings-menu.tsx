@@ -10,6 +10,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import { IconButton, ListItemIcon, ListItemText, Menu, MenuItem, MenuItemProps } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Link, { LinkProps } from 'next/link';
+import PostAddIcon from '@mui/icons-material/PostAdd';
 
 const menuItems : { [key: string]: (MenuItemProps & LinkProps)[]} = {
     logged: [
@@ -27,7 +28,7 @@ const menuItems : { [key: string]: (MenuItemProps & LinkProps)[]} = {
 const icons: { [key: string]: JSX.Element } = {
   "home": <HomeIcon />,
   "profile": <AssignmentIndIcon />,
-  "btn_create.default": <CreateIcon />,
+  "btn_create.default": <PostAddIcon />,
   "btn_logout.default": <LogoutIcon />,
   "btn_login.default": <LoginIcon />,
   "btn_register.default": <PersonAddIcon />
