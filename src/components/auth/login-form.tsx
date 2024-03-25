@@ -1,13 +1,13 @@
 "use client"
 import useZodValidate from '@/hooks/useZodValidate'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { TUserLoginData, TUserRegisterData, UserRegisterSchema } from '../../../lib/auth/zodSchemas'
 import { Field } from '@/types/types'
 import { Button, Grid, Grid2Props, TextField, Typography } from '@mui/material'
 import { checkIfUserExists, comparePassword } from '../../../lib/mongo/utils'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
-import { sessionLogin } from '../../../lib/auth/actions'
+
 
 
 
@@ -27,6 +27,9 @@ const fields : (Field<TUserRegisterData> & Grid2Props & {item?: boolean})[] = [
 const LoginForm = () => {  
   const t = useTranslations('auth');
   const router = useRouter();
+  useEffect(() => {
+    router.refresh()
+  }, []);
  
   const {formState: {errors},isBusy,submitForm,register} = useZodValidate({    
     onValidationSuccess:  () => {

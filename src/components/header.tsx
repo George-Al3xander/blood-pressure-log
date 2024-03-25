@@ -4,15 +4,14 @@ import { Suspense } from "react";
 import CreateReportLink from "./utils/create-report-link";
 import SettingsMenu from "./settings-menu";
 import { AuthClientWrapper } from "./auth-client-wrapper";
-import PersonIcon from '@mui/icons-material/Person';
+import MenuIcon from '@mui/icons-material/Menu';
 
-let renderCount = 0;
+
 
 export default function Header ({locale}: {locale: string}) {
-    renderCount++;
+
     return(<Box sx={{ flexGrow: 1 }}>
-        <AppBar  component={"header"} position="fixed">
-        <Typography>{renderCount}</Typography>
+        <AppBar  component={"header"} position="fixed">       
             <Toolbar>
                     <Box sx={{ flexGrow: 1 }}>
                         <Typography color={"white"} variant="h6" href="/log" component={Link} >
@@ -21,7 +20,7 @@ export default function Header ({locale}: {locale: string}) {
                     </Box>                  
                 <AuthClientWrapper 
                     Component={SettingsMenu}
-                    fallback={<IconButton disabled><PersonIcon /></IconButton>} 
+                    fallback={<IconButton disabled><MenuIcon /></IconButton>} 
                 />
                 <LanguageSelect locale={locale}/>     
             </Toolbar>  

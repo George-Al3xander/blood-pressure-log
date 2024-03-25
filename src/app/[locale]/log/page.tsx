@@ -23,6 +23,7 @@ const LogPage = async ({params: {locale}, searchParams: {tableVariant}}:{params:
   
    return (
     <div>
+     
       {reports.length > 0 ? 
       <DataGridTable items={reports}/>
       :

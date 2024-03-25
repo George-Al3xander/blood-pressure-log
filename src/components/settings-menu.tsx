@@ -1,14 +1,21 @@
 "use client"
 import React, { useState, useTransition } from 'react'
-import PersonIcon from '@mui/icons-material/Person';
-import { IconButton, Menu, MenuItem, MenuItemProps } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import CreateIcon from '@mui/icons-material/Create';
+import LogoutIcon from '@mui/icons-material/Logout';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import HomeIcon from '@mui/icons-material/Home';
+import LoginIcon from '@mui/icons-material/Login';
+import { IconButton, ListItemIcon, ListItemText, Menu, MenuItem, MenuItemProps } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Link, { LinkProps } from 'next/link';
 
-
 const menuItems : { [key: string]: (MenuItemProps & LinkProps)[]} = {
     logged: [
-        {children: "profile",  href: "/profile", component: Link},
+        {children: "home",  href: "/", component: Link},
+        {children: "profile",  href: "/log/profile", component: Link},
+        {children: "btn_create.default",  href: "/log/create", component: Link},
         {children: "btn_logout.default",  href: "/api/mongo/users/logout", component: Link}
     ],
     notLogged: [
@@ -16,6 +23,17 @@ const menuItems : { [key: string]: (MenuItemProps & LinkProps)[]} = {
         {children: "btn_register.default",href: "/auth/register", component: Link}
     ]
 }
+
+const icons: { [key: string]: JSX.Element } = {
+  "home": <HomeIcon />,
+  "profile": <AssignmentIndIcon />,
+  "btn_create.default": <CreateIcon />,
+  "btn_logout.default": <LogoutIcon />,
+  "btn_login.default": <LoginIcon />,
+  "btn_register.default": <PersonAddIcon />
+};
+
+
 
 const SettingsMenu = ({loggedIn}:{loggedIn:boolean}) => {
 const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -42,7 +60,7 @@ const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}    
             aria-label="settings"
-        ><PersonIcon /></IconButton>
+        ><MenuIcon /></IconButton>
         <Menu
             id="basic-menu"
             anchorEl={anchorEl}
@@ -53,7 +71,10 @@ const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
         }}
       >
 
-        {menuItem.map(({children,...item}) => <MenuItem onClick={handleClose} key={children?.toString()}  children={t(children! as string)} {...item}/>)}      
+        {menuItem.map(({children,...item}) => <MenuItem onClick={handleClose} key={children?.toString()}   {...item}>
+          <ListItemIcon>{icons[children as string]}</ListItemIcon>
+          <ListItemText>{t(children! as string)}</ListItemText>
+        </MenuItem>)}      
       </Menu>
     </div>
   )

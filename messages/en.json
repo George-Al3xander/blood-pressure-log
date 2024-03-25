@@ -25,6 +25,11 @@
         "success": "Successful login",
         "fail": "Login failed."
       },
+      "btn_create": {
+        "default": "Create a report",
+        "process": "Creating..."
+      },
+      "home": "Home page",
       "loginPageLink":"Don't have an account? Sign up",
       "registerPageLink": "Already have an account? Log in",
       "welcomeTitle": "Welcome to BPL!👋🏻",
