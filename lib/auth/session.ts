@@ -2,11 +2,13 @@
 
 import {SessionOptions} from "iron-session"
 
-export interface SessionData {
-    name?: {first:string,last:string},
-    email?: string,
-    isLoggedIn?: boolean
-}
+export type SessionData = Partial<{
+    name: {first:string,last:string},
+    email: string,
+    isLoggedIn: boolean,
+    apiToken: string,
+    id: string
+}>
 
 export const sessionOptions: SessionOptions ={
     password: process.env.IRON_SESSION_PASSWORD!,

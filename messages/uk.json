@@ -8,6 +8,11 @@
     "email": "Електронна пошта",
     "password": "Пароль",
     "confirmPassword": "Підтвердження паролю",
+    "profile": "Профіль",
+    "btn_logout": {
+      "default": "Вийти",
+      "process": "Вихід..."
+    },
     "btn_login": {
       "default": "Увійти",
       "process": "Вхід..."

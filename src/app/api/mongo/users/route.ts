@@ -7,7 +7,7 @@ import bcrypt from "bcryptjs"
 
 // get user api endpoint
 export async function GET(req: NextRequest){
-    const email  = req.nextUrl.searchParams.get("email")
+    const email  = req.nextUrl.searchParams.get("email");
     if(!email) return NextResponse.json({status: 400})
     await connectToDatabase();
     const user =  await User.findOne({email})  

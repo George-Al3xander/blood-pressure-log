@@ -72,8 +72,7 @@ const useZodValidate = ({
                 for (const { func, path, messagePath } of additionalCheck) {
                     if(typeof path == "string") {                     
                         const val = getValues(path);
-                        const res = await func(val);
-                        console.log(res)
+                        const res = await func(val);                  
                         if(!res) {
                             errCount = errCount + 1;
                             setError(path, {
@@ -103,9 +102,9 @@ const useZodValidate = ({
                 }
             } finally {
                 setExtraCheck(false);               
-            }
+            }            
             if(errCount > 0) return;
-        }       
+        }    
         await onValidationSuccess(data)
     };
     

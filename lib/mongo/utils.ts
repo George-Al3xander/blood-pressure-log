@@ -1,7 +1,8 @@
 import toast from "react-hot-toast"
 import { TReportData, TUserLoginData, TUserRegisterData } from "../auth/zodSchemas"
 import { getTranslations } from "next-intl/server"
-//import { login } from "../auth/actions"
+import { fetchMongoData } from "./actions"
+
 
 
 
@@ -48,19 +49,23 @@ export const createReport = async (data: TReportData) => {
   return {success: true}
 }
 
-export const comparePassword = async (loginData: TUserLoginData) => {  
-  const res =  await fetch(`/api/mongo/users/login`, {
-    method: "POST",
-    body: JSON.stringify(loginData),
-    headers: {
-      "Content-type": "application/json"
-    }
-  });  
-  if(!res.ok)  return  false;
-  
-  const data = await res.json();  
-  if(data.isMatch == false) return  false;
-  //const {email,name} = data
-  // await login({email, name})
-  return  true;
+export const comparePassword = async (loginData: TUserLoginData) => {   
+  try {
+    const res = await fetch(`/api/mongo/users/login`, {
+      method: "POST",
+      body: JSON.stringify(loginData),
+      headers: {
+        "Content-type": "application/json"
+      }
+    })
+
+    if(!res.ok) throw new Error("Req error")
+
+    const {isMatch} = await res.json();
+    return isMatch
+  } catch (error) {
+      return  false;
+  }   
 }
+
+

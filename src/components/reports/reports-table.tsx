@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
-import repoBase from "../../../public/json/dummyDb.json"
+import repoBase from "../../../public/json/realData.json"
 import dayjs from "dayjs"
 import { defaultLocale } from "@/middleware"
 import 'dayjs/locale/uk';
@@ -144,8 +144,8 @@ const ReportsTable = ({locale = defaultLocale}:{locale?:string}) => {
 //         </TableHead>
         
 //     </TableContainer>)
-    // return(<WeekTable items={byDays}/>)
-    return (<DataGridDemo items={reports}/>)
+     return(<WeekTable items={byDays}/>)
+   // return (<DataGridDemo items={reports}/>)
  }
 
 export default ReportsTable

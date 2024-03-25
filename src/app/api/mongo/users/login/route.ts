@@ -15,12 +15,12 @@ export async function POST(req: NextRequest) {
         if(!user) throw new Error("Invalid email or password");
         const isMatch = await bcrypt.compare(password, user.password);       
         
-        if(!isMatch) return NextResponse.json({status: 200, isMatch});
-        const res = await sessionLogin({email, name: user.name});
+        if(isMatch) {
+            const res = await sessionLogin({email, name: user.name, id: user._id});
+            if(!res.success) throw new Error("Error");
+        }
 
-        if(!res.success) throw new Error("Error");
-
-        return NextResponse.redirect(new URL('/', req.url))
+         return NextResponse.json({status: 200, isMatch});       
         
     } catch (error) {   
        return NextResponse.json({status: 500,message: error})        

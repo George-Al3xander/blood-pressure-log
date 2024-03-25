@@ -8,9 +8,14 @@
       "email": "Email",
       "password": "Password",
       "confirmPassword": "Confirm Password",
+      "profile": "Profile",
       "btn_login": {
         "default": "Login",
         "process": "Logging..."
+      },
+      "btn_logout": {
+        "default": "Logout",
+        "process": "Logging out..."
       },
       "btn_register": {
         "default": "Register",
@@ -99,15 +104,15 @@
     },
     "table": {
         "sys": "Systolic",
-        "sys_additon": "(upper #)",
+        "sys_addition": "(upper #)",
         "dia": "Diastolic",
-        "dia_additon": "(lower #)",
+        "dia_addition": "(lower #)",
         "time": "Time",
         "pressure": "Blood Pressure",
         "pulse": "Heart rate",
         "pulse_addition": "(pulse per minute)",
         "rating": "Rating",
-        "notes" : "Notes/Observation",
+        "notes" : "Notes / Observation",
         "month": "Month",
         "week": "Week starting",
         "date": "Date",

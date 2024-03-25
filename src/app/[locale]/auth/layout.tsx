@@ -6,9 +6,9 @@ import { Container } from "@mui/material";
 
 
 
-export default async function AuthLayout ({children}:{children: ReactNode, params: {locale: string}}) {
-    const session = await getSession();  
-    if(session.isLoggedIn) redirect("/");
+export default  function AuthLayout ({children}:{children: ReactNode, params: {locale: string}}) {
+    //const session = await getSession();  
+    //if(session.isLoggedIn) redirect("/");
       
     
     return(<Container  maxWidth={"sm"}>{children}</Container>)

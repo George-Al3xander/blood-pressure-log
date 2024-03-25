@@ -28,9 +28,13 @@ export const ReportSchema = new Schema({
     notes: {
         type: String,
         required: true
-    }   
+    },
+    userId: {
+        type:String,
+        required: true
+    }
 }, {timestamps:true});
 
 
-const Report = (mongoose.models && mongoose.models.Report ) ? mongoose.models.Report  as any :  mongoose.model("Report", ReportSchema);
+const Report = (mongoose.models && mongoose.models.Report ) ? mongoose.models.Report  :  mongoose.model("Report", ReportSchema);
 export default Report

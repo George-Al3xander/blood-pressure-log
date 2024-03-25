@@ -7,6 +7,7 @@ import { Button, Grid, Grid2Props, TextField, Typography } from '@mui/material'
 import { checkIfUserExists, comparePassword } from '../../../lib/mongo/utils'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
+import { sessionLogin } from '../../../lib/auth/actions'
 
 
 
@@ -27,8 +28,11 @@ const LoginForm = () => {
   const t = useTranslations('auth');
   const router = useRouter();
  
-  const {formState: {errors},isBusy,submitForm,register, getValues} = useZodValidate({    
-    onValidationSuccess: () => router.push("/"), 
+  const {formState: {errors},isBusy,submitForm,register} = useZodValidate({    
+    onValidationSuccess:  () => {
+      router.push("/");
+      router.refresh()
+    }, 
     type: "login",  
     additionalCheck: [
         {

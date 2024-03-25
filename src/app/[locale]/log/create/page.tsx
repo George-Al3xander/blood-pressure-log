@@ -1,4 +1,4 @@
-import CreateLogForm from '@/components/log/create-log-form'
+import CreateLogForm from '@/components/log/create-report-form'
 import React from 'react'
 import { TReportData } from '../../../../../lib/auth/zodSchemas'
 

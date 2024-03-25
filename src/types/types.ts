@@ -47,3 +47,5 @@ export type GroupByTypes = { [key: string]: GroupItem }
 export type LabelStyling = { [key in OpUnitType]: TypographyProps}
 
 export type CustomInput = {control: Control, defaultValue?:string, error?:string}
+
+export type TableVariantParam = "complex" | "plain"

@@ -23,18 +23,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const messages = useMessages();
-  dayjs.locale(locale)
+  dayjs.locale(locale);
   return (
     <html lang={locale}>
       <body className={inter.className}>
       <AppRouterCacheProvider>
-        <Header locale={locale}/>
-          <Container sx={{mt:"5rem"}} component={"div"}>
             <NextIntlClientProvider locale={locale} messages={messages}>
-                  {children}
+              <Header locale={locale}/>
+                <Container sx={{mt:"5rem"}} component={"div"}>
+                        {children}
+                </Container>
+              <Toaster />
             </NextIntlClientProvider>
-          </Container>
-        <Toaster />
       </AppRouterCacheProvider>
         </body>
     </html>
