@@ -2,14 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { TReportData } from "../../../../../lib/auth/zodSchemas";
 import { connectToDatabase } from "../../../../../lib/mongo";
 import Report from "../../../../../lib/mongo/schemas/report"
-import { cookies, headers } from "next/headers";
+
 import jwt from "jsonwebtoken"
 import User from "../../../../../lib/mongo/schemas/user";
 import { getSession } from "../../../../../lib/auth/actions";
-import mongoose from "mongoose";
-import realData from "../../../../../public/json/realData.json"
-import { getIronSession } from "iron-session";
-import { SessionData, sessionOptions } from "../../../../../lib/auth/session";
+import { headers } from "next/headers";
+
 
 export async function GET(req: NextRequest) {    
     const headersList = headers();
@@ -26,9 +24,13 @@ export async function GET(req: NextRequest) {
         await connectToDatabase();
         const user =  await User.findOne({email}) ;
         if(!user) throw new Error("Invalid user info");
-
-        const reports = await Report.find({userId})
-        return NextResponse.json({status: 200,success: true,reports})        
+        const page = Number(req.nextUrl.searchParams.get("page") || "0");
+        const pageSize = Number(req.nextUrl.searchParams.get("pageSize") || "30");
+        const skip = page * pageSize
+        const reports = await Report.find({userId}).limit(pageSize).skip(skip);
+        const count = await Report.countDocuments({userId})
+      
+        return NextResponse.json({status: 200,success: true,reports, count})     
 
     } catch (error) {      
        const message = 

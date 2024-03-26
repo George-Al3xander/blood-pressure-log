@@ -142,7 +142,8 @@
     },
     "table_variant": "Формат таблиці",
     "plain": "Простий",
-    "complex": "Складний"
+    "complex": "Складний",
+    "date_range": "З {start} по {end}"
   }
   
 }

@@ -140,7 +140,8 @@
         },
         "table_variant": "Table Variant",
         "plain": "Plain",
-        "complex": "Complex"
+        "complex": "Complex",
+        "date_range": "From {start} to {end}"
     }
     
   }
