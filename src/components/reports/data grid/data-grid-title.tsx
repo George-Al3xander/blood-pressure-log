@@ -18,7 +18,7 @@ export default function DataGridTitle({ firstItem, lastItem }: TitleProps) {
         width: "100%",
         display: "flex",
         //flexDirection: "column",
-        justifyContent: "space-between",
+        justifyContent: "center",
         alignItems: "center",
         py: 4,
 
@@ -26,7 +26,7 @@ export default function DataGridTitle({ firstItem, lastItem }: TitleProps) {
         color: "white",
       }}
     >
-      <GridToolbarExport
+      {/* <GridToolbarExport
         variant={"contained"}
         component={Button}
         color="success"
@@ -57,7 +57,7 @@ export default function DataGridTitle({ firstItem, lastItem }: TitleProps) {
           }
           `,
         }}
-      />
+      /> */}
       <Typography variant="h5">
         {t("date_range", {
           start: dayjs(startDate).format("D/MM/YYYY"),

@@ -15,20 +15,28 @@ import { locales } from "@/middleware"
 import { Localization } from "@mui/material/locale"
 import { handleDataGridLocale } from "./handleDataGridLang"
 import { useRouter } from "next/navigation"
+import { LogPageSearchParams } from "@/app/[locale]/log/page"
+import { handleLogPageParams } from "../../../../lib/utils"
 
 export default function DataGridTable({
   items,
   locale,
-  paginationModel,
-  rowCount
+  //paginationModel,
+  searchParams,
+  rowCount,
 }: {
   items: LogReport[]
   locale: string
-  paginationModel: GridPaginationModel
+  //paginationModel: GridPaginationModel
   rowCount: number
+  searchParams: LogPageSearchParams
 }) {
   const router = useRouter()
-
+  const { tableVariant, page, pageSize } = searchParams
+  const paginationModel = {
+    pageSize: Number(pageSize || 30),
+    page: Number(page || 0),
+  }
   return (
     <Box sx={{ height: "80vh", width: "100%" }}>
       <DataGrid
@@ -48,9 +56,16 @@ export default function DataGridTable({
         getRowId={(row) => row._id}
         pageSizeOptions={[5, 10, 15, 30]}
         rowCount={rowCount}
+   
         paginationModel={paginationModel}
-        onPaginationModelChange={({ page, pageSize }) =>
-          router.push(`?page=${page}&pageSize=${pageSize}`)
+        onPaginationModelChange={({ page: newPage, pageSize: newPageSize }) =>
+          router.push(
+            handleLogPageParams({
+              tableVariant,
+              page: newPage.toString(),
+              pageSize: newPageSize.toString(),
+            })
+          )
         }
         disableRowSelectionOnClick
       />

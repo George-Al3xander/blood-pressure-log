@@ -1,9 +1,9 @@
-"use client";
-import DoneIcon from "@mui/icons-material/Done";
-import React, { useState, useTransition } from "react";
+"use client"
+import DoneIcon from "@mui/icons-material/Done"
+import React, { useState, useTransition } from "react"
 
-import { useTranslations } from "next-intl";
-import Link, { LinkProps } from "next/link";
+import { useTranslations } from "next-intl"
+import Link, { LinkProps } from "next/link"
 import {
   Button,
   IconButton,
@@ -12,25 +12,29 @@ import {
   Menu,
   MenuItem,
   MenuItemProps,
-} from "@mui/material";
-import { TableVariantParam } from "@/types/types";
-import DataArrayIcon from "@mui/icons-material/DataArray";
-import { useSearchParams } from "next/navigation";
-const variants: TableVariantParam[] = ["plain", "complex"];
+} from "@mui/material"
+import { TableVariantParam } from "@/types/types"
+import DataArrayIcon from "@mui/icons-material/DataArray"
+import { useSearchParams } from "next/navigation"
+import { handleLogPageParams } from "../../../lib/utils"
+const variants: TableVariantParam[] = ["plain", "complex"]
 
 const TableVariantMenu = () => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
   const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const t = useTranslations("table");
+    setAnchorEl(null)
+  }
+  const t = useTranslations("table")
 
-  const searchParams = useSearchParams();
-  const current = searchParams.get("tableVariant") || "plain";
+  const searchParams = useSearchParams()
+  const current = (searchParams.get("tableVariant") ||
+    "plain") as TableVariantParam
+  const page = searchParams.get("page") || undefined
+  const pageSize = searchParams.get("pageSize") || undefined
   return (
     <div>
       <Button
@@ -55,7 +59,11 @@ const TableVariantMenu = () => {
           <MenuItem
             disabled={current == variant}
             sx={{ textTransform: "capitalize" }}
-            href={`?tableVariant=${variant}`}
+            href={handleLogPageParams({
+              page,
+              pageSize,
+              tableVariant: variant,
+            })}
             component={Link}
             onClick={handleClose}
             key={variant}
@@ -66,7 +74,11 @@ const TableVariantMenu = () => {
         ))}
       </Menu>
     </div>
-  );
-};
+  )
+}
 
-export default TableVariantMenu;
+// `?tableVariant=${variant}${
+//   pageSize ? "&pageSize=" + pageSize : ""
+// }${page ? "&page=" + page : ""}`
+
+export default TableVariantMenu

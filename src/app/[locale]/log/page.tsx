@@ -7,17 +7,20 @@ import { headers } from "next/headers"
 import { fetchMongoData } from "../../../../lib/mongo/actions"
 import DataGridTable from "@/components/reports/data grid/data-grid"
 
+export type LogPageSearchParams = Partial<{
+  tableVariant: TableVariantParam
+  pageSize: string
+  page: string
+}>
+
 const LogPage = async ({
   params: { locale },
-  searchParams: { tableVariant, page, pageSize },
+  searchParams,
 }: {
   params: { locale?: string }
-  searchParams: {
-    tableVariant?: TableVariantParam
-    pageSize?: string
-    page: string
-  }
+  searchParams: LogPageSearchParams
 }) => {
+  const { tableVariant, page, pageSize } = searchParams
   const variant = tableVariant ?? "plain"
 
   const { reports, count } = await fetchMongoData<{
@@ -34,20 +37,14 @@ const LogPage = async ({
     <div>
       {reports.length > 0 ? (
         <DataGridTable
-          paginationModel={{
-            pageSize: Number(pageSize || 30),
-            page: Number(page || 0),
-          }}
+          searchParams={searchParams}
           rowCount={count}
           locale={locale || "en"}
           items={reports}
         />
       ) : (
-        "token"
+        "No reports"
       )}
-      {/* <PrintWrapper> */}
-      {/* <ReportsTable locale={locale}/> */}
-      {/* </PrintWrapper> */}
     </div>
   )
 }
