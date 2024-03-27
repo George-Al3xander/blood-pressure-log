@@ -1,5 +1,5 @@
-"use server"
-import { headers } from "next/headers"
+//"use server"
+//import { headers } from "next/headers"
 import { getAccessToken } from "../auth/actions"
 //import { login } from "../auth/actions"
 import unset from "lodash/unset"
@@ -13,10 +13,10 @@ export const fetchMongoData = async <T>(
   const reqHeaders = init && init.headers && init.headers
 
   unset(init, "headers")
-  unset(headers, "Authorization")
+  //unset(headers, "Authorization")
 
-  const host = headers().get("host")
-  const res = await fetch(`http://${host}${input}`, {
+  //const host = headers().get("host")
+  const res = await fetch(`http://localhost:3000${input}`, {
     headers: {
       Authorization: `Bearer ${token}`,
       ...reqHeaders,

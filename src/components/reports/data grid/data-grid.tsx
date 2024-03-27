@@ -14,34 +14,32 @@ import { columns } from "./columns"
 import { locales } from "@/middleware"
 import { Localization } from "@mui/material/locale"
 import { handleDataGridLocale } from "./handleDataGridLang"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { LogPageSearchParams } from "@/app/[locale]/log/page"
 import { handleLogPageParams } from "../../../../lib/utils"
 
 export default function DataGridTable({
   items,
   locale,
-  //paginationModel,
-  searchParams,
   rowCount,
+  isLoading,
+  paginationModel,
+  onChange
 }: {
   items: LogReport[]
   locale: string
-  //paginationModel: GridPaginationModel
   rowCount: number
-  searchParams: LogPageSearchParams
+  isLoading: boolean,
+  paginationModel: {page:number,pageSize:number},
+  onChange: any
 }) {
-  const router = useRouter()
-  const { tableVariant, page, pageSize } = searchParams
-  const paginationModel = {
-    pageSize: Number(pageSize || 30),
-    page: Number(page || 0),
-  }
+  
   return (
     <Box sx={{ height: "80vh", width: "100%" }}>
       <DataGrid
         rows={items}
         columns={columns}
+        loading={isLoading}
         initialState={{
           pagination: { paginationModel },
         }}
@@ -54,19 +52,10 @@ export default function DataGridTable({
         localeText={handleDataGridLocale(locale as "uk")}
         paginationMode="server"
         getRowId={(row) => row._id}
-        pageSizeOptions={[5, 10, 15, 30]}
-        rowCount={rowCount}
-   
+        pageSizeOptions={[21, 42, 63, 84]}
+        rowCount={items.length > 0 ? rowCount : 0}
         paginationModel={paginationModel}
-        onPaginationModelChange={({ page: newPage, pageSize: newPageSize }) =>
-          router.push(
-            handleLogPageParams({
-              tableVariant,
-              page: newPage.toString(),
-              pageSize: newPageSize.toString(),
-            })
-          )
-        }
+        onPaginationModelChange={onChange}
         disableRowSelectionOnClick
       />
     </Box>

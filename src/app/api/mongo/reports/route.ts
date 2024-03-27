@@ -9,7 +9,8 @@ import { getSession } from "../../../../../lib/auth/actions";
 import { headers } from "next/headers";
 
 
-export async function GET(req: NextRequest) {    
+export async function GET(req: NextRequest) {   
+    console.log("reports fetched") 
     const headersList = headers();
     const authToken = (headersList.get("authorization") || '').split("Bearer ").at(1);
     //const id  = req.nextUrl.searchParams.get("id");
@@ -28,9 +29,9 @@ export async function GET(req: NextRequest) {
         const pageSize = Number(req.nextUrl.searchParams.get("pageSize") || "30");
         const skip = page * pageSize
         const reports = await Report.find({userId}).limit(pageSize).skip(skip);
-        const count = await Report.countDocuments({userId})
+        //const count = await Report.countDocuments({userId})
       
-        return NextResponse.json({status: 200,success: true,reports, count})     
+        return NextResponse.json({status: 200,success: true,reports})     
 
     } catch (error) {      
        const message = 

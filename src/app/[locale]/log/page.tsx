@@ -6,6 +6,7 @@ import { getAccessToken } from "../../../../lib/auth/actions"
 import { headers } from "next/headers"
 import { fetchMongoData } from "../../../../lib/mongo/actions"
 import DataGridTable from "@/components/reports/data grid/data-grid"
+import TestPaginationWrapper from "@/components/reports/test-pagination-wrapper"
 
 export type LogPageSearchParams = Partial<{
   tableVariant: TableVariantParam
@@ -15,24 +16,23 @@ export type LogPageSearchParams = Partial<{
 
 const LogPage = async ({
   params: { locale },
-  searchParams,
+ // searchParams,
 }: {
   params: { locale?: string }
-  searchParams: LogPageSearchParams
+  //searchParams: LogPageSearchParams
 }) => {
-  const { tableVariant, page, pageSize } = searchParams
-  const variant = tableVariant ?? "plain"
+ // const { tableVariant, page, pageSize } = searchParams
+ // const variant = tableVariant ?? "plain"
 
-  const { reports, count } = await fetchMongoData<{
-    success: boolean
-    reports: LogReport[]
+  const {  count } = await fetchMongoData<{
+    success: boolean 
     count: number
-  }>(`/api/mongo/reports?page=${page}&pageSize=${pageSize}`)
+  }>(`/api/mongo/reports/count`)
 
-  if (variant == "complex") {
-    return "COMPLEX"
-  }
-
+  // if (variant == "complex") {
+  //   return "COMPLEX"
+  // }
+  return(<div><TestPaginationWrapper count={count} /></div>)
   return (
     <div>
       {reports.length > 0 ? (

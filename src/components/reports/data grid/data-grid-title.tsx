@@ -9,9 +9,11 @@ type TitleProps = {
 }
 
 export default function DataGridTitle({ firstItem, lastItem }: TitleProps) {
+  const t = useTranslations("table")
+  if (!firstItem || !lastItem) return
   const { date: startDate } = firstItem
   const { date: endDate } = lastItem
-  const t = useTranslations("table")
+
   return (
     <Box
       sx={{
