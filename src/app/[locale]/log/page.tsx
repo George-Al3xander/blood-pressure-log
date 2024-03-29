@@ -7,7 +7,7 @@ import { headers } from "next/headers"
 import { fetchMongoData } from "../../../../lib/mongo/actions"
 import DataGridTable from "@/components/reports/data grid/data-grid"
 import TestPaginationWrapper from "@/components/reports/test-pagination-wrapper"
-import DateRangePicker from "@/components/date-range-picker"
+import DateRangePicker from "@/components/date range picker/date-range-picker"
 
 export type LogPageSearchParams = Partial<{
   tableVariant: TableVariantParam
@@ -20,7 +20,12 @@ const LogPage = async ({
 }: {
   params: { locale?: string }
 }) => {
-  return <DateRangePicker from="2024-03-04T05:37:27.142+00:00" to="2024-03-14T00:00:00.000+00:00" />
+  return (
+    <DateRangePicker
+      from="2024-03-04T05:37:27.142+00:00"
+      to="2024-03-14T00:00:00.000+00:00"
+    />
+  )
 
   const { count } = await fetchMongoData<{
     success: boolean

@@ -6,14 +6,18 @@ import React from "react"
 import dayjs from "dayjs"
 import { useTranslations } from "next-intl"
 import useZodValidate from "@/hooks/useZodValidate"
-import { TDateRangeData } from "../../lib/auth/zodSchemas"
+import { TDateRangeData } from "../../../lib/auth/zodSchemas"
 import { Button, Grid, Stack } from "@mui/material"
 import { Controller } from "react-hook-form"
-import { MockHelperText } from "./utils/mock-helper-text"
+import { MockHelperText } from "../utils/mock-helper-text"
 import PrintIcon from "@mui/icons-material/Print"
 const keys = ["from", "to"] as const
 
-const DateRangePicker = (props: { from?: string; to?: string }) => {
+const DateRangePicker = (props: {
+  from?: string
+  to?: string
+  onValidationSuccess?: Function
+}) => {
   const {
     control,
     formState: { errors },
@@ -24,7 +28,7 @@ const DateRangePicker = (props: { from?: string; to?: string }) => {
     setValue,
   } = useZodValidate({
     type: "dateRange",
-    onValidationSuccess: (data: TDateRangeData) => alert(data),
+    onValidationSuccess: props.onValidationSuccess || ((data: TDateRangeData) => alert(data)), //(data: TDateRangeData) => alert(data),
   })
   const t = useTranslations("table")
 
@@ -47,7 +51,9 @@ const DateRangePicker = (props: { from?: string; to?: string }) => {
                 <DatePicker
                   sx={{ width: "100%" }}
                   onChange={(dateVal) => {
-                    return onChange(dateVal?.toISOString())
+                    //console.log(dateVal?.toDate().toISOString())
+                    //return onChange(dateVal?.toDate().toISOString())
+                    return onChange(dateVal)
                   }}
                   disabled={isBusy}
                   minDate={dayjs(props[range])}

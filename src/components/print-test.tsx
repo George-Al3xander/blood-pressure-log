@@ -7,7 +7,7 @@ import { DatePicker } from "@mui/x-date-pickers"
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
-import DateRangePicker from "./date-range-picker"
+import DateRangePicker from "./date range picker/date-range-picker"
 
 const style = {
   position: "absolute" as "absolute",
