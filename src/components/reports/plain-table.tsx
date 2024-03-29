@@ -1,4 +1,4 @@
-import { LogReport } from "@/types/types";
+import { LogReport, ReportTableProps } from "@/types/types"
 import {
   TableContainer,
   Table,
@@ -7,11 +7,13 @@ import {
   TableRow,
   TableCell,
   TableBody,
-} from "@mui/material";
-import dayjs from "dayjs";
-import { useTranslations } from "next-intl";
-import React from "react";
-
+  Stack,
+  Pagination,
+} from "@mui/material"
+import dayjs from "dayjs"
+import { useTranslations } from "next-intl"
+import React from "react"
+import CircularProgress from "@mui/material/CircularProgress"
 const headings: (keyof LogReport | "time")[] = [
   "date",
   "time",
@@ -20,40 +22,67 @@ const headings: (keyof LogReport | "time")[] = [
   "pulse",
   "rating",
   "notes",
-];
+]
 
-const PlainTable = ({ reports }: { reports: LogReport[] }) => {
-  const t = useTranslations("table");
+const PlainTable = ({
+  reports,
+  isLoading,
+  onChange,
+  reportCount,
+  paginationModel
+}: ReportTableProps) => {
+  const t = useTranslations("table")
+
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }}>
-        <TableHead>
-          <TableRow>
-            {headings.map((heading) => (
-              <TableCell key={heading}>{t(heading)}</TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {reports.map((report) => (
-            <TableRow key={report._id}>
+    <Stack alignItems={"center"}>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }}>
+          <TableHead>
+            <TableRow>
               {headings.map((heading) => (
-                <TableCell key={report._id + heading}>
-                  {heading == "rating"
-                    ? t(`rating_range.${report[heading]}`)
-                    : heading == "date"
-                    ? dayjs(report[heading]).format("DD-MM-YYYY")
-                    : heading == "time"
-                    ? dayjs(report["date"]).format("H:mm ")
-                    : report[heading]}
-                </TableCell>
+                <TableCell key={heading}>{t(heading)}</TableCell>
               ))}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
-};
+          </TableHead>
+          <TableBody>
+            {isLoading ? (
+              <TableRow>
+                {headings.map((heading) => (
+                  <TableCell key={heading + "spinner"}>
+                    <CircularProgress color="primary" />
+                  </TableCell>
+                ))}
+              </TableRow>
+            ) : (
+              reports.map((report) => (
+                <TableRow key={report._id}>
+                  {headings.map((heading) => (
+                    <TableCell key={report._id + heading}>
+                      {heading == "rating"
+                        ? t(`rating_range.${report[heading]}`)
+                        : heading == "date"
+                        ? dayjs(report[heading]).format("DD-MM-YYYY")
+                        : heading == "time"
+                        ? dayjs(report["date"]).format("H:mm ")
+                        : report[heading]}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Pagination
+        defaultPage={paginationModel.page + 1}
+        disabled={isLoading}
+        sx={{ my: 3 }}
+        color="primary"
+        count={Math.floor(reportCount / 21) + 1}
+        onChange={(_event, num) => onChange({ page: num - 1, pageSize: 21 })}
+      />
+    </Stack>
+  )
+}
 
-export default PlainTable;
+export default PlainTable

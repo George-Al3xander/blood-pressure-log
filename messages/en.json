@@ -91,8 +91,8 @@
       "notes": {
         "min": "Notes must be at least {length} characters long",
         "max": "Notes must not exceed {length} characters"
-      }
-      ,
+      },
+      "invalid_date":"Invalid date",
       "submit": {
         "success": "Successfully submitted.",
         "fail": "Submitting failed."
@@ -105,6 +105,10 @@
       "reportCreation": {
         "success": "Report created",
         "fail": "Failed creating report"
+      },
+      "date_range": {
+        "from":"'From' field  must be earlier that 'To'",
+        "to": "'To' field  must be later that 'From'"
       }
     },
     "table": {
@@ -138,10 +142,16 @@
           "2": "Fair",
           "1": "Poor"
         },
+        "from": "From",
+        "to": "To",
         "table_variant": "Table Variant",
         "plain": "Plain",
         "complex": "Complex",
-        "date_range": "From {start} to {end}"
+        "date_range": "From {start} to {end}",
+        "btn_print": {
+          "default": "Print",
+          "process": "Processing..."
+        }
     }
     
   }

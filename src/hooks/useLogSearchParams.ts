@@ -7,9 +7,9 @@ const useLogSearchParams = () => {
   const searchParams = useSearchParams()
 
   const tableVariant = (searchParams.get("tableVariant") ||
-    "plain") as TableVariantParam
-  const page = searchParams.get("page") || undefined
-  const pageSize = searchParams.get("pageSize") || undefined
+    "complex") as TableVariantParam
+  const page = searchParams.get("page") || "0"
+  const pageSize = searchParams.get("pageSize") || "21"
 
   return { tableVariant, page, pageSize }
 }

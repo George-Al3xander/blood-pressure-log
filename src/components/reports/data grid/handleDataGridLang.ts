@@ -7,4 +7,5 @@ const muiTranslations: Record<(typeof locales)[number], Localization> = {
   uk: ukUA,
 }
 
-export const handleDataGridLocale = (locale: "en" | "uk") => muiTranslations[locale].components.MuiDataGrid.defaultProps.localeText
+export const handleDataGridLocale = (locale: "en" | "uk") =>
+  muiTranslations[locale].components.MuiDataGrid.defaultProps.localeText

@@ -32,7 +32,7 @@ const TableVariantMenu = () => {
 
   const searchParams = useSearchParams()
   const current = (searchParams.get("tableVariant") ||
-    "plain") as TableVariantParam
+    "complex") as TableVariantParam
   const page = searchParams.get("page") || undefined
   const pageSize = searchParams.get("pageSize") || undefined
   return (
