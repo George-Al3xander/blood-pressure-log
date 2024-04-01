@@ -151,7 +151,10 @@
     "date_range": "З {start} по {end}",
     "from": "Від",
     "to": "До",
-   
+    "btn_select": {
+      "default": "Обрати",
+      "process": "Обробка..."
+    },
     "btn_print": {
       "default": "Друк",
       "process": "Обробка..."

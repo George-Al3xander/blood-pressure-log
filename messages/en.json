@@ -107,8 +107,8 @@
         "fail": "Failed creating report"
       },
       "date_range": {
-        "from":"'From' field  must be earlier that 'To'",
-        "to": "'To' field  must be later that 'From'"
+        "from":"'From' field  must be earlier than 'To'",
+        "to": "'To' field  must be later than 'From'"
       }
     },
     "table": {
@@ -148,6 +148,10 @@
         "plain": "Plain",
         "complex": "Complex",
         "date_range": "From {start} to {end}",
+        "btn_select": {
+          "default": "Select",
+          "process": "Processing..."
+        },
         "btn_print": {
           "default": "Print",
           "process": "Processing..."

@@ -1,9 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import DateRangePicker from "../date-range-picker"
 import { NextIntlClientProvider } from "next-intl"
 import { ReactNode } from "react"
 import { defaultLocale, locales } from "@/middleware"
-import userEvent from "@testing-library/user-event"
+
 import dayjs from "dayjs"
 const localeProvider = ({
   locale = defaultLocale,
@@ -26,43 +27,46 @@ const localeProvider = ({
 }
 
 describe("Render", () => {
-  it("should render the component with the 'en' locale", () => {
-    localeProvider({ locale: "en", toRender: <DateRangePicker /> })
+  describe("en locale", () => {
+    beforeEach(() =>
+      localeProvider({ locale: "en", toRender: <DateRangePicker /> })
+    )
+    it("should render the component with the 'en' locale", () => {
+      const btn = screen.getByText("Select")
+      expect(btn).toBeInTheDocument()
+    })
 
-    const btn = screen.getByText("Print")
-    expect(btn).toBeInTheDocument()
+    it("should render the date picking inputs", () => {
+      const fromInput = screen.getByLabelText("From")
+      const toInput = screen.getByLabelText("To")
+
+      expect(fromInput).toBeInTheDocument()
+      expect(toInput).toBeInTheDocument()
+    })
+
+    it("shouldn't render the date picking inputs: wrong labels", () => {
+      const fromInput = screen.queryByLabelText("FromFrom")
+      const toInput = screen.queryByLabelText("ToYou")
+
+      expect(fromInput).not.toBeInTheDocument()
+      expect(toInput).not.toBeInTheDocument()
+    })
   })
 
   it("should render the component with the 'uk' locale", () => {
     localeProvider({ locale: "uk", toRender: <DateRangePicker /> })
 
-    const btn = screen.getByText("Друк")
+    const btn = screen.getByText("Обрати")
     expect(btn).toBeInTheDocument()
-  })
-
-  it("should render the date picking inputs", () => {
-    localeProvider({ locale: "en", toRender: <DateRangePicker /> })
-    const fromInput = screen.getByLabelText("From")
-    const toInput = screen.getByLabelText("To")
-
-    expect(fromInput).toBeInTheDocument()
-    expect(toInput).toBeInTheDocument()
-  })
-
-  it("shouldn't render the date picking inputs: wrong labels", () => {
-    localeProvider({ locale: "en", toRender: <DateRangePicker /> })
-    const fromInput = screen.queryByLabelText("FromFrom")
-    const toInput = screen.queryByLabelText("ToYou")
-
-    expect(fromInput).not.toBeInTheDocument()
-    expect(toInput).not.toBeInTheDocument()
   })
 })
 
 describe("Behavior", () => {
   describe("input test", () => {
-    it("should correspond to the user input: from", async () => {
+    beforeEach(() => {
       localeProvider({ toRender: <DateRangePicker /> })
+    })
+    it("should correspond to the user input: from", async () => {
       const fromInput = screen.getByLabelText("From")
 
       expect(fromInput).toBeInTheDocument()
@@ -71,7 +75,6 @@ describe("Behavior", () => {
     })
 
     it("should correspond to the user input: from, hardcode check", async () => {
-      localeProvider({ toRender: <DateRangePicker /> })
       const fromInput = screen.getByLabelText("From")
 
       expect(fromInput).toBeInTheDocument()
@@ -80,7 +83,6 @@ describe("Behavior", () => {
     })
 
     it("should correspond to the user input: from", async () => {
-      localeProvider({ toRender: <DateRangePicker /> })
       const fromInput = screen.getByLabelText("From")
 
       expect(fromInput).toBeInTheDocument()
@@ -89,7 +91,6 @@ describe("Behavior", () => {
     })
 
     it("should correspond to the user input: to, hardcode check", async () => {
-      localeProvider({ toRender: <DateRangePicker /> })
       const toInput = screen.getByLabelText("To")
 
       expect(toInput).toBeInTheDocument()
@@ -97,20 +98,66 @@ describe("Behavior", () => {
       expect(toInput).toHaveValue("01/22/2014")
     })
   })
-  describe("validation test", () => {
-    it("should do validate the dates", async () => {
-      const mockSuccess = jest.fn()
-      localeProvider({ toRender: <DateRangePicker /> })
-      const fromInput = screen.getByLabelText("From")
-      const toInput = screen.getByLabelText("To")
-      const btn = screen.getByText("Print")
 
+  describe("zod validation test", () => {
+    let fromInput: HTMLElement
+    let toInput: HTMLElement
+    let btn: HTMLElement
+    const mockSuccess = jest.fn()
+    beforeEach(() => {
+      localeProvider({
+        toRender: <DateRangePicker onValidationSuccess={mockSuccess} />,
+      })
+      fromInput = screen.getByLabelText("From")
+      toInput = screen.getByLabelText("To")
+      btn = screen.getByText("Select")
+    })
+    afterEach(async () => {
+      await userEvent.clear(fromInput)
+      await userEvent.clear(toInput)
+      jest.clearAllMocks()
+    })
+    it("should call the onValidationSuccess callback", async () => {
       await userEvent.type(fromInput, "01222014")
       await userEvent.type(toInput, "6122024")
       await userEvent.click(btn)
 
-       expect(mockSuccess).toHaveBeenCalled()
-      
+      await waitFor(() => expect(mockSuccess).toHaveBeenCalled())
+    })
+    it("shouldn't call the onValidationSuccess callback", async () => {
+      await userEvent.type(toInput, "01222014")
+      await userEvent.type(fromInput, "6122024")
+      await userEvent.click(btn)
+
+      await waitFor(() => expect(mockSuccess).not.toHaveBeenCalled())
+    })
+    it("should display the right number of the error messages", async () => {
+      await userEvent.type(toInput, "01222014")
+      await userEvent.type(fromInput, "6122024")
+      await userEvent.click(btn)
+
+      const errs = screen.getAllByRole("alert")
+      expect(errs.length).toBe(2)
+    })
+
+    it("should return right value from the onValidation success callback", async () => {
+      await userEvent.type(fromInput, "01222014")
+      await userEvent.type(toInput, "6122024")
+      await userEvent.click(btn)
+      const calls = mockSuccess.mock.calls[0][0]
+      const { from, to } = calls
+      expect(dayjs(from).format("MM/DD/YYYY")).toBe("01/22/2014")
+      expect(dayjs(to).format("MM/DD/YYYY")).toBe("06/12/2024")
+    })
+
+    it("should return right value from the onValidation success callback: wrong input", async () => {
+      await userEvent.type(fromInput, "12222016")
+      await userEvent.type(toInput, "12122025")
+      await userEvent.click(btn)
+      const calls = mockSuccess.mock.calls[0][0]
+      const { from, to } = calls
+      expect(dayjs(from).format("MM/DD/YYYY")).not.toBe("01/22/2014")
+      expect(dayjs(to).format("MM/DD/YYYY")).not.toBe("06/12/2024")
     })
   })
 })

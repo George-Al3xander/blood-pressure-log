@@ -28,7 +28,8 @@ const DateRangePicker = (props: {
     setValue,
   } = useZodValidate({
     type: "dateRange",
-    onValidationSuccess: props.onValidationSuccess || ((data: TDateRangeData) => alert(data)), //(data: TDateRangeData) => alert(data),
+    onValidationSuccess:
+      props.onValidationSuccess || ((data: TDateRangeData) => alert(data)), //(data: TDateRangeData) => alert(data),
   })
   const t = useTranslations("table")
 
@@ -67,14 +68,14 @@ const DateRangePicker = (props: {
 
         <Grid item xs={12} mx="auto">
           <Button
-            startIcon={<PrintIcon />}
+            //startIcon={<PrintIcon />}
             type={"submit"}
             size="large"
             variant="contained"
             fullWidth
             disabled={isBusy}
           >
-            {isBusy ? t("btn_print.process") : t("btn_print.default")}
+            {isBusy ? t("btn_select.process") : t("btn_select.default")}
           </Button>
         </Grid>
       </Grid>
