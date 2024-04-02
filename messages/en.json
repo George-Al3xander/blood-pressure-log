@@ -2,6 +2,9 @@
     "Index": {
       "title": "Hello world!"
     },
+    "global": {
+
+    },
     "auth": {
       "name_first": "First name",
       "name_last": "Last name",
@@ -155,7 +158,16 @@
         "btn_print": {
           "default": "Print",
           "process": "Processing..."
-        }
+        },
+        "print_title":  "Select the time range during which reports were created",
+        "print_header_info": {
+          "default" : "Your reports are ready. Click the button to print.",
+          "process": "Loading data...please wait..."
+        },
+        "btn_cancel": "Cancel",
+        "error_message": "Oops! Something went wrong.",
+        "btn_retry": "Try again"
+       
     }
     
   }

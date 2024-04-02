@@ -36,7 +36,7 @@ const PlainTable = ({
 
   return (
     <Stack alignItems={"center"}>
-      <TableContainer component={Paper}>
+      <TableContainer /*component={Paper}*/>
         <Table sx={{ minWidth: 650 }}>
           <TableHead>
             <TableRow>

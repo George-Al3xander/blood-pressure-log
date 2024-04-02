@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import PrintReports from "../print-reports"
+import PrintReports from "../print-reports-menu"
 import { localeProvider } from "../../../../lib/tests/utils"
 import { server } from "@/mocks/server"
 import { HttpResponse, http } from "msw"
@@ -63,6 +63,15 @@ describe("Behavior", () => {
       it("should render the print ready ui", () => {
         const printText = screen.getByText("Ready to print")
         expect(printText).toBeInTheDocument()
+      })
+
+      describe("print test", () => {
+        jest.spyOn(window, "print").mockReturnValue()
+        it("should trigger window print after the print button click", async () => {
+          const btn = screen.getByRole("button", { name: "Print" }) 
+          await userEvent.click(btn)
+          await waitFor(() => expect(window.print).toHaveBeenCalled())
+        })
       })
     })
     describe("Fetch error", () => {

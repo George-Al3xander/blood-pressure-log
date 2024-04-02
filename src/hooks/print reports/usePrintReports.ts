@@ -28,10 +28,19 @@ const usePrintReports = () => {
     setStep("fetch")
     try {
       const { from, to } = data
-      const { reports } = await fetchMongoData<{ reports: LogReport[] }>(
-        `/api/mongo/reports?gte=${from.toISOString()}&lte=${to.toISOString()}`
-      )
-      setReports(reports)
+      const { reports: newReports, success } = await fetchMongoData<{
+        reports: LogReport[]
+        success: boolean
+      }>(`/api/mongo/reports?gte=${from.toISOString()}&lte=${to.toISOString()}`)
+
+      if (success != true || !reports) throw new Error("damn")
+
+      const sorted = newReports.sort((a, b) => {
+        const dateA = new Date(a.date)
+        const dateB = new Date(b.date)
+        return dateA.valueOf() - dateB.valueOf()
+      })
+      setReports(sorted)
     } catch (error) {
       console.log(error)
       setIsError(true)

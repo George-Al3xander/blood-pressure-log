@@ -7,7 +7,7 @@ import dayjs from "dayjs"
 import { useTranslations } from "next-intl"
 import useZodValidate from "@/hooks/useZodValidate"
 import { TDateRangeData } from "../../../lib/auth/zodSchemas"
-import { Button, Grid, Stack } from "@mui/material"
+import { Button, Grid, Stack, Typography } from "@mui/material"
 import { Controller } from "react-hook-form"
 import { MockHelperText } from "../utils/mock-helper-text"
 import PrintIcon from "@mui/icons-material/Print"
@@ -36,6 +36,11 @@ const DateRangePicker = (props: {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Grid container spacing={2} component={"form"} onSubmit={submitForm}>
+        <Grid alignSelf={"center"} item xs={12}>
+          <Typography fontWeight={600} variant="caption">
+            {t("print_title")}
+          </Typography>
+        </Grid>
         {keys.map((range) => (
           <Grid
             item
@@ -57,7 +62,7 @@ const DateRangePicker = (props: {
                     return onChange(dateVal)
                   }}
                   disabled={isBusy}
-                  minDate={dayjs(props[range])}
+                  //minDate={dayjs(props[range])}
                   label={t(range)}
                 />
               )}

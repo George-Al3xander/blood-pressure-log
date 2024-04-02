@@ -49,10 +49,10 @@ export async function GET(req: NextRequest) {
     const reports = await Report.find(searchModel)
       .limit(pageSize)
       .skip(skip)
-
+   
     const count = await Report.countDocuments({ userId })
     return NextResponse.json({ status: 200, success: true, reports, count })
-  } catch (error) {
+  } catch (error) {    
     const message =
       typeof error == "string"
         ? error
