@@ -6,6 +6,7 @@ import {
   TypographyProps,
 } from "@mui/material"
 import { OpUnitType } from "dayjs"
+
 import { Control } from "react-hook-form"
 import { ZodSchema, string } from "zod"
 
@@ -59,13 +60,23 @@ export type TableVariantParam = "complex" | "plain"
 
 export type ReportTableProps = {
   reports: LogReport[]
+}
+
+export type ReportTableWithPagination = ReportTableProps & {
   reportCount: number
   isLoading: boolean
-  onChange: any,
+  onChange: any
   paginationModel: { page: number; pageSize: number }
 }
 
-export type DataGridProps = ReportTableProps & {
+export type PlainTable = ReportTableProps  & Partial<{
+  pagination: boolean,
+  reportCount: number
+  isLoading: boolean
+  onChange: any
+  paginationModel: { page: number; pageSize: number }
+}>
+
+export type DataGridProps = ReportTableWithPagination & {
   locale: string
- 
 }

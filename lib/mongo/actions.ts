@@ -8,17 +8,17 @@ export const fetchMongoData = async <T>(
   input: RequestInfo | URL,
   init?: RequestInit | undefined
 ): Promise<T> => {
-  const { token, success } = await getAccessToken()
-  if (!success) throw new Error("Auth error")
+  // const { token, success } = await getAccessToken()
+  // if (!success) throw new Error("Auth error")
   const reqHeaders = init && init.headers && init.headers
 
   unset(init, "headers")
   //unset(headers, "Authorization")
 
   //const host = headers().get("host")
-  const res = await fetch(`http://localhost:3000${input}`, {
+  const res = await fetch(`${input}`, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      //Authorization: `Bearer ${token}`,
       ...reqHeaders,
     },
     ...init,

@@ -1,4 +1,4 @@
-import { LogReport, ReportTableProps } from "@/types/types"
+import { LogReport, PlainTable, ReportTableProps } from "@/types/types"
 import {
   TableContainer,
   Table,
@@ -29,8 +29,9 @@ const PlainTable = ({
   isLoading,
   onChange,
   reportCount,
-  paginationModel
-}: ReportTableProps) => {
+  paginationModel,
+  pagination,
+}: PlainTable) => {
   const t = useTranslations("table")
 
   return (
@@ -73,14 +74,16 @@ const PlainTable = ({
           </TableBody>
         </Table>
       </TableContainer>
-      <Pagination
-        defaultPage={paginationModel.page + 1}
-        disabled={isLoading}
-        sx={{ my: 3 }}
-        color="primary"
-        count={Math.floor(reportCount / 21) + 1}
-        onChange={(_event, num) => onChange({ page: num - 1, pageSize: 21 })}
-      />
+      {(pagination && paginationModel && reportCount) && (
+        <Pagination
+          defaultPage={paginationModel.page + 1}
+          disabled={isLoading}
+          sx={{ my: 3 }}
+          color="primary"
+          count={Math.floor(reportCount / 21) + 1}
+          onChange={(_event, num) => onChange({ page: num - 1, pageSize: 21 })}
+        />
+      )}
     </Stack>
   )
 }

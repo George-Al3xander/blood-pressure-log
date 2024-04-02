@@ -1,30 +1,11 @@
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import DateRangePicker from "../date-range-picker"
-import { NextIntlClientProvider } from "next-intl"
-import { ReactNode } from "react"
-import { defaultLocale, locales } from "@/middleware"
+
 
 import dayjs from "dayjs"
-const localeProvider = ({
-  locale = defaultLocale,
-  toRender,
-}: {
-  locale?: (typeof locales)[number]
-  toRender: ReactNode
-}) => {
-  const useRouter = jest.spyOn(require("next/router"), "useRouter")
-  const messages = require(`../../../../messages/${locale}.json`)
-  useRouter.mockImplementationOnce(() => ({
-    query: { locale: locale },
-  }))
+import { localeProvider } from "../../../../lib/tests/utils"
 
-  render(
-    <NextIntlClientProvider messages={messages} locale={locale}>
-      {toRender}
-    </NextIntlClientProvider>
-  )
-}
 
 describe("Render", () => {
   describe("en locale", () => {

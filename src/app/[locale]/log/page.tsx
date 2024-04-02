@@ -30,7 +30,7 @@ const LogPage = async ({
   const { count } = await fetchMongoData<{
     success: boolean
     count: number
-  }>(`/api/mongo/reports/count`)
+  }>(`/api/mongo/reports`)
 
   return (
     <>
