@@ -48,7 +48,24 @@ export const handlers = [
           dayjs(obj.date).isBefore(dayjs(lte))
       )
       //console.log("Ranged Reports:", ranged)
-      return HttpResponse.json({ reports: ranged, success: true })
+      return HttpResponse.json(
+        { reports: ranged, success: true },
+        { status: 200 }
+      )
     }
+  }),
+  http.post("/api/mongo/reports", async ({ request }) => {
+    // const data = await request.formData()
+    //const report = data.get('report')
+    const report = await request.json()
+    return HttpResponse.json({ success: true, report }, { status: 200 })
+  }),
+  http.put("/api/mongo/reports", async ({ request }) => {
+    // const data = await request.formData()
+
+    const report = await request.json()
+    //const report = data.get("report")
+
+    return HttpResponse.json({ success: true ,report}, { status: 200 })
   }),
 ]

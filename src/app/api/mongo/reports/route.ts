@@ -8,6 +8,8 @@ import User from "../../../../../lib/mongo/schemas/user"
 import { getSession } from "../../../../../lib/auth/actions"
 import { headers } from "next/headers"
 import dayjs from "dayjs"
+import { LogReport } from "@/types/types"
+import { ObjectId } from "mongodb"
 
 export async function GET(req: NextRequest) {
   console.log("reports fetched")
@@ -32,27 +34,28 @@ export async function GET(req: NextRequest) {
     const page = Number(req.nextUrl.searchParams.get("page") || "0")
     const pageSize = Number(req.nextUrl.searchParams.get("pageSize") || "30")
     const gte = req.nextUrl.searchParams.get("gte")
-    const lte = req.nextUrl.searchParams.get("lte") 
+    const lte = req.nextUrl.searchParams.get("lte")
     const skip = page * pageSize
-    
-    const searchModel: {userId?:string,date?: any} = {
-        userId,
-        date: {
-          $gte: dayjs(gte ).startOf("day").toDate(),
-          $lte: dayjs(lte).endOf("day").toDate(),
-        },
-      }
 
-     if(!lte || !gte) {
-        delete searchModel.date
-     } 
+    const searchModel: { userId?: string; date?: any } = {
+      userId,
+      date: {
+        $gte: dayjs(gte).startOf("day").toDate(),
+        $lte: dayjs(lte).endOf("day").toDate(),
+      },
+    }
+
+    if (!lte || !gte) {
+      delete searchModel.date
+    }
     const reports = await Report.find(searchModel)
+      .sort({ date: "desc" })
       .limit(pageSize)
       .skip(skip)
-   
+
     const count = await Report.countDocuments({ userId })
     return NextResponse.json({ status: 200, success: true, reports, count })
-  } catch (error) {    
+  } catch (error) {
     const message =
       typeof error == "string"
         ? error
@@ -65,18 +68,76 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export async function PUT() {
-  // const headersList = headers();
-  // const authToken = (headersList.get("authorization") || '').split("Bearer ").at(1);
+export async function PUT(req: NextRequest) {
+  const { date, sys, dia, pulse, rating, notes, _id }: LogReport =
+    await req.json()
+  const headersList = headers()
 
-  //     if(!authToken) throw new Error("Invalid token");
-  //     const {email} = jwt.verify(authToken!, process.env.JWT_SECRET_KEY!) as {userId?:string,email?:string};
+  const authToken = (headersList.get("authorization") || "")
+    .split("Bearer ")
+    .at(1)
+  try {
+    if (!authToken) throw new Error("Invalid token")
+    const { email, userId } = jwt.verify(
+      authToken!,
+      process.env.JWT_SECRET_KEY!
+    ) as { userId?: string; email?: string }
 
-  //     if(!email) throw new Error("Invalid user info");
+    if (!email) throw new Error("Invalid user info")
+    await connectToDatabase()
+    if (!_id) throw new Error()
+    const item = await Report.findByIdAndUpdate(
+      _id,
+      {
+        $set: {
+          date,
+          sys,
+          dia,
+          pulse,
+          rating,
+          notes,
+        },
+      },
+      { new: true }
+    )
 
-  //  await connectToDatabase();
-  //throw new Error("BRUH")
-  return NextResponse.json({ success: true })
+    return NextResponse.json(
+      { status: 200, success: true, report: item },
+      { status: 200 }
+    )
+  } catch (error) {
+    /// console.log(error)
+    console.log(error)
+    return NextResponse.json({ status: 500, message: error }, { status: 500 })
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  const { _id }: LogReport = await req.json()
+  const headersList = headers()
+
+  const authToken = (headersList.get("authorization") || "")
+    .split("Bearer ")
+    .at(1)
+  try {
+    if (!authToken) throw new Error("Invalid token")
+    if (!_id) throw new Error("No id provided")
+    const { email, userId } = jwt.verify(
+      authToken!,
+      process.env.JWT_SECRET_KEY!
+    ) as { userId?: string; email?: string }
+
+    if (!email) throw new Error("Invalid user info")
+    await connectToDatabase()
+    if (!_id) throw new Error()
+    await Report.findByIdAndDelete(_id)
+
+    return NextResponse.json({ status: 200, success: true }, { status: 200 })
+  } catch (error) {
+    /// console.log(error)
+    console.log(error)
+    return NextResponse.json({ status: 500, message: error }, { status: 500 })
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -93,11 +154,14 @@ export async function POST(req: NextRequest) {
       notes,
       userId: id,
     })
-    await newReport.save()
+    const item = await newReport.save()
 
-    return NextResponse.json({ status: 200, success: true })
+    return NextResponse.json(
+      { status: 200, success: true, report: item },
+      { status: 200 }
+    )
   } catch (error) {
     /// console.log(error)
-    return NextResponse.json({ status: 500, message: error })
+    return NextResponse.json({ status: 500, message: error }, { status: 500 })
   }
 }

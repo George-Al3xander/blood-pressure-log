@@ -18,7 +18,7 @@ export const fetchMongoData = async <T>(
   //const host = headers().get("host")
   const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}${input}`, {
     headers: {
-      Authorization: `Bearer ${token}`,
+     Authorization: `Bearer ${token}`,
       ...reqHeaders,
     },
     ...init,

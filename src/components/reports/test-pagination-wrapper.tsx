@@ -17,7 +17,7 @@ const TestPaginationWrapper = ({
   if (count == 0) return <div>Empty</div>
 
   if (tableVariant == "plain") {
-    return <PlainTable reportCount={count} {...props} />
+    return <PlainTable pagination reportCount={count} {...props} />
   }
 
   return <DataGridTable locale={locale} reportCount={count} {...props} />

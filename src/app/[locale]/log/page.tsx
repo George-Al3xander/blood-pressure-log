@@ -1,4 +1,4 @@
-import PrintWrapper from "@/components/print-modal"
+import PrintWrapper from "@/components/modals/print-modal"
 import ReportsTable from "@/components/reports/reports-table"
 import { LogReport, TableVariantParam } from "@/types/types"
 import React from "react"
@@ -21,8 +21,6 @@ const LogPage = async ({
 }: {
   params: { locale?: string }
 }) => {
- 
-
   const { count } = await fetchMongoData<{
     success: boolean
     count: number
@@ -30,7 +28,6 @@ const LogPage = async ({
 
   return (
     <>
-      
       <TestPaginationWrapper locale={locale || "en"} count={count} />
     </>
   )

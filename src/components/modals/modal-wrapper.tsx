@@ -6,40 +6,37 @@ import Typography from "@mui/material/Typography"
 import Modal from "@mui/material/Modal"
 import PrintIcon from "@mui/icons-material/Print"
 import { useTranslations } from "next-intl"
-import PrintBtn from "./print-btn"
-import PrintReports from "./print reports/print-reports-menu"
+import PrintBtn from "../print-btn"
+import PrintReports from "../print reports/print-reports-menu"
 import { SxProps } from "@mui/material"
 import CloseIcon from "@mui/icons-material/Close"
-const style: SxProps = {
-  position: "absolute" as "absolute",
-  top: "30%",
-  left: "0",
-  right: "0",
-  mx: "auto",
-  height: { sx: "100vh", md: "initial" },
-  width: { sx: "80vw", md: "40vw" },
+export const modalContainerStyle: SxProps = {
+  position: "absolute",
+  top: "50%", // Center vertically
+  left: "50%", // Center horizontally
+  transform: "translate(-50%, -50%)",
+  width: { xs: "90%", md: "50%" }, // Adjust the width as needed
+  // height: {xs:"90vh",md: "initial"}, // Use viewport height to make sure it fits within the screen
   bgcolor: "background.paper",
   boxShadow: 24,
-  p: 4,
+  p: { xs: 2, md: 4 },
   borderRadius: 2,
 }
 
-export default function PrintModal() {
+export default function ModalWrapper({
+  children,
+  trigger,
+}: {
+  children: React.ReactNode
+  trigger: React.ReactElement
+}) {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
   const t = useTranslations("table")
   return (
     <div>
-      <Button
-        onClick={handleOpen}
-        startIcon={<PrintIcon />}
-        size="large"
-        variant="contained"
-        fullWidth
-      >
-        {t("btn_print.default")}
-      </Button>
+      <span onClick={handleOpen}>{trigger}</span>
 
       <Modal
         open={open}
@@ -47,8 +44,8 @@ export default function PrintModal() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <PrintReports />
+        <Box sx={modalContainerStyle}>
+          {children}
           <Button
             onClick={handleClose}
             sx={{ mt: 1 }}

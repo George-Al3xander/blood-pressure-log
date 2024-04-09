@@ -7,7 +7,7 @@ import Link from "next/link"
 import HomeIcon from "@mui/icons-material/Home"
 import { useTranslations } from "next-intl"
 import TableVariantMenu from "@/components/log/table-variant-menu"
-import PrintModal from "@/components/print-modal"
+import PrintModal from "@/components/modals/print-modal"
 
 const commonProps: ButtonProps = {
   LinkComponent: Link,
@@ -37,13 +37,13 @@ export default function LogLayout({
       >
         {current == "log" ? (
           <>
-            <Button
+            {/* <Button
               href="/log/create"
               startIcon={<CreateIcon />}
               {...commonProps}
             >
               {t("btn_create.default")}
-            </Button>
+            </Button> */}
             <PrintModal />
           </>
         ) : (

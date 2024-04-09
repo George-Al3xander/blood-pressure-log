@@ -7,9 +7,7 @@ import { MockHelperText } from '../utils/mock-helper-text';
 
 
 
-function valuetext(value: number) {
-  return `${value}°C`;
-}
+
 
 export default function RatingRange({control,defaultValue,error}:CustomInput) {
     const t = useTranslations('table')
@@ -31,7 +29,7 @@ export default function RatingRange({control,defaultValue,error}:CustomInput) {
                 aria-label="Rating marks"
                 defaultValue={defaultValue ? +defaultValue : 3}
                 onChange={({target: {value}}: {target: any})=> onChange(value)} 
-                getAriaValueText={valuetext}                
+                             
                 step={1}
                 min={1}
                 max={5}

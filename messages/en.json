@@ -105,9 +105,15 @@
         "success": "User created",
         "fail": "Failed creating user"
       },
-      "reportCreation": {
-        "success": "Report created",
-        "fail": "Failed creating report"
+      "reportAction": {
+        "create": {
+          "success": "Report created",
+          "fail": "Failed creating report"
+        },
+        "update": {
+          "success": "Report updated",
+          "fail": "Failed updating report"
+        }
       },
       "date_range": {
         "from":"'From' field  must be earlier than 'To'",
@@ -151,6 +157,7 @@
         "plain": "Plain",
         "complex": "Complex",
         "date_range": "From {start} to {end}",
+        "actions": "Actions",
         "btn_select": {
           "default": "Select",
           "process": "Processing..."
@@ -166,7 +173,16 @@
         },
         "btn_cancel": "Cancel",
         "error_message": "Oops! Something went wrong.",
-        "btn_retry": "Try again"
+        "btn_retry": "Try again",
+        "deleteModal": {
+          "btn": "Delete",
+          "message": {
+            "header": "Are you sure you want to delete the following report:",
+            "additional": "This report will be deleted immediately. You can’t undo this action.",
+            "success": "Report deleted",
+            "fail":"Failed deleting report"
+          }
+        }
        
     }
     

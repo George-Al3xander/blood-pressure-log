@@ -9,6 +9,8 @@ import { OpUnitType } from "dayjs"
 
 import { Control } from "react-hook-form"
 import { ZodSchema, string } from "zod"
+import { TReportData } from "../../lib/auth/zodSchemas"
+import { manageReport } from "../../lib/mongo/utils"
 
 export type Field<T> = TextFieldProps & { name: keyof T }
 
@@ -29,13 +31,14 @@ export type AdditionalCheckItem = {
 }
 
 export type LogReport = {
-  date: string
+  date: Date
   sys: number
   dia: number
   _id: string
   pulse: number
-  rating: 5 | 4 | 3 | 2 | 1
+  rating: number //5 | 4 | 3 | 2 | 1
   notes: string // e.g.
+  //userId: string
 }
 //'Excellent' | 'Very Good' | 'Good' | 'Fair' | 'Poor',
 
@@ -52,7 +55,7 @@ export type LabelStyling = { [key in OpUnitType]: TypographyProps }
 
 export type CustomInput = {
   control: Control
-  defaultValue?: string
+  defaultValue?: string | number
   error?: string
 }
 
@@ -69,14 +72,51 @@ export type ReportTableWithPagination = ReportTableProps & {
   paginationModel: { page: number; pageSize: number }
 }
 
-export type PlainTable = ReportTableProps  & Partial<{
-  pagination: boolean,
-  reportCount: number
-  isLoading: boolean
-  onChange: any
-  paginationModel: { page: number; pageSize: number }
-}>
+export type PlainTable = ReportTableProps &
+  Partial<{
+    pagination: boolean
+    reportCount: number
+    isLoading: boolean
+    onChange: any
+    paginationModel: { page: number; pageSize: number }
+  }>
 
 export type DataGridProps = ReportTableWithPagination & {
   locale: string
 }
+
+export type TOptAction = {
+  action: "POST" | "PUT" | "DELETE" | "ERROR"
+  newReport: TReportData & { _id: string }
+}
+type TOptimistic = (action: TOptAction, callback?: () => void) => void
+
+export type ManageReportProps<T extends LogReport | TReportData> = {
+  type: "POST" | "PUT"
+  defaultValue?: T
+  onOptimistic: TOptimistic
+  onValidationSuccess: (data: T) => Promise<
+    | {
+        success: boolean
+        report?: undefined
+      }
+    | {
+        success: boolean
+        report: LogReport
+      }
+  >
+}
+
+export type UpdateReportProps = ManageReportProps<LogReport>
+
+export type CreateReportProps = ManageReportProps<TReportData>
+
+export type UpdateReportModalProps = Omit<
+  ManageReportProps<LogReport>,
+  "onValidationSuccess"
+>
+
+export type CreateReportModalProps = Omit<
+  ManageReportProps<TReportData>,
+  "onValidationSuccess"
+>

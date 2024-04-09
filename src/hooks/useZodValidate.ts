@@ -37,6 +37,8 @@ const useZodValidate = ({
   } = formReturn
 
   const onSubmit = async (data: unknown) => {
+    setExtraCheck(true)
+
     const body: BodyReq = { data, type }
     const res = await fetch("/api/zod", {
       method: "POST",
@@ -63,7 +65,6 @@ const useZodValidate = ({
     }
 
     if (additionalCheck) {
-      setExtraCheck(true)
       let errCount = 0
       try {
         for (const { func, path, messagePath } of additionalCheck) {
@@ -100,11 +101,11 @@ const useZodValidate = ({
           }
         }
       } finally {
-        setExtraCheck(false)
       }
       if (errCount > 0) return
     }
     await onValidationSuccess(data)
+    setExtraCheck(false)
   }
 
   const submitForm = (e: FormEvent<HTMLFormElement>) =>

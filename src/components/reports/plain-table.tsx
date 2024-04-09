@@ -41,7 +41,7 @@ const PlainTable = ({
           <TableHead>
             <TableRow>
               {headings.map((heading) => (
-                <TableCell key={heading}>{t(heading)}</TableCell>
+                <TableCell sx={{textAlign: "center"}} key={heading}>{t(heading)}</TableCell>
               ))}
             </TableRow>
           </TableHead>
@@ -49,7 +49,7 @@ const PlainTable = ({
             {isLoading ? (
               <TableRow>
                 {headings.map((heading) => (
-                  <TableCell key={heading + "spinner"}>
+                  <TableCell sx={{textAlign: "center"}} key={heading + "spinner"}>
                     <CircularProgress color="primary" />
                   </TableCell>
                 ))}
@@ -58,7 +58,7 @@ const PlainTable = ({
               reports.map((report) => (
                 <TableRow key={report._id}>
                   {headings.map((heading) => (
-                    <TableCell key={report._id + heading}>
+                    <TableCell sx={{textAlign: heading != "notes" ? "center" : "left"}} key={report._id + heading}>
                       {heading == "rating"
                         ? t(`rating_range.${report[heading]}`)
                         : heading == "date"
