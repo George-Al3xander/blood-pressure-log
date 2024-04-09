@@ -29,18 +29,4 @@ export const groupByProperty = (
   return flatten(filteredItems)
 }
 
-export const handleLogPageParams = (obj: LogPageSearchParams) => {
-  const keys: (keyof LogPageSearchParams)[] = [
-    "tableVariant",
-    "page",
-    "pageSize",
-  ]
-  let str = "?"
-  keys.forEach((key) => {
-    if (obj[key]) {
-      const data = `${key}=${obj[key]}`
-      str = str.concat(str.length > 1 ? "&" : "", data)
-    }
-  })
-  return str.length > 1 ? str : ""
-}
+

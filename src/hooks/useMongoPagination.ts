@@ -3,17 +3,16 @@
 import { LogPageSearchParams } from "@/app/[locale]/log/page"
 import { useEffect, useState } from "react"
 import { fetchMongoData } from "../../lib/mongo/actions"
-import { LogReport, TableVariantParam } from "@/types/types"
+import { LogReport} from "@/types/types"
 import useLogSearchParams from "./useLogSearchParams"
-import { useRouter } from "next/navigation"
-import { handleLogPageParams } from "../../lib/utils"
-import realData from "../../public/json/realData.json"
+
+import useHandleParams from "./useChangeSearchParams"
 const useMongoPagination = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
   const [reports, setReports] = useState<LogReport[]>([])
   const { pageSize, page, tableVariant } = useLogSearchParams()
-  const router = useRouter()
+  const { handleChange } = useHandleParams()
 
   const paginationModel = {
     pageSize: Number(pageSize),
@@ -24,13 +23,10 @@ const useMongoPagination = () => {
     page: newPage,
     pageSize: newPageSize,
   }: LogPageSearchParams) =>
-    router.push(
-      handleLogPageParams({
-        tableVariant,
-        page: newPage!.toString(),
-        pageSize: newPageSize!.toString(),
-      })
-    )
+    handleChange([
+      { path: "page", value: newPage },
+      { path: "pageSize", value: newPageSize },
+    ])
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -41,7 +37,7 @@ const useMongoPagination = () => {
         reports: LogReport[]
       }>(`/api/mongo/reports?page=${page}&pageSize=${pageSize}`, {
         signal: abortController.signal,
-      })           
+      })
         .then(({ reports: reportsDb }) => {
           setReports(reportsDb)
         })
@@ -51,7 +47,6 @@ const useMongoPagination = () => {
     fetchData()
     return () => abortController.abort()
   }, [page, pageSize])
-  
 
   return {
     isLoading,

@@ -15,26 +15,27 @@ import {
 } from "@mui/material"
 import { TableVariantParam } from "@/types/types"
 import DataArrayIcon from "@mui/icons-material/DataArray"
-import { useSearchParams } from "next/navigation"
-import { handleLogPageParams } from "../../../lib/utils"
+import { useRouter, useSearchParams } from "next/navigation"
+import useHandleParams from "@/hooks/useChangeSearchParams"
+
 const variants: TableVariantParam[] = ["plain", "complex"]
 
 const TableVariantMenu = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const { searchParams, handleChange } = useHandleParams()
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
   }
-  const handleClose = () => {
+  const handleClose = (value: string) => {
+    handleChange({ path: "tableVariant", value })
     setAnchorEl(null)
   }
   const t = useTranslations("table")
 
-  const searchParams = useSearchParams()
   const current = (searchParams.get("tableVariant") ||
     "complex") as TableVariantParam
-  const page = searchParams.get("page") || undefined
-  const pageSize = searchParams.get("pageSize") || undefined
+
   return (
     <div>
       <Button
@@ -59,13 +60,8 @@ const TableVariantMenu = () => {
           <MenuItem
             disabled={current == variant}
             sx={{ textTransform: "capitalize" }}
-            href={handleLogPageParams({
-              page,
-              pageSize,
-              tableVariant: variant,
-            })}
-            component={Link}
-            onClick={handleClose}
+            //component={Link}
+            onClick={() => handleClose(variant)}
             key={variant}
           >
             <ListItemIcon>{current == variant && <DoneIcon />}</ListItemIcon>
