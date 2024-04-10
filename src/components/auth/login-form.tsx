@@ -1,18 +1,18 @@
-"use client";
-import useZodValidate from "@/hooks/useZodValidate";
-import React, { useEffect } from "react";
+"use client"
+
+import React, { useEffect } from "react"
 import {
   TUserLoginData,
-  TUserRegisterData,
-  UserRegisterSchema,
-} from "../../../lib/auth/zodSchemas";
-import { Field } from "@/types/types";
-import { Button, Grid, Grid2Props, TextField, Typography } from "@mui/material";
-import { checkIfUserExists, comparePassword } from "../../../lib/mongo/utils";
-import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 
-const fields: (Field<TUserRegisterData> & Grid2Props & { item?: boolean })[] = [
+} from "../../../lib/auth/zodSchemas"
+import { ZodFormField, ZodValidationArgs } from "@/types/types"
+
+import { checkIfUserExists, comparePassword } from "../../../lib/mongo/utils"
+
+import { useRouter } from "next/navigation"
+import ZodUserForm from "./zod-user-form"
+
+const fields: ZodFormField<TUserLoginData>[] = [
   {
     name: "email",
     xs: 12,
@@ -22,24 +22,14 @@ const fields: (Field<TUserRegisterData> & Grid2Props & { item?: boolean })[] = [
     type: "password",
     xs: 12,
   },
-];
+]
 
 const LoginForm = () => {
-  const t = useTranslations("auth");
-  const router = useRouter();
-  useEffect(() => {
-    router.refresh();
-  }, []);
-
-  const {
-    formState: { errors },
-    isBusy,
-    submitForm,
-    register,
-  } = useZodValidate({
+  const router = useRouter()
+  const props: ZodValidationArgs = {
     onValidationSuccess: () => {
-      router.push("/");
-      router.refresh();
+      router.push("/")
+      router.refresh()
     },
     type: "login",
     additionalCheck: [
@@ -54,40 +44,13 @@ const LoginForm = () => {
         func: comparePassword,
       },
     ],
-  });
+  }
 
-  return (
-    <Grid item component={"form"} onSubmit={submitForm}>
-      <Grid spacing={2} container>
-        {fields.map(({ name, type, xs, md, ...props }) => {
-          return (
-            <Grid key={name + "-grid"} xs={xs} md={md} item>
-              <TextField
-                required
-                fullWidth
-                label={t(name)}
-                type={type ?? "text"}
-                error={errors[name] != undefined}
-                helperText={
-                  errors[name] && errors
-                    ? (errors[name]!.message as string)
-                    : ""
-                }
-                key={name}
-                {...props}
-                {...register(name)}
-              />
-            </Grid>
-          );
-        })}
-        <Grid xs={12} item>
-          <Button fullWidth type="submit" variant="contained" disabled={isBusy}>
-            {isBusy ? t("btn_login.process") : t("btn_login.default")}
-          </Button>
-        </Grid>
-      </Grid>
-    </Grid>
-  );
-};
+  useEffect(() => {
+    router.refresh()
+  }, [])
 
-export default LoginForm;
+  return <ZodUserForm fields={fields} {...props} />
+}
+
+export default LoginForm

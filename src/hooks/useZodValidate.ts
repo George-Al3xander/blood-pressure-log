@@ -80,13 +80,13 @@ const useZodValidate = ({
             }
           } else {
             const val = getValues(path)
+
             const pathMap = path.map((p, index) => [
               p,
               val[index],
             ]) as readonly (readonly [unknown, unknown])[]
             const entries = new Map(pathMap)
             const obj = Object.fromEntries(entries)
-
             const res = await func(obj)
 
             if (!res) {
@@ -102,7 +102,19 @@ const useZodValidate = ({
         }
       } finally {
       }
-      if (errCount > 0) return
+
+      if (errCount > 0) {
+        setExtraCheck(false)
+        return
+      }
+    }
+
+    if (defaultValues) {
+      if (typeof defaultValues == "object" && typeof data == "object") {
+        if ("_id" in defaultValues) {
+          ;(data! as any)._id = defaultValues._id
+        }
+      }
     }
     await onValidationSuccess(data)
     setExtraCheck(false)

@@ -1,4 +1,5 @@
 import {
+  Grid2Props,
   SxProps,
   TableCellProps,
   TableRowProps,
@@ -11,6 +12,8 @@ import { Control } from "react-hook-form"
 import { ZodSchema, string } from "zod"
 import { TReportData } from "../../lib/auth/zodSchemas"
 import { manageReport } from "../../lib/mongo/utils"
+import { Schemas } from "@/app/api/zod/route"
+import MetricsDashboard from "@/components/metrics dashboard/metrics-dashboard"
 
 export type Field<T> = TextFieldProps & { name: keyof T }
 
@@ -28,6 +31,16 @@ export type AdditionalCheckItem = {
   func: AdditionalCheckFunc
   path: string | readonly string[]
   messagePath: string
+}
+
+export type MongoUser = {
+  _id: string
+  email: string
+  name: {
+    first: string
+    last: string
+  },
+  createdAt: string
 }
 
 export type LogReport = {
@@ -120,3 +133,23 @@ export type CreateReportModalProps = Omit<
   ManageReportProps<TReportData>,
   "onValidationSuccess"
 >
+
+export type ZodFormField<T> = Field<T> & Grid2Props & { item?: boolean }
+
+export type ZodValidationArgs = {
+  onValidationSuccess: Function
+  type: Schemas
+  additionalCheck?: AdditionalCheckItem[]
+  defaultValues?: any
+}
+
+export type MetricsResponce = {
+  _id: null
+  sys_average: number
+  dia_average: number
+  pulse_average: number
+  rating_average: number
+}
+
+
+export type MetricsDashboardProps = {metrics: MetricsResponce & {reports_count: number}, userInfo:  MongoUser}

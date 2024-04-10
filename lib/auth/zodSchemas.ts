@@ -2,23 +2,30 @@ import dayjs from "dayjs"
 import { TranslationValues, useTranslations } from "next-intl"
 import { z } from "zod"
 
-export const UserRegisterSchema = (
-  t: (arg: string, values?: TranslationValues) => string
-) =>
+type Translator = (arg: string, values?: TranslationValues) => string
+
+const EmailSchema = (t: Translator) =>
+  z
+    .string()
+    .email(t("email.email"))
+    .min(3, t("email.min", { length: 3 }))
+
+const NameSchema = (t: Translator, type: "first" | "last") =>
+  z
+    .string()
+    .min(3, t(`name_${type}.min`, { length: 3 }))
+    .max(256, t(`name_${type}.max`, { length: 256 }))
+
+const UserPersonalInfo = (t: Translator) => ({
+  name_first: NameSchema(t, "first"),
+  name_last: NameSchema(t, "last"),
+  email: EmailSchema(t),
+})
+
+export const UserRegisterSchema = (t: Translator) =>
   z
     .object({
-      name_first: z
-        .string()
-        .min(3, t("name_first.min", { length: 3 }))
-        .max(256, t("name_first.max", { length: 256 })),
-      name_last: z
-        .string()
-        .min(3, t("name_last.min", { length: 3 }))
-        .max(256, t("name_last.max", { length: 256 })),
-      email: z
-        .string()
-        .email(t("email.email"))
-        .min(3, t("email.min", { length: 3 })),
+      ...UserPersonalInfo(t),
       password: z
         .string()
         .min(8, t("password.min", { length: 8 }))
@@ -45,14 +52,9 @@ export const UserRegisterSchema = (
       path: ["confirmPassword"],
     })
 
-export const UserLoginSchema = (
-  t: (arg: string, values?: TranslationValues) => string
-) =>
+export const UserLoginSchema = (t: Translator) =>
   z.object({
-    email: z
-      .string()
-      .email(t("email.email"))
-      .min(3, t("email.min", { length: 3 })),
+    email: EmailSchema(t),
     password: z
       .string()
       .min(8, t("password.min", { length: 8 }))
@@ -65,9 +67,7 @@ const tableNumObj = (t: any) =>
     .gte(1, t("number.min", { length: 1 }))
     .lte(300, t("number.max", { length: 300 }))
 
-export const ReportSchema = (
-  t: (arg: string, values?: TranslationValues) => string
-) =>
+export const ReportSchema = (t: Translator) =>
   z.object({
     date: z.coerce.date(),
     sys: tableNumObj(t),
@@ -83,9 +83,7 @@ export const ReportSchema = (
       .max(250, t("notes.max", { length: 250 })),
   })
 
-export const DateRangeSchema = (
-  t: (arg: string, values?: TranslationValues) => string
-) =>
+export const DateRangeSchema = (t: Translator) =>
   z
     .object({
       from: z.coerce.date(),
@@ -100,10 +98,21 @@ export const DateRangeSchema = (
       message: t("date_range.to"),
     })
 
+export const EditUserSchema = (t: Translator) =>
+  z.object({
+    ...UserPersonalInfo(t),
+    password: z
+      .string()
+      .min(8, t("password.min", { length: 8 }))
+      .max(15, t("password.max", { length: 15 })),
+  })
+
 export type TUserLoginData = z.infer<ReturnType<typeof UserLoginSchema>>
 export type TReportData = z.infer<ReturnType<typeof ReportSchema>>
 export type TUserRegisterData = z.infer<ReturnType<typeof UserRegisterSchema>>
 export type TUserLoginSchema = z.TypeOf<ReturnType<typeof UserLoginSchema>>
+export type TEditUserSchema = z.TypeOf<ReturnType<typeof EditUserSchema>>
+
 export type TUserRegisterSchema = z.TypeOf<
   ReturnType<typeof UserRegisterSchema>
 >

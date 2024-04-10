@@ -1,5 +1,6 @@
 import toast from "react-hot-toast"
 import {
+  TEditUserSchema,
   TReportData,
   TUserLoginData,
   TUserRegisterData,
@@ -50,6 +51,27 @@ export const manageReport = async (
 
     return { success: true, report: dataRes.report }
   } catch (error) {
+    return { success: false }
+  }
+}
+
+export const updateUser = async (data: TEditUserSchema) => {
+  try {
+    const dataRes = await fetchMongoData<{ success: boolean }>(
+      `/api/mongo/users`,
+      {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    )
+
+
+    return { success: true }
+  } catch (error) {
+    console.log(error)
     return { success: false }
   }
 }
