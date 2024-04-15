@@ -53,7 +53,7 @@ export default function DataGridTable({
 
   return (
     <Box sx={{ height: "80vh", width: "100%" }}>
-      <ManageReportModal type="POST" onOptimistic={onOptimistic} />
+      
       <DataGrid
         rows={reports}
         columns={[...columns, actionsColumn]}

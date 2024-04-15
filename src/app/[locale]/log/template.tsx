@@ -37,13 +37,6 @@ export default function LogLayout({
       >
         {current == "log" ? (
           <>
-            {/* <Button
-              href="/log/create"
-              startIcon={<CreateIcon />}
-              {...commonProps}
-            >
-              {t("btn_create.default")}
-            </Button> */}
             <PrintModal />
           </>
         ) : (

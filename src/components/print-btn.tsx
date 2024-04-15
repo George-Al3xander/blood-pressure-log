@@ -57,7 +57,10 @@ const PrintBtn = ({
                 ),
               })}
             </title>
-            <PlainTable pagination={false} reports={reports} />
+            <PlainTable pagination={false} reports={reports} reportCount={0} isLoading={false} onChange={undefined} paginationModel={{
+                page: 0,
+                pageSize: 0
+              }} />
           </div>
         )}
       </div>

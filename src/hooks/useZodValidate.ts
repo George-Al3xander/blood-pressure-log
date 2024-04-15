@@ -39,85 +39,86 @@ const useZodValidate = ({
 
   const onSubmit = async (data: unknown) => {
     setExtraCheck(true)
-
-    const body: BodyReq = { data, type }
-    const res = await fetch("/api/zod", {
-      method: "POST",
-      body: JSON.stringify(body),
-    })
-    if (!res.ok) {
-      toast.error(t("submit.fail"))
-      return
-    }
-
-    const resData = await res.json()
-    if (resData.errors) {
-      const { errors } = resData
-      const schemaKeys = Object.keys(schema)
-      schemaKeys.forEach((key) => {
-        if (errors[key]) {
-          setError(key, {
-            type: "server",
-            message: errors[key],
-          })
-        }
+    try {
+      const body: BodyReq = { data, type }
+      const res = await fetch("/api/zod", {
+        method: "POST",
+        body: JSON.stringify(body),
       })
-      return
-    }
+      if (!res.ok) {
+        toast.error(t("submit.fail"))
+        return
+      }
 
-    if (additionalCheck) {
-      let errCount = 0
-      try {
-        for (const { func, path, messagePath } of additionalCheck) {
-          if (typeof path == "string") {
-            const val = getValues(path)
-            const res = await func(val)
-            if (!res) {
-              errCount = errCount + 1
-              setError(path, {
-                type: "server",
-                message: t(`${path}.${messagePath}`),
-              })
-            }
-          } else {
-            const val = getValues(path)
+      const resData = await res.json()
+      if (resData.errors) {
+        const { errors } = resData
+        const schemaKeys = Object.keys(schema)
+        schemaKeys.forEach((key) => {
+          if (errors[key]) {
+            setError(key, {
+              type: "server",
+              message: errors[key],
+            })
+          }
+        })
+        return
+      }
 
-            const pathMap = path.map((p, index) => [
-              p,
-              val[index],
-            ]) as readonly (readonly [unknown, unknown])[]
-            const entries = new Map(pathMap)
-            const obj = Object.fromEntries(entries)
-            const res = await func(obj)
-
-            if (!res) {
-              errCount = errCount + 1
-              for (const pathItem of path) {
-                setError(pathItem, {
+      if (additionalCheck) {
+        let errCount = 0
+        try {
+          for (const { func, path, messagePath } of additionalCheck) {
+            if (typeof path == "string") {
+              const val = getValues(path)
+              const res = await func(val)
+              if (!res) {
+                errCount = errCount + 1
+                setError(path, {
                   type: "server",
-                  message: t(messagePath),
+                  message: t(`${path}.${messagePath}`),
                 })
+              }
+            } else {
+              const val = getValues(path)
+
+              const pathMap = path.map((p, index) => [
+                p,
+                val[index],
+              ]) as readonly (readonly [unknown, unknown])[]
+              const entries = new Map(pathMap)
+              const obj = Object.fromEntries(entries)
+              const res = await func(obj)
+
+              if (!res) {
+                errCount = errCount + 1
+                for (const pathItem of path) {
+                  setError(pathItem, {
+                    type: "server",
+                    message: t(messagePath),
+                  })
+                }
               }
             }
           }
+        } finally {
         }
-      } finally {
-      }
 
-      if (errCount > 0) {
-        setExtraCheck(false)
-        return
-      }
-    }
-
-    if (defaultValues) {
-      if (typeof defaultValues == "object" && typeof data == "object") {
-        if ("_id" in defaultValues) {
-          ;(data! as any)._id = defaultValues._id
+        if (errCount > 0) {
+          setExtraCheck(false)
+          return
         }
       }
-    }
-    await onValidationSuccess(data)
+
+      if (defaultValues) {
+        if (typeof defaultValues == "object" && typeof data == "object") {
+          if ("_id" in defaultValues) {
+            ;(data! as any)._id = defaultValues._id
+          }
+        }
+      }
+      await onValidationSuccess(data)
+    } catch (error) {toast.error(t("submit.fail"))}
     setExtraCheck(false)
   }
 

@@ -189,6 +189,10 @@
             "success": "Report deleted",
             "fail":"Failed deleting report"
           }
+        },
+        "no_reports": {
+          "title": "You don't have any reports yet",
+          "desc": "You can start adding one by pressing the button below"
         }
        
     },
