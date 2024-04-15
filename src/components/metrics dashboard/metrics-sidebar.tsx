@@ -28,7 +28,6 @@ const MetricCard = ({
     <Stack
       sx={{
         borderBottom: "1px solid grey",
-        overflow: "hidden",
         p: 2,
       }}
       gap={1}
@@ -39,7 +38,8 @@ const MetricCard = ({
       <Stack gap={0.5} alignItems={{ sx: "center", sm: "initial" }}>
         <Typography
           textAlign={{ xs: "center", sm: "left" }}
-          variant="h5"
+          sx={{ wordBreak: "break-word" }}
+          variant="h6"
           fontWeight={700}
         >
           {children}
@@ -64,7 +64,7 @@ const MetricCard = ({
 
 const MetricsSidebar = (props: MongoUser & { reports_count: number }) => {
   const keys = ["name", "email", "createdAt", "reports_count"]
-  
+
   return (
     <Stack
       gap={4}

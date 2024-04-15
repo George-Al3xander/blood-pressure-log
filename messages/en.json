@@ -196,7 +196,17 @@
         "email":"Email",
         "name": "Name",
         "reports_count": "Reports count",
-        "createdAt": "Member since"
+        "createdAt": "Member since",
+        "average": {
+          "title": "Statistical Averages",
+          "desc": {
+            "pulse": "Normal heart rate: 60-100 bpm, varies minutely.",
+            "dia": "Normal blood pressure: <120/80 mm Hg, follow healthy habits.",
+            "sys": "Normal blood pressure: <120/80 mm Hg, follow healthy habits.",
+            "rating": "Health status: 5 = excellent, 1 = poor, strong validity."
+          }
+        },
+        "disclaimer": "This platform is not medically certified and is intended for informational purposes only. All information was taken from Harvard Health Publishing."
     }
     
   }

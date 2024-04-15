@@ -21,7 +21,7 @@ const ProfilePage = async ({
 
   const data = await fetchMongoData<{success: boolean} & MetricsDashboardProps>("/api/mongo/users/metrics")
   
-  return <MetricsDashboard {...data}/>
+ 
   const session = await getSession()
   const t = await getTranslations("auth")
   const isDisabled = Boolean(
@@ -51,34 +51,7 @@ const ProfilePage = async ({
     )
   return (
     <Stack gap={2}>
-      {properties.map((prop) => {
-        const item = session[prop]
-        if (!item) return null
-        if (typeof item == "string") {
-          return (
-            <TextField
-              disabled={isDisabled}
-              key={prop}
-              label={t(prop)}
-              defaultValue={item}
-            />
-          )
-        }
-        const keys = Object.keys(item as Object) as ("last" | "first")[]
-
-        return (
-          <>
-            {keys.map((key) => (
-              <TextField
-                disabled={isDisabled}
-                key={key}
-                label={t(prop + "_" + key)}
-                defaultValue={item[key]}
-              />
-            ))}
-          </>
-        )
-      })}
+      <MetricsDashboard {...data}/>
       <Button
         sx={{ mt: 4 }}
         LinkComponent={Link}

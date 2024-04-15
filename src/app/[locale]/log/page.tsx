@@ -1,14 +1,9 @@
-import PrintWrapper from "@/components/modals/print-modal"
-import ReportsTable from "@/components/reports/reports-table"
-import { LogReport, TableVariantParam } from "@/types/types"
+import { TableVariantParam } from "@/types/types"
 import React from "react"
-import { getAccessToken } from "../../../../lib/auth/actions"
-import { headers } from "next/headers"
+
 import { fetchMongoData } from "../../../../lib/mongo/actions"
-import DataGridTable from "@/components/reports/data grid/data-grid"
-import TestPaginationWrapper from "@/components/reports/test-pagination-wrapper"
-import DateRangePicker from "@/components/date range picker/date-range-picker"
-import PrintReports from "@/components/print reports/print-reports-menu"
+
+import TablesWrapper from "@/components/reports/tables-wrapper"
 
 export type LogPageSearchParams = Partial<{
   tableVariant: TableVariantParam
@@ -26,11 +21,7 @@ const LogPage = async ({
     count: number
   }>(`/api/mongo/reports`)
 
-  return (
-    <>
-      <TestPaginationWrapper locale={locale || "en"} count={count} />
-    </>
-  )
+  return <TablesWrapper locale={locale || "en"} count={count} />
 }
 
 export default LogPage

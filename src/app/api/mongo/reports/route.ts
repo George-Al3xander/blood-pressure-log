@@ -48,6 +48,7 @@ export async function GET(req: NextRequest) {
     if (!lte || !gte) {
       delete searchModel.date
     }
+    //@ts-ignore
     const reports = await Report.find(searchModel)
       .sort({ date: "desc" })
       .limit(pageSize)
@@ -86,6 +87,7 @@ export async function PUT(req: NextRequest) {
     if (!email) throw new Error("Invalid user info")
     await connectToDatabase()
     if (!_id) throw new Error()
+    //@ts-ignore
     const item = await Report.findByIdAndUpdate(
       _id,
       {
@@ -130,6 +132,7 @@ export async function DELETE(req: NextRequest) {
     if (!email) throw new Error("Invalid user info")
     await connectToDatabase()
     if (!_id) throw new Error()
+    //@ts-ignore
     await Report.findByIdAndDelete(_id)
 
     return NextResponse.json({ status: 200, success: true }, { status: 200 })

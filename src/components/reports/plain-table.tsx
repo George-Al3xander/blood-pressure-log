@@ -1,4 +1,4 @@
-import { LogReport, PlainTable, ReportTableProps } from "@/types/types"
+import { LogReport, ReportTableWithPagination } from "@/types/types"
 import {
   TableContainer,
   Table,
@@ -31,8 +31,13 @@ const PlainTable = ({
   reportCount,
   paginationModel,
   pagination,
-}: PlainTable) => {
+}: ReportTableWithPagination & { pagination: boolean }) => {
   const t = useTranslations("table")
+ 
+
+  if(reports.length == 0) return <Stack>
+    no reports
+  </Stack>
 
   return (
     <Stack alignItems={"center"}>
@@ -41,7 +46,9 @@ const PlainTable = ({
           <TableHead>
             <TableRow>
               {headings.map((heading) => (
-                <TableCell sx={{textAlign: "center"}} key={heading}>{t(heading)}</TableCell>
+                <TableCell sx={{ textAlign: "center" }} key={heading}>
+                  {t(heading)}
+                </TableCell>
               ))}
             </TableRow>
           </TableHead>
@@ -49,7 +56,10 @@ const PlainTable = ({
             {isLoading ? (
               <TableRow>
                 {headings.map((heading) => (
-                  <TableCell sx={{textAlign: "center"}} key={heading + "spinner"}>
+                  <TableCell
+                    sx={{ textAlign: "center" }}
+                    key={heading + "spinner"}
+                  >
                     <CircularProgress color="primary" />
                   </TableCell>
                 ))}
@@ -58,7 +68,10 @@ const PlainTable = ({
               reports.map((report) => (
                 <TableRow key={report._id}>
                   {headings.map((heading) => (
-                    <TableCell sx={{textAlign: heading != "notes" ? "center" : "left"}} key={report._id + heading}>
+                    <TableCell
+                      sx={{ textAlign: heading != "notes" ? "center" : "left" }}
+                      key={report._id + heading}
+                    >
                       {heading == "rating"
                         ? t(`rating_range.${report[heading]}`)
                         : heading == "date"
@@ -74,7 +87,7 @@ const PlainTable = ({
           </TableBody>
         </Table>
       </TableContainer>
-      {(pagination && paginationModel && reportCount) && (
+      {pagination && paginationModel && reportCount && (
         <Pagination
           defaultPage={paginationModel.page + 1}
           disabled={isLoading}

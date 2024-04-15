@@ -22,49 +22,15 @@ import RenderHeader from "./render-header"
 import DeleteReportModal from "@/components/modals/delete-report-modal"
 
 export default function DataGridTable({
-  reports: initialReports,
+  reports,
   locale,
   reportCount,
   isLoading,
   paginationModel,
   onChange,
+  onOptimistic,
+  
 }: DataGridProps) {
-  const optimisticReportManage = (
-    currReports: LogReport[],
-    {
-      action,
-      newReport,
-    }: {
-      action: "POST" | "PUT" | "DELETE" | "ERROR"
-      newReport: LogReport
-    }
-  ) => {
-    switch (action) {
-      case "POST":
-        return sortBy([...currReports, newReport], (report) =>
-          dayjs(report.date).unix()
-        )
-      case "PUT":
-        return currReports.map((mapRep) =>
-          mapRep._id == newReport._id ? newReport : mapRep
-        )
-      case "DELETE":
-        return currReports.filter(({ _id }) => _id !== newReport._id)
-      default:
-        return currReports
-    }
-  }
-  const [reports, manageReport] = useOptimistic(
-    initialReports,
-    optimisticReportManage
-  )
-
-  const onOptimistic = (args: TOptAction, callback?: () => void) => {
-    manageReport(args)
-    if (callback) callback()
-  }
-
-  //const manageFunction = type == "create" ? createReport : updateReport
   const actionsColumn: GridColDef = {
     field: "actions",
     type: "actions",
@@ -87,7 +53,7 @@ export default function DataGridTable({
 
   return (
     <Box sx={{ height: "80vh", width: "100%" }}>
-      <ManageReportModal type="POST" onOptimistic={manageReport} />
+      <ManageReportModal type="POST" onOptimistic={onOptimistic} />
       <DataGrid
         rows={reports}
         columns={[...columns, actionsColumn]}

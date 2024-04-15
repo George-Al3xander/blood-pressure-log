@@ -53,26 +53,18 @@ export default function ManageReportModal(
 export default function ManageReportModal({
   defaultValue,
   type,
-  onOptimistic: withoutCallback,
+  onOptimistic: withCallback,
 }: (UpdateReportModalProps | CreateReportModalProps) & {
   type: "PUT" | "POST"
 }) {
   const manageFunc = (data: LogReport | TReportData) => manageReport(type, data)
-  // return (
-  //   <ModalWrapper trigger={<TriggerButton type={type} />}>
-  //     <ManageLogForm
-  //       defaultValue={defaultValue}
-  //       onValidationSuccess={manageFunc}
-  //       onOptimistic={onOptimistic}
-  //       type={type}
-  //     />
-  //   </ModalWrapper>
-  // )
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
-  const onOptimistic = (args: TOptAction) => withoutCallback(args, handleClose)
+  const onOptimistic = (args: TOptAction) => {
+    return withCallback(args, handleClose)
+  }
   return (
     <div>
       <TriggerButton onClick={handleOpen} reqType={type} />

@@ -9,11 +9,9 @@ import {
 import { OpUnitType } from "dayjs"
 
 import { Control } from "react-hook-form"
-import { ZodSchema, string } from "zod"
+import { ZodSchema } from "zod"
 import { TReportData } from "../../lib/auth/zodSchemas"
-import { manageReport } from "../../lib/mongo/utils"
-import { Schemas } from "@/app/api/zod/route"
-import MetricsDashboard from "@/components/metrics dashboard/metrics-dashboard"
+import { Schemas } from "../../lib/mongo/schemas/schemas"
 
 export type Field<T> = TextFieldProps & { name: keyof T }
 
@@ -39,7 +37,7 @@ export type MongoUser = {
   name: {
     first: string
     last: string
-  },
+  }
   createdAt: string
 }
 
@@ -96,6 +94,8 @@ export type PlainTable = ReportTableProps &
 
 export type DataGridProps = ReportTableWithPagination & {
   locale: string
+  onOptimistic: TOptimistic
+  //manageReport: TOptimistic
 }
 
 export type TOptAction = {
@@ -151,5 +151,7 @@ export type MetricsResponce = {
   rating_average: number
 }
 
-
-export type MetricsDashboardProps = {metrics: MetricsResponce & {reports_count: number}, userInfo:  MongoUser}
+export type MetricsDashboardProps = {
+  metrics: MetricsResponce & { reports_count: number }
+  userInfo: MongoUser
+}

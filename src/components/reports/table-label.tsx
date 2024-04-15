@@ -4,29 +4,6 @@ import dayjs, { OpUnitType } from "dayjs";
 
 
 
-const styles: LabelStyling = {
-    day: {
-    },
-    week: {
-        sx: {
-            textAlign: "center",
-        },
-        variant: "h6"
-    },
-    month: {
-        sx: {
-            textAlign: "center",
-        },
-        variant: "h5"
-    },
-    year: {
-        
-        sx: {
-            textAlign: "center",
-        } ,
-        variant: "h4"      
-    }
-}
 
 
 

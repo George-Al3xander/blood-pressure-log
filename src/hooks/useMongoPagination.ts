@@ -3,10 +3,10 @@
 import { LogPageSearchParams } from "@/app/[locale]/log/page"
 import { useEffect, useState } from "react"
 import { fetchMongoData } from "../../lib/mongo/actions"
-import { LogReport} from "@/types/types"
+import { LogReport } from "@/types/types"
 import useLogSearchParams from "./useLogSearchParams"
-
 import useHandleParams from "./useChangeSearchParams"
+
 const useMongoPagination = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
@@ -57,5 +57,5 @@ const useMongoPagination = () => {
     tableVariant,
   }
 }
-
+export type UseMongoPaginationResult = ReturnType<typeof useMongoPagination>
 export default useMongoPagination

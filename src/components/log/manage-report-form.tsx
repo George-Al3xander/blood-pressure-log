@@ -84,7 +84,6 @@ export default function ManageLogForm({
       })
       return
     }
-    //onOptimistic({ action: "ERROR", newReport: copy })
     toast.error(
       tZod(`reportAction.${type == "POST" ? "create" : "update"}.fail`)
     )
@@ -159,7 +158,7 @@ export default function ManageLogForm({
         <Grid item xs={12}>
           <Button fullWidth type="submit" variant="contained" disabled={isBusy}>
             {isBusy
-              ? t(`btn_.${type == "POST" ? "create" : "edit"}process`)
+              ? t(`btn_${type == "POST" ? "create" : "edit"}.process`)
               : t(`btn_${type == "POST" ? "create" : "edit"}.default`)}
           </Button>
         </Grid>

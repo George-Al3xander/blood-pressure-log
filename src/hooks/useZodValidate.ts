@@ -1,12 +1,13 @@
 "use client"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { BodyReq, Schemas, schemas } from "@/app/api/zod/route"
+
 import toast from "react-hot-toast"
 import { FormEvent, useState } from "react"
 import { useTranslations } from "next-intl"
 
 import { AdditionalCheckItem } from "@/types/types"
+import { BodyReq, Schemas, schemas } from "../../lib/mongo/schemas/schemas"
 
 const useZodValidate = ({
   onValidationSuccess,

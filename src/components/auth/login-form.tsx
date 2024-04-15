@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect } from "react"
+import React from "react"
 import {
   TUserLoginData,
 
@@ -46,9 +46,7 @@ const LoginForm = () => {
     ],
   }
 
-  useEffect(() => {
-    router.refresh()
-  }, [])
+  
 
   return <ZodUserForm fields={fields} {...props} />
 }
