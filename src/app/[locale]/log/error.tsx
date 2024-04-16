@@ -11,7 +11,7 @@ const Error = ({
   reset: () => void
 }) => {
   const router = useRouter()
-
+  console.log(error.digest)
   const t = useTranslations("table")
   return (
     <Stack textAlign={"center"}>
@@ -21,6 +21,11 @@ const Error = ({
       <Typography mb={4} variant="subtitle2">
         {error.message}
       </Typography>
+      {error.digest && (
+        <Typography mb={4} variant="subtitle2">
+          {error.digest}
+        </Typography>
+      )}
       <ButtonGroup sx={{ alignSelf: "center" }}>
         <Button variant="contained" onClick={() => router.push("/")}>
           Home
