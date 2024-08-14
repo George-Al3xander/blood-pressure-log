@@ -1,216 +1,216 @@
 {
-    "Index": {
-      "title": "Hello world!"
+  "auth": {
+    "name_first": "First name",
+    "name_last": "Last name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "profile": "Profile",
+    "btn_login": {
+      "default": "Login",
+      "process": "Logging..."
     },
-    "global": {
-
+    "btn_logout": {
+      "default": "Logout",
+      "process": "Logging out..."
     },
-    "auth": {
-      "name_first": "First name",
-      "name_last": "Last name",
-      "email": "Email",
-      "password": "Password",
-      "confirmPassword": "Confirm Password",
-      "profile": "Profile",
-      "btn_login": {
-        "default": "Login",
-        "process": "Logging..."
-      },
-      "btn_logout": {
-        "default": "Logout",
-        "process": "Logging out..."
-      },
-      "btn_register": {
-        "default": "Register",
-        "process": "Registering..."
-      },      
-      "loginResult": {
-        "success": "Successful login",
-        "fail": "Login failed."
-      },
-      "btn_create": {
-        "default": "Create a report",
-        "process": "Creating..."
-      },
-      "btn_edit": {
-        "default": "Edit",
-        "process": "Editing..."
-      },
+    "btn_register": {
+      "default": "Register",
+      "process": "Registering..."
+    },
+    "loginResult": {
+      "success": "Successful login",
+      "fail": "Login failed."
+    },
+    "btn_create": {
+      "default": "Create a report",
+      "process": "Creating..."
+    },
+    "btn_edit": {
+      "default": "Edit",
+      "process": "Editing..."
+    },
     "msg_success": "Success",
-
-      "btn_cancel": "Cancel",
-      "home": "Home page",
-      "loginPageLink":"Don't have an account? Sign up",
-      "registerPageLink": "Already have an account? Log in",
-      "welcomeTitle": "Welcome to BPL!👋🏻",
-      "loginMessage": "Please sign in to your account and start the tracking",      
-      "registerMessage": "Please register to create an account and start the tracking"
+    "btn_cancel": "Cancel",
+    "home": "Home page",
+    "loginPageLink": "Don't have an account? Sign up",
+    "registerPageLink": "Already have an account? Log in",
+    "welcomeTitle": "Welcome to BPL!👋🏻",
+    "loginMessage": "Please sign in to your account and start the tracking",
+    "registerMessage": "Please register to create an account and start the tracking"
+  },
+  "zod": {
+    "number": {
+      "min": "Minimum allowed number is {length}",
+      "max": "Maximum allowed number is {length}"
     },
-    "zod": {
-      "number":{
-        "min":"Minimum allowed number is {length}",
-          "max":"Maximum allowed number is {length}"
+    "string": {
+      "length": {
+        "min": "{title} must be at least {length} characters at length",
+        "max": "{title} can't be longer than {length} characters"
       },
-      "string": {
-        "length": {
-          "min":"{title} must be at least {length} characters at length",
-          "max":"{title} can't be longer than {length} characters"
-        },
-        "validFormat": "Enter a valid {title}"
+      "validFormat": "Enter a valid {title}"
+    },
+    "name_first": {
+      "min": "First name must be at least {length} characters at length",
+      "max": "First name can't be longer than {length} characters"
+    },
+    "name_last": {
+      "min": "Last name must be at least {length} characters at length",
+      "max": "Last name can't be longer than {length} characters"
+    },
+    "email": {
+      "email": "Enter a valid email",
+      "min": "This field has to be filled.",
+      "length": "This field must be at least {length} characters at length.",
+      "existingUser": "User with this email already exists"
+    },
+    "password": {
+      "min": "Password must be at least {length} characters in length",
+      "max": "Password can't be longer than {length} characters",
+      "lowercase": "Password must contain at least one lowercase letter.",
+      "uppercase": "Password must contain at least one uppercase letter.",
+      "numeric": "Password must contain at least one numeric digit.",
+      "specialCharacter": "Password must contain at least one special character."
+    },
+    "confirmPassword": {
+      "min": "Password must be at least {length} characters in length",
+      "max": "Password can't be longer than {length} characters",
+      "equality": "Confirm password and password are not equal"
+    },
+    "sys": {
+      "min": "Systolic pressure must be at least {length}"
+    },
+    "dia": {
+      "min": "Diastolic pressure must be at least {length}"
+    },
+    "pulse": {
+      "min": "Pulse must be at least {length}"
+    },
+    "rating": {
+      "min": "This field has to selected",
+      "max": "This field has to selected"
+    },
+    "notes": {
+      "min": "Notes must be at least {length} characters long",
+      "max": "Notes must not exceed {length} characters"
+    },
+    "invalid_date": "Invalid date",
+    "submit": {
+      "success": "Successfully submitted.",
+      "fail": "Submitting failed."
+    },
+    "invalidCredentials": "Invalid email or password.",
+    "userCreation": {
+      "success": "User created",
+      "fail": "Failed creating user"
+    },
+    "reportAction": {
+      "create": {
+        "success": "Report created",
+        "fail": "Failed creating report"
       },
-      "name_first": {
-        "min": "First name must be at least {length} characters at length",
-        "max": "First name can't be longer than {length} characters"
-      },
-      "name_last": {
-        "min": "Last name must be at least {length} characters at length",
-        "max": "Last name can't be longer than {length} characters"
-      },
-      "email": {
-        "email": "Enter a valid email",
-        "min": "This field has to be filled.",
-        "length": "This field must be at least {length} characters at length.",
-        "existingUser": "User with this email already exists"
-      },
-      "password": {
-        "min": "Password must be at least {length} characters in length",
-        "max": "Password can't be longer than {length} characters",
-        "lowercase": "Password must contain at least one lowercase letter.",
-        "uppercase": "Password must contain at least one uppercase letter.",
-        "numeric": "Password must contain at least one numeric digit.",
-        "specialCharacter": "Password must contain at least one special character."
-      },
-      "confirmPassword": {
-        "min": "Password must be at least {length} characters in length",
-        "max": "Password can't be longer than {length} characters",
-        "equality": "Confirm password and password are not equal"
-      },
-      "sys": {
-        "min": "Systolic pressure must be at least {length}"
-      },
-      "dia": {
-        "min": "Diastolic pressure must be at least {length}"
-      },
-      "pulse": {
-        "min": "Pulse must be at least {length}"
-      },
-      "rating": {
-        "min": "This field has to selected",
-        "max": "This field has to selected"
-      },
-      "notes": {
-        "min": "Notes must be at least {length} characters long",
-        "max": "Notes must not exceed {length} characters"
-      },
-      "invalid_date":"Invalid date",
-      "submit": {
-        "success": "Successfully submitted.",
-        "fail": "Submitting failed."
-      },
-      "invalidCredentials": "Invalid email or password.",
-      "userCreation": {
-        "success": "User created",
-        "fail": "Failed creating user"
-      },
-      "reportAction": {
-        "create": {
-          "success": "Report created",
-          "fail": "Failed creating report"
-        },
-        "update": {
-          "success": "Report updated",
-          "fail": "Failed updating report"
-        }
-      },
-      "date_range": {
-        "from":"'From' field  must be earlier than 'To'",
-        "to": "'To' field  must be later than 'From'"
+      "update": {
+        "success": "Report updated",
+        "fail": "Failed updating report"
       }
     },
-    "table": {
-        "sys": "Systolic",
-        "sys_addition": "(upper #)",
-        "dia": "Diastolic",
-        "dia_addition": "(lower #)",
-        "time": "Time",
-        "pressure": "Blood Pressure",
-        "pulse": "Heart rate",
-        "pulse_addition": "(pulse per minute)",
-        "rating": "Rating",
-        "notes" : "Notes / Observation",
-        "month": "Month",
-        "week": "Week starting",
-        "date": "Date",
-
-        "year": "Year",
-        "btn_create": {
-          "default": "Create",
-          "process": "Creating..."
-        },
-        "btn_edit": {
-          "default": "Edit",
-          "process": "Editing..."
-        },
-        "rating_range": {
-          "5": "Excellent",
-          "4": "Very Good",
-          "3": "Good",
-          "2": "Fair",
-          "1": "Poor"
-        },
-        "from": "From",
-        "to": "To",
-        "table_variant": "Table Variant",
-        "plain": "Plain",
-        "complex": "Complex",
-        "date_range": "From {start} to {end}",
-        "actions": "Actions",
-        "btn_select": {
-          "default": "Select",
-          "process": "Processing..."
-        },
-        "btn_print": {
-          "default": "Print",
-          "process": "Processing..."
-        },
-        "print_title":  "Select the time range during which reports were created",
-        "print_header_info": {
-          "default" : "Your reports are ready. Click the button to print.",
-          "process": "Loading data...please wait..."
-        },
-        "btn_cancel": "Cancel",
-        "error_message": "Oops! Something went wrong.",
-        "btn_retry": "Try again",
-        "deleteModal": {
-          "btn": "Delete",
-          "message": {
-            "header": "Are you sure you want to delete the following report:",
-            "additional": "This report will be deleted immediately. You can’t undo this action.",
-            "success": "Report deleted",
-            "fail":"Failed deleting report"
-          }
-        },
-        "no_reports": {
-          "title": "You don't have any reports yet",
-          "desc": "You can start adding one by pressing the button below"
-        }
-       
-    },
-    "metrics": {
-        "email":"Email",
-        "name": "Name",
-        "reports_count": "Reports count",
-        "createdAt": "Member since",
-        "average": {
-          "title": "Statistical Averages",
-          "desc": {
-            "pulse": "Normal heart rate: 60-100 bpm, varies minutely.",
-            "dia": "Normal blood pressure: <120/80 mm Hg, follow healthy habits.",
-            "sys": "Normal blood pressure: <120/80 mm Hg, follow healthy habits.",
-            "rating": "Health status: 5 = excellent, 1 = poor, strong validity."
-          }
-        },
-        "disclaimer": "This platform is not medically certified and is intended for informational purposes only. All information was taken from Harvard Health Publishing."
+    "date_range": {
+      "from": "'From' field  must be earlier than 'To'",
+      "to": "'To' field  must be later than 'From'"
     }
-    
+  },
+  "table": {
+    "sys": "Systolic",
+    "sys_addition": "(upper #)",
+    "dia": "Diastolic",
+    "dia_addition": "(lower #)",
+    "time": "Time",
+    "pressure": "Blood Pressure",
+    "pulse": "Heart rate",
+    "pulse_addition": "(pulse per minute)",
+    "rating": "Rating",
+    "notes": "Notes / Observation",
+    "month": "Month",
+    "week": "Week starting",
+    "date": "Date",
+    "year": "Year",
+    "btn_create": {
+      "default": "Create",
+      "process": "Creating..."
+    },
+    "btn_edit": {
+      "default": "Edit",
+      "process": "Editing..."
+    },
+    "rating_range": {
+      "1": "Poor",
+      "2": "Fair",
+      "3": "Good",
+      "4": "Very Good",
+      "5": "Excellent"
+    },
+    "from": "From",
+    "to": "To",
+    "table_variant": "Table Variant",
+    "plain": "Plain",
+    "complex": "Complex",
+    "date_range": "From {start} to {end}",
+    "actions": "Actions",
+    "btn_select": {
+      "default": "Select",
+      "process": "Processing..."
+    },
+    "btn_print": {
+      "default": "Print",
+      "process": "Processing..."
+    },
+    "print_title": "Select the time range during which reports were created",
+    "print_header_info": {
+      "default": "Your reports are ready. Click the button to print.",
+      "process": "Loading data...please wait..."
+    },
+    "btn_cancel": "Cancel",
+    "error_message": "Oops! Something went wrong.",
+    "btn_retry": "Try again",
+    "deleteModal": {
+      "btn": "Delete",
+      "message": {
+        "header": "Are you sure you want to delete the following report:",
+        "additional": "This report will be deleted immediately. You can’t undo this action.",
+        "success": "Report deleted",
+        "fail": "Failed deleting report"
+      }
+    },
+    "no_reports": {
+      "title": "You don't have any reports yet",
+      "desc": "You can start adding one by pressing the button below"
+    },
+    "print_error": {
+      "no_results": {
+        "title": "No Reports Found",
+        "message": "The selected date range does not contain any reports. Please choose a different range."
+      },
+      "default_message": {
+        "title": "Error",
+        "message": "Oops! Something went wrong."
+      }
+    }
+  },
+  "metrics": {
+    "email": "Email",
+    "name": "Name",
+    "reports_count": "Reports count",
+    "createdAt": "Member since",
+    "average": {
+      "title": "Statistical Averages",
+      "desc": {
+        "pulse": "Normal heart rate: 60-100 bpm, varies minutely.",
+        "dia": "Normal blood pressure: <120/80 mm Hg, follow healthy habits.",
+        "sys": "Normal blood pressure: <120/80 mm Hg, follow healthy habits.",
+        "rating": "Health status: 5 = excellent, 1 = poor, strong validity."
+      }
+    },
+    "disclaimer": "This platform is not medically certified and is intended for informational purposes only. All information was taken from Harvard Health Publishing."
   }
+}
