@@ -1,10 +1,9 @@
 .MuiDataGrid-root .MuiDataGrid-main {
-  color: black;
+    color: black;
 }
 .MuiButton-root {
-  visibility: hidden;
+    visibility: hidden;
 }
-
 
 .MuiAppBar-root {
     background-color: red;

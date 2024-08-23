@@ -1,17 +1,17 @@
 @media (max-width: 450px) {
-  .MuiSlider-markLabel {
-    display: none;
-  }
+    .MuiSlider-markLabel {
+        display: none;
+    }
 }
 
 .print-comp {
-  display: none;
+    display: none;
 }
 
 @media print {
-  .print-comp {
-    display: initial;
-  }
+    .print-comp {
+        display: initial;
+    }
 }
 
 /* .dateField {

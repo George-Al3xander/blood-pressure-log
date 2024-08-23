@@ -1,37 +1,25 @@
-"use server"
-import mongoose, { ConnectOptions } from 'mongoose';
-import User from './schemas/user';
+import mongoose, { ConnectOptions } from "mongoose";
 
-const uri = process.env.MONGO_URI!
+const uri = process.env.MONGO_URI!;
 
-const clientOptions: ConnectOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+const clientOptions: ConnectOptions = {
+    serverApi: { version: "1", strict: true, deprecationErrors: true },
+};
 
 async function connectToDatabase() {
-  if(mongoose.connection.readyState == 0) {
-      try {
-        await mongoose.connect(uri, clientOptions);
-        // await mongoose.connection.db.admin().command({ ping: 1 });
-        console.log("You successfully connected to MongoDB!");
-        
-      } catch (error) {
-        console.log(error)
-        console.error("Error connecting to MongoDB:", error);
-      }
-  }   
+    "use server";
+    if (mongoose.connection.readyState == 0) {
+        try {
+            await mongoose.connect(uri, clientOptions);
+            // await mongoose.connection.db.admin().command({ ping: 1 });
+            console.log("You successfully connected to MongoDB!");
+        } catch (error) {
+            console.log(error);
+            console.error("Error connecting to MongoDB:", error);
+        }
+    }
 }
-
-async function disconnectFromDatabase() {
-   try {
-    await mongoose.disconnect();
-   
-    console.log("You successfully disconnected from MongoDB!");
-  } catch (error) {
-    console.error("Error disconnecting from MongoDB:", error);
-  }
-}
-
-
-
-
-
-export { connectToDatabase, disconnectFromDatabase };
+export { default as Report } from "./schemas/report";
+export { schemas } from "./schemas/schemas";
+export { default as User } from "./schemas/user";
+export { connectToDatabase };
