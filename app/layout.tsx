@@ -1,6 +1,7 @@
 import { LayoutProps } from "@/app/model";
 import { geistMono, geistSans } from "@/app/ui";
 import "@/app/ui/main.css";
+import { Providers } from "@/shared/api";
 
 export { metadata } from "@/app/config";
 
@@ -10,7 +11,9 @@ export default function RootLayout({ children }: LayoutProps) {
             lang="en"
             className={`${geistSans.variable} ${geistMono.variable}`}
         >
-            <body className="font-geist-mono">{children}</body>
+            <body className="font-geist-mono">
+                <Providers>{children}</Providers>
+            </body>
         </html>
     );
 }
