@@ -22,7 +22,7 @@ export default async function RootLayout({ children }: LayoutProps) {
             className={`${geistSans.variable} ${geistMono.variable}`}
         >
             <body className="font-geist-mono">
-                <Providers>{children}</Providers>
+                <Providers locale={locale}>{children}</Providers>
             </body>
         </html>
     );
