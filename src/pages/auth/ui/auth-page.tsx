@@ -8,5 +8,9 @@ type Props = {
 export const AuthPage: FC<Props> = ({ type }) => {
     const ClerkComponent = type === "sign-in" ? SignIn : SignUp;
 
-    return <ClerkComponent />;
+    return (
+        <div className="flex w-full justify-center">
+            <ClerkComponent />
+        </div>
+    );
 };
