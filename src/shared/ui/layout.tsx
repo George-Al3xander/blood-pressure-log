@@ -1,5 +1,10 @@
-import { cn } from "@/shared/lib";
-import { FC, HTMLAttributes, PropsWithChildren, ReactNode } from "react";
+import {
+    FC,
+    HTMLAttributes,
+    PropsWithChildren,
+    ReactNode,
+    type CSSProperties,
+} from "react";
 
 type Props = PropsWithChildren<{
     header: ReactNode;
@@ -10,7 +15,36 @@ type Props = PropsWithChildren<{
     mainProps?: HTMLAttributes<HTMLElement>;
 }>;
 
-const baseStyles = "w-[min(90%,50rem)] mx-auto py-4";
+const layoutContainerStyle: CSSProperties = {
+    display: "flex",
+    minHeight: "100vh",
+    flexDirection: "column",
+    gap: "1rem",
+};
+
+const stickyHeaderStyle: CSSProperties = {
+    position: "sticky",
+    top: 0,
+    zIndex: 30,
+    width: "100%",
+    backgroundColor: "#2563EB",
+    color: "#ffffff",
+};
+
+const baseContentStyle: CSSProperties = {
+    width: "min(90%, 50rem)",
+    marginLeft: "auto",
+    marginRight: "auto",
+    paddingTop: "1rem",
+    paddingBottom: "1rem",
+};
+
+const mainStyle: CSSProperties = {
+    ...baseContentStyle,
+    flex: 1,
+    paddingTop: "2.5rem",
+    paddingBottom: "2.5rem",
+};
 
 export const Layout: FC<Props> = ({
     header,
@@ -18,24 +52,30 @@ export const Layout: FC<Props> = ({
     headerProps,
     mainProps,
 }) => (
-    <div className="flex min-h-screen flex-col gap-4">
+    <div style={layoutContainerStyle}>
         <header
             {...headerProps?.wrapper}
-            className={cn(
-                "sticky top-0 z-30 w-full bg-blue-600 text-white",
-                headerProps?.wrapper?.className,
-            )}
+            style={{
+                ...stickyHeaderStyle,
+                ...headerProps?.wrapper?.style,
+            }}
         >
             <div
                 {...headerProps?.content}
-                className={cn(baseStyles, headerProps?.content?.className)}
+                style={{
+                    ...baseContentStyle,
+                    ...headerProps?.content?.style,
+                }}
             >
                 {header}
             </div>
         </header>
         <main
             {...mainProps}
-            className={cn(baseStyles, "flex-1 py-10", mainProps?.className)}
+            style={{
+                ...mainStyle,
+                ...mainProps?.style,
+            }}
         >
             {children}
         </main>

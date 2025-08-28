@@ -27,7 +27,9 @@ export default async function RootLayout({ children }: LayoutProps) {
                 <Providers locale={locale}>
                     <Layout
                         header={
-                            <h1 className="text-xl font-bold">
+                            <h1
+                                style={{ fontSize: "1.25rem", fontWeight: 700 }}
+                            >
                                 {metadata.title?.toString()}
                             </h1>
                         }

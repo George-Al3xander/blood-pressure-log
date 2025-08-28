@@ -9,7 +9,9 @@ export const AuthPage: FC<Props> = ({ type }) => {
     const ClerkComponent = type === "sign-in" ? SignIn : SignUp;
 
     return (
-        <div className="flex w-full justify-center">
+        <div
+            style={{ display: "flex", width: "100%", justifyContent: "center" }}
+        >
             <ClerkComponent />
         </div>
     );
