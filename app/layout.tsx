@@ -1,8 +1,8 @@
 import { metadata } from "@/app/config";
 import { LayoutProps } from "@/app/model";
+import { Providers } from "@/app/providers";
 import { geistMono, geistSans } from "@/app/ui";
 import "@/app/ui/main.css";
-import { Providers } from "@/shared/api";
 import { routing } from "@/shared/i18n";
 import { Layout } from "@/shared/ui";
 import { hasLocale } from "next-intl";
@@ -24,7 +24,7 @@ export default async function RootLayout({ children }: LayoutProps) {
             className={`${geistSans.variable} ${geistMono.variable}`}
         >
             <body className="font-geist-mono">
-                <Providers locale={locale}>
+                <Providers>
                     <Layout
                         header={
                             <h1
