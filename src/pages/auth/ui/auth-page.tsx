@@ -1,4 +1,5 @@
 import { SignIn, SignUp } from "@clerk/nextjs";
+import Box from "@mui/material/Box";
 import { FC } from "react";
 
 type Props = {
@@ -9,10 +10,8 @@ export const AuthPage: FC<Props> = ({ type }) => {
     const ClerkComponent = type === "sign-in" ? SignIn : SignUp;
 
     return (
-        <div
-            style={{ display: "flex", width: "100%", justifyContent: "center" }}
-        >
+        <Box display="flex" width="100%" justifyContent="center">
             <ClerkComponent />
-        </div>
+        </Box>
     );
 };

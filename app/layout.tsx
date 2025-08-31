@@ -3,8 +3,10 @@ import { LayoutProps } from "@/app/model";
 import { Providers } from "@/app/providers";
 import { geistMono, geistSans } from "@/app/ui";
 import "@/app/ui/main.css";
+import { LanguageSelectionMenu } from "@/feature/language";
 import { routing } from "@/shared/i18n";
 import { Layout } from "@/shared/ui";
+import { Typography } from "@mui/material";
 import { hasLocale } from "next-intl";
 import { getLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -27,11 +29,16 @@ export default async function RootLayout({ children }: LayoutProps) {
                 <Providers>
                     <Layout
                         header={
-                            <h1
-                                style={{ fontSize: "1.25rem", fontWeight: 700 }}
-                            >
-                                {metadata.title?.toString()}
-                            </h1>
+                            <>
+                                <Typography
+                                    component="h1"
+                                    fontSize="1.25rem"
+                                    fontWeight={700}
+                                >
+                                    {metadata.title?.toString()}
+                                </Typography>
+                                <LanguageSelectionMenu />
+                            </>
                         }
                     >
                         {children}

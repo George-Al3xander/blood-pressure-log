@@ -1,50 +1,15 @@
-import {
-    FC,
-    HTMLAttributes,
-    PropsWithChildren,
-    ReactNode,
-    type CSSProperties,
-} from "react";
+import type { AppBarProps, BoxProps, ContainerProps } from "@mui/material";
+import { AppBar, Box, Container } from "@mui/material";
+import { FC, PropsWithChildren, ReactNode } from "react";
 
 type Props = PropsWithChildren<{
     header: ReactNode;
     headerProps?: {
-        wrapper?: HTMLAttributes<HTMLDivElement>;
-        content?: HTMLAttributes<HTMLDivElement>;
+        wrapper?: AppBarProps;
+        content?: ContainerProps;
     };
-    mainProps?: HTMLAttributes<HTMLElement>;
+    mainProps?: BoxProps;
 }>;
-
-const layoutContainerStyle: CSSProperties = {
-    display: "flex",
-    minHeight: "100vh",
-    flexDirection: "column",
-    gap: "1rem",
-};
-
-const stickyHeaderStyle: CSSProperties = {
-    position: "sticky",
-    top: 0,
-    zIndex: 30,
-    width: "100%",
-    backgroundColor: "#2563EB",
-    color: "#ffffff",
-};
-
-const baseContentStyle: CSSProperties = {
-    width: "min(90%, 50rem)",
-    marginLeft: "auto",
-    marginRight: "auto",
-    paddingTop: "1rem",
-    paddingBottom: "1rem",
-};
-
-const mainStyle: CSSProperties = {
-    ...baseContentStyle,
-    flex: 1,
-    paddingTop: "2.5rem",
-    paddingBottom: "2.5rem",
-};
 
 export const Layout: FC<Props> = ({
     header,
@@ -52,32 +17,43 @@ export const Layout: FC<Props> = ({
     headerProps,
     mainProps,
 }) => (
-    <div style={layoutContainerStyle}>
-        <header
-            {...headerProps?.wrapper}
-            style={{
-                ...stickyHeaderStyle,
-                ...headerProps?.wrapper?.style,
+    <Box minHeight="100vh" display="flex" flexDirection="column" gap={2}>
+        <AppBar
+            position="sticky"
+            sx={{
+                backgroundColor: "primary.main",
+                color: "primary.contrastText",
+                zIndex: 30,
+                p: 2,
+                ...headerProps?.wrapper?.sx,
             }}
+            {...headerProps?.wrapper}
         >
-            <div
-                {...headerProps?.content}
-                style={{
-                    ...baseContentStyle,
-                    ...headerProps?.content?.style,
+            <Container
+                maxWidth="md"
+                sx={{
+                    py: 1,
+                    display: "flex",
+                    gap: 4,
+                    justifyItems: "center",
+                    justifyContent: "space-between",
+                    ...headerProps?.content?.sx,
                 }}
+                {...headerProps?.content}
             >
                 {header}
-            </div>
-        </header>
-        <main
+            </Container>
+        </AppBar>
+
+        <Box
+            component="main"
+            flex={1}
+            py={5}
+            mx="auto"
+            maxWidth="md"
             {...mainProps}
-            style={{
-                ...mainStyle,
-                ...mainProps?.style,
-            }}
         >
             {children}
-        </main>
-    </div>
+        </Box>
+    </Box>
 );
