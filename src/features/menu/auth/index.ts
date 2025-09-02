@@ -1,1 +1,1 @@
-export { AuthOptions } from "./ui";
+export { LogoutOption } from "./ui";

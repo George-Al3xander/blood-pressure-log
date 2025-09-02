@@ -2,37 +2,53 @@
 
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import HomeIcon from "@mui/icons-material/Home";
+import LoginIcon from "@mui/icons-material/Login";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { ListItemIcon, ListItemText, MenuItem } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { ElementType, FC } from "react";
 
-type Props = {
-    handleClose: () => void;
+type NavigationOption = {
+    id: string;
+    href: string;
+    icon: ElementType;
 };
 
-const OPTIONS: { key: string; icon: ElementType; path: string }[] = [
-    { key: "home", path: "/", icon: HomeIcon },
-    { key: "profile", path: "/profile", icon: AssignmentIndIcon },
+const AUTHORIZED_OPTIONS: NavigationOption[] = [
+    { id: "home", href: "/", icon: HomeIcon },
+    { id: "profile", href: "/profile", icon: AssignmentIndIcon },
+];
+const UNAUTHORIZED_OPTIONS: NavigationOption[] = [
+    { id: "sign-in", href: "sign-in", icon: LoginIcon },
+    { id: "sign-up", href: "sign-up", icon: PersonAddIcon },
 ];
 
-export const NavigationOptions: FC<Props> = ({ handleClose }) => {
+type Props = {
+    handleClose: () => void;
+    isSignedIn?: boolean;
+};
+
+export const NavigationOptions: FC<Props> = ({
+    isSignedIn = false,
+    handleClose,
+}) => {
     const router = useRouter();
     const t = useTranslations("menu");
+
+    const options = isSignedIn ? AUTHORIZED_OPTIONS : UNAUTHORIZED_OPTIONS;
 
     const handleClick = (path: string) => () => {
         router.push(path);
         handleClose();
     };
 
-    return OPTIONS.map(({ key, path, icon: Icon }) => {
-        return (
-            <MenuItem key={`menu-item-${key}`} onClick={handleClick(path)}>
-                <ListItemIcon>
-                    <Icon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>{t(key)}</ListItemText>
-            </MenuItem>
-        );
-    });
+    return options.map(({ id, href, icon: Icon }) => (
+        <MenuItem key={`navigation-item-${id}`} onClick={handleClick(href)}>
+            <ListItemIcon>
+                <Icon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>{t(id)}</ListItemText>
+        </MenuItem>
+    ));
 };
