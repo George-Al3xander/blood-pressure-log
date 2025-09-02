@@ -1,5 +1,14 @@
 {
   "HomePage": {
     "title": "Hello world!"
+  },
+  "menu": {
+    "sign-in": "Sign in",
+    "sign-up": "Sign up",
+    "logout": "Logout",
+    "accountStatus": {
+      "private": "Private Account",
+      "signInRequired": "Sign in to view"
+    }
   }
 }

@@ -1,5 +1,14 @@
 {
   "HomePage": {
     "title": "Хелоу ворлд!"
+  },
+  "menu": {
+    "sign-in": "Увійти",
+    "sign-up": "Зареєструватися",
+    "logout": "Вийти",
+    "accountStatus": {
+      "private": "Приватний акаунт",
+      "signInRequired": "Увійдіть, щоб переглянути"
+    }
   }
 }
