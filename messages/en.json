@@ -9,6 +9,8 @@
     "accountStatus": {
       "private": "Private Account",
       "signInRequired": "Sign in to view"
-    }
+    },
+    "home": "Home page",
+    "profile": "Profile"
   }
 }
