@@ -3,9 +3,9 @@ import { LayoutProps } from "@/app/model";
 import { Providers } from "@/app/providers";
 import { geistMono, geistSans } from "@/app/ui";
 import "@/app/ui/main.css";
-import { LanguageSelectionMenu } from "@/features/language";
 import { routing } from "@/shared/i18n";
 import { Layout } from "@/shared/ui";
+import { UserMenu } from "@/widgets/menu";
 import { Typography } from "@mui/material";
 import { hasLocale } from "next-intl";
 import { getLocale } from "next-intl/server";
@@ -37,7 +37,7 @@ export default async function RootLayout({ children }: LayoutProps) {
                                 >
                                     {metadata.title?.toString()}
                                 </Typography>
-                                <LanguageSelectionMenu />
+                                <UserMenu />
                             </>
                         }
                     >
