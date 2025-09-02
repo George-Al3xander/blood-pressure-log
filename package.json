@@ -27,6 +27,7 @@
         "zod": "^3.25.57"
     },
     "devDependencies": {
+        "@clerk/types": "^4.83.0",
         "@commitlint/cli": "^19.8.1",
         "@commitlint/config-conventional": "^19.8.1",
         "@eslint/eslintrc": "^3.3.1",
