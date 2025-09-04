@@ -1,0 +1,1 @@
+export { reportModel } from "./report";
