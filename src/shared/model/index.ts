@@ -1,1 +1,1 @@
-export { reportModel } from "./report";
+export { reportModel, reportSchema, type TReport } from "./report";

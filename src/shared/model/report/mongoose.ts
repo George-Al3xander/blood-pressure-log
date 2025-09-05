@@ -1,8 +1,9 @@
-import mongoose from "mongoose";
+import mongoose, { Model } from "mongoose";
+import { TReport } from "./zod";
 
 const Schema = mongoose.Schema;
 
-export const ReportSchema = new Schema(
+export const ReportSchema = new Schema<TReport>(
     {
         date: {
             type: Date,
@@ -38,4 +39,5 @@ export const ReportSchema = new Schema(
 );
 
 export const reportModel =
-    mongoose.models.Report || mongoose.model("Report", ReportSchema);
+    (mongoose.models.Report as Model<TReport>) ||
+    mongoose.model<TReport>("Report", ReportSchema);
