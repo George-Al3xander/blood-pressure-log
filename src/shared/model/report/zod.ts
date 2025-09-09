@@ -1,19 +1,46 @@
+import { createLocalizedSchema } from "@/shared/lib";
+import { useTranslations } from "next-intl";
 import { z } from "zod";
 
-export const reportSchema = z.object({
-    userId: z.string(),
-    date: z.coerce.date(),
-    sys: z.number(),
-    dia: z.number(),
-    pulse: z.number(),
-    rating: z.union([
-        z.literal(1),
-        z.literal(2),
-        z.literal(3),
-        z.literal(4),
-        z.literal(5),
-    ]),
-    notes: z.string(),
-});
+type Translator = ReturnType<typeof useTranslations>;
 
-export type TReport = z.infer<typeof reportSchema>;
+export const reportSchema = (t: Translator) => {
+    const withTranslator = createLocalizedSchema(t);
+
+    return z.object({
+        userId: z.string().optional(),
+        date: z.coerce.date({ message: t("invalid_date") }),
+        sys: withTranslator({
+            fieldName: "sys",
+            dataType: "number",
+            min: 1,
+            max: 300,
+        }),
+        dia: withTranslator({
+            fieldName: "dia",
+            dataType: "number",
+            min: 1,
+            max: 300,
+        }),
+        pulse: withTranslator({
+            fieldName: "pulse",
+            dataType: "number",
+            min: 1,
+            max: 300,
+        }),
+        rating: withTranslator({
+            fieldName: "rating",
+            dataType: "range",
+            min: 1,
+            max: 5,
+        }),
+        notes: withTranslator({
+            fieldName: "notes",
+            dataType: "string",
+            min: 10,
+            max: 250,
+        }),
+    });
+};
+
+export type TReport = z.infer<ReturnType<typeof reportSchema>>;

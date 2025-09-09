@@ -12,5 +12,25 @@
     },
     "home": "Home page",
     "profile": "Profile"
+  },
+  "validation": {
+    "number": {
+      "min": "{title} must be at least {length}",
+      "max": "{title} must not exceed {length}",
+      "type": "{title} must be a number",
+      "int": "{title} must be an integer"
+    },
+    "string": {
+      "min": "{title} must be at least {length} characters long",
+      "max": "{title} must not exceed {length} characters",
+      "validFormat": "Enter a valid {title}",
+      "type": "{title} must be a string"
+    },
+    "invalid_date": "Invalid date",
+    "range": "{title} must be between {min} and {max}",
+    "date_range": {
+      "from": "'From' date must be earlier than 'To'",
+      "to": "'To' date must be later than 'From'"
+    }
   }
 }
