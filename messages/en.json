@@ -32,5 +32,22 @@
       "from": "'From' date must be earlier than 'To'",
       "to": "'To' date must be later than 'From'"
     }
+  },
+  "vitals": {
+    "sys": "Systolic",
+    "dia": "Diastolic",
+    "pulse": "Heart rate",
+    "rating": {
+      "title": "Rating",
+      "range": {
+        "1": "Poor",
+        "2": "Fair",
+        "3": "Good",
+        "4": "Very Good",
+        "5": "Excellent"
+      }
+    },
+    "notes": "Notes / Observation",
+    "date": "Date"
   }
 }
