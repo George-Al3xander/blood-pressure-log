@@ -39,5 +39,5 @@ export const ReportSchema = new Schema<TReport>(
 );
 
 export const reportModel =
-    (mongoose.models.Report as Model<TReport>) ||
+    (mongoose.models?.Report as Model<TReport>) ||
     mongoose.model<TReport>("Report", ReportSchema);
