@@ -1,3 +1,5 @@
+"use client";
+
 import { MenuProps } from "@mui/material";
 import { ButtonProps } from "@mui/material/Button";
 import { type MouseEvent, useState } from "react";
