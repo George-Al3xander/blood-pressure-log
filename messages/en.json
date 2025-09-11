@@ -31,7 +31,8 @@
     "date_range": {
       "from": "'From' date must be earlier than 'To'",
       "to": "'To' date must be later than 'From'"
-    }
+    },
+    "clear": "Clear"
   },
   "vitals": {
     "sys": "Systolic",
