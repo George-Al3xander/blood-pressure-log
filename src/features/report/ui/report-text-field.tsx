@@ -24,12 +24,11 @@ export const ReportTextField: FC<Props> = ({
         <Controller
             name={name}
             control={control}
-            rules={{
-                required,
-            }}
+            rules={{ required }}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
                 <TextField
                     {...props}
+                    required={required}
                     label={t(name as string)}
                     type={type}
                     value={value}
