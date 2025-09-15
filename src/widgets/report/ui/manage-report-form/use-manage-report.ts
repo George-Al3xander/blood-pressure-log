@@ -12,7 +12,6 @@ const defaultReport: TReport = {
     pulse: 0,
     rating: 3,
     notes: "",
-    userId: "",
     date: new Date(),
 };
 
