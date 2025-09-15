@@ -5,6 +5,7 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
     plugins: [tsconfigPaths(), react()],
     test: {
+        globals: true,
         environment: "jsdom",
         server: {
             deps: {
@@ -12,5 +13,6 @@ export default defineConfig({
                 inline: ["next-intl"],
             },
         },
+        setupFiles: ["src/shared/mocks"]
     },
 });
