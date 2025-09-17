@@ -11,7 +11,8 @@
       "signInRequired": "Увійдіть, щоб переглянути"
     },
     "home": "Головна сторінка",
-    "profile": "Профіль"
+    "profile": "Профіль",
+    "create": "Додати звіт"
   },
   "validation": {
     "number": {

@@ -3,6 +3,7 @@
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import HomeIcon from "@mui/icons-material/Home";
 import LoginIcon from "@mui/icons-material/Login";
+import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { ListItemIcon, ListItemText, MenuItem } from "@mui/material";
 import { useTranslations } from "next-intl";
@@ -18,6 +19,7 @@ type NavigationOption = {
 const AUTHORIZED_OPTIONS: NavigationOption[] = [
     { id: "home", href: "/", icon: HomeIcon },
     { id: "profile", href: "/profile", icon: AssignmentIndIcon },
+    { id: "create", href: "/create", icon: NoteAddIcon },
 ];
 const UNAUTHORIZED_OPTIONS: NavigationOption[] = [
     { id: "sign-in", href: "sign-in", icon: LoginIcon },

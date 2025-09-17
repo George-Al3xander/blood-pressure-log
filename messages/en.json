@@ -11,7 +11,8 @@
       "signInRequired": "Sign in to view"
     },
     "home": "Home page",
-    "profile": "Profile"
+    "profile": "Profile",
+    "create": "Create a report"
   },
   "validation": {
     "number": {
