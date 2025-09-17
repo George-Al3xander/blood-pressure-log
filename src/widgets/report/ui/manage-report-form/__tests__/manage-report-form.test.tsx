@@ -1,6 +1,6 @@
 import { manageReportTestingApi } from "@/shared/mocks";
 import { TReport } from "@/shared/model";
-import { screen } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import dayjs from "dayjs";
 import { afterEach, describe, expect, it, vi } from "vitest";
@@ -44,9 +44,10 @@ describe("Manage report", () => {
         });
     });
 
-    it("should render the submit button", () => {
-        const { submitButton } = setup();
+    it("should render the submit & clear buttons", () => {
+        const { submitButton, clearButton } = setup();
         expect(submitButton).toBeInTheDocument();
+        expect(clearButton).toBeInTheDocument();
     });
 
     it("should populate form fields with initial report values", () => {
@@ -94,5 +95,21 @@ describe("Manage report", () => {
 
         expect(onSuccessAction).not.toHaveBeenCalled();
         expect(onErrorAction).toHaveBeenCalled();
+    });
+
+    it("should reset the form after successful submission when resetOnSuccess is true", async () => {
+        const { submitButton } = setup(sampleReport, {
+            resetOnSuccess: true,
+        });
+
+        await userEvent.click(submitButton);
+
+        await waitFor(async () => {
+            expect(getInput("sys")).toHaveValue(0);
+            expect(getInput("dia")).toHaveValue(0);
+            expect(getInput("pulse")).toHaveValue(0);
+            expect(getInput("notes")).toHaveValue("");
+            expect(getRatingRadio(3)).toBeChecked();
+        });
     });
 });

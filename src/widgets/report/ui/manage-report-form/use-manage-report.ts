@@ -57,11 +57,13 @@ const textFieldConfigs: ({ name: keyof TReport } & Omit<
 
 export const useManageReport = ({
     report = defaultReport,
+    resetOnSuccess = false,
     onSubmitAction,
     onSuccessAction,
     onErrorAction,
 }: {
     report?: TReport;
+    resetOnSuccess?: boolean;
     onSubmitAction: SubmitHandler<TReport>;
     onSuccessAction?: () => void;
     onErrorAction?: (e: unknown) => void;
@@ -90,6 +92,7 @@ export const useManageReport = ({
             try {
                 await onSubmitAction(r);
                 if (onSuccessAction) onSuccessAction();
+                if (resetOnSuccess) reset(defaultReport);
             } catch (e) {
                 if (onErrorAction) onErrorAction(e);
             }
