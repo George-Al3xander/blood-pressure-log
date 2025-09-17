@@ -50,5 +50,15 @@
     },
     "notes": "Notes / Observation",
     "date": "Date"
+  },
+  "createReport": {
+    "button": {
+      "default": "Create",
+      "process": "Creating..."
+    },
+    "action": {
+      "success": "Report created",
+      "fail": "Failed creating report"
+    }
   }
 }
