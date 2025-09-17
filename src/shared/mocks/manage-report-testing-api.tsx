@@ -4,6 +4,7 @@ import { ManageReportForm } from "@/widgets/report";
 import { screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import dayjs from "dayjs";
+import { ComponentProps } from "react";
 import { vi } from "vitest";
 import messages from "../../../messages/en.json";
 
@@ -11,14 +12,17 @@ const { vitals } = messages;
 
 type ReportInputKey = Exclude<keyof TReport, "rating" | "userId">;
 
-interface ManageReportTestingApi {
+type ManageReportTestingApi = {
     getInput: (key: ReportInputKey) => HTMLElement;
     getRatingRadio: (num: 1 | 2 | 3 | 4 | 5) => HTMLElement;
     selectRatingOption: (rating: 1 | 2 | 3 | 4 | 5) => Promise<void>;
     fillFormFields: (report: Partial<TReport>) => Promise<void>;
     formProps: typeof formProps;
-    renderForm: (report?: TReport) => { submitButton: HTMLElement };
-}
+    renderForm: (
+        report?: TReport,
+        props?: Partial<ComponentProps<typeof ManageReportForm>>,
+    ) => { submitButton: HTMLElement; clearButton: HTMLElement };
+};
 
 const formProps = {
     submitButtonChildren: "Submit",
@@ -30,16 +34,22 @@ const formProps = {
 
 export const manageReportTestingApi: ManageReportTestingApi = {
     formProps,
-    renderForm: (r) => {
+    renderForm: (r, props) => {
         const SUBMIT_BTN_TEXT = "Submit";
 
-        renderWithNextIntl(<ManageReportForm report={r} {...formProps} />);
+        renderWithNextIntl(
+            <ManageReportForm report={r} {...formProps} {...props} />,
+        );
 
         const submitButton = screen.getByText(SUBMIT_BTN_TEXT, {
             selector: "button",
         });
 
-        return { submitButton };
+        const clearButton = screen.getByText(messages.validation.clear, {
+            selector: "button",
+        });
+
+        return { submitButton, clearButton };
     },
 
     getInput: (key) => {
