@@ -2,9 +2,8 @@ import { reportSchema, TReport } from "@/shared/model";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { GridProps, TextFieldProps } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { ComponentProps, FormEvent } from "react";
-import { useForm } from "react-hook-form";
-import { ManageReportForm } from "./manage-report-form";
+import { FormEvent } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 const defaultReport: TReport = {
     sys: 0,
@@ -61,10 +60,12 @@ export const useManageReport = ({
     onSubmitAction,
     onSuccessAction,
     onErrorAction,
-}: Omit<
-    ComponentProps<typeof ManageReportForm>,
-    "submitButtonChildren" | "submitButtonChildrenOnLoading"
->) => {
+}: {
+    report?: TReport;
+    onSubmitAction: SubmitHandler<TReport>;
+    onSuccessAction?: () => void;
+    onErrorAction?: (e: unknown) => void;
+}) => {
     const t = useTranslations("validation");
 
     const {
@@ -90,8 +91,7 @@ export const useManageReport = ({
                 await onSubmitAction(r);
                 if (onSuccessAction) onSuccessAction();
             } catch (e) {
-                console.error(e);
-                if (onErrorAction) onErrorAction();
+                if (onErrorAction) onErrorAction(e);
             }
         })(e);
 

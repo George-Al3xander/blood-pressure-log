@@ -5,20 +5,15 @@ import {
     ReportRatingRange,
     ReportTextField,
 } from "@/features/report";
-import { TReport } from "@/shared/model";
 import { Button, Grid } from "@mui/material";
 import { FC, ReactNode } from "react";
-import { SubmitHandler } from "react-hook-form";
+
 import { useManageReport } from "./use-manage-report";
 
-type Props<T = Omit<TReport, "userId">> = {
-    report?: T;
-    onSubmitAction: SubmitHandler<T>;
-    onSuccessAction?: () => void;
-    onErrorAction?: () => void;
+type Props = {
     submitButtonChildren: ReactNode;
     submitButtonChildrenOnLoading?: ReactNode;
-};
+} & Parameters<typeof useManageReport>[0];
 
 export const ManageReportForm: FC<Props> = ({
     submitButtonChildren,
@@ -63,10 +58,10 @@ export const ManageReportForm: FC<Props> = ({
                 </Grid>
                 <Grid size={{ xs: 12, md: 6 }}>
                     <Button
+                        {...fieldBaseProps}
                         type="button"
                         variant="outlined"
                         color="error"
-                        fullWidth
                         onClick={reset}
                     >
                         {clearButtonText}
