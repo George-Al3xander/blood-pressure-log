@@ -17,11 +17,16 @@ import { Control, Controller } from "react-hook-form";
 type Props = {
     control: Control<TReport>;
     required?: boolean;
+    disabled?: boolean;
 };
 
 const FIELD_NAME: keyof TReport = "rating";
 
-export const ReportRatingRange: FC<Props> = ({ control, required }) => {
+export const ReportRatingRange: FC<Props> = ({
+    control,
+    required,
+    disabled,
+}) => {
     const t = useTranslations("vitals");
 
     const title = `${t(`${FIELD_NAME}.title`)}${required ? " *" : ""}`;
@@ -39,7 +44,7 @@ export const ReportRatingRange: FC<Props> = ({ control, required }) => {
             control={control}
             rules={{ required }}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
-                <FormControl error={!!error} fullWidth>
+                <FormControl error={!!error} disabled={disabled} fullWidth>
                     <FormLabel id={labelId}>{title}</FormLabel>
                     <RadioGroup
                         aria-labelledby={title}
