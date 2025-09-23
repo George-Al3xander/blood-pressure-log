@@ -61,5 +61,12 @@
       "success": "Report created",
       "fail": "Failed creating report"
     }
+  },
+  "reportTable": {
+    "nestedTableTitle": "Report details",
+    "expandButton": {
+      "show": "Show details for this row",
+      "hide": "Hide details for this row"
+    }
   }
 }
