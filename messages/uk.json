@@ -63,6 +63,7 @@
     }
   },
   "reportTable": {
+    "title": "Таблиця огляду звітів",
     "nestedTableTitle": "Деталі звіту",
     "expandButton": {
       "show": "Показати повні деталі для цього рядка",

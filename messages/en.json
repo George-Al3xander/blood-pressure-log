@@ -63,6 +63,7 @@
     }
   },
   "reportTable": {
+    "title": "Reports overview table",
     "nestedTableTitle": "Report details",
     "expandButton": {
       "show": "Show details for this row",

@@ -1,1 +1,1 @@
-export { ManageReportForm } from "./ui";
+export { ManageReportForm, ReportTable } from "./ui";
