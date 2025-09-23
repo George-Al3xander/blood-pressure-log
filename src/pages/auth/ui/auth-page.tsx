@@ -1,5 +1,5 @@
+import { Box } from "@/shared/ui";
 import { SignIn, SignUp } from "@clerk/nextjs";
-import Box from "@mui/material/Box";
 import { FC } from "react";
 
 type Props = {

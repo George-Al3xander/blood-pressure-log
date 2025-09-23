@@ -1,7 +1,6 @@
 "use client";
 
-import { MenuProps } from "@mui/material";
-import { ButtonProps } from "@mui/material/Button";
+import type { ButtonProps, MenuProps } from "@/shared/ui";
 import { type MouseEvent, useState } from "react";
 
 export const useMuiMenuController = (ariaBaseName: string) => {

@@ -1,6 +1,6 @@
 import { reportSchema, TReport } from "@/shared/model";
+import type { GridProps, TextFieldProps } from "@/shared/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { GridProps, TextFieldProps } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { FormEvent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";

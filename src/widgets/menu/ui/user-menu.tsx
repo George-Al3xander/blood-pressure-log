@@ -7,9 +7,8 @@ import {
     ProfilePreviewOption,
 } from "@/features/menu";
 import { useMuiMenuController } from "@/shared/lib";
+import { Divider, IconButton, Menu, MenuIcon } from "@/shared/ui";
 import { useUser } from "@clerk/nextjs";
-import MenuIcon from "@mui/icons-material/Menu";
-import { Divider, IconButton, Menu } from "@mui/material";
 
 const ARIA_BASE_NAME = "profile-menu";
 

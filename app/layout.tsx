@@ -4,9 +4,8 @@ import { Providers } from "@/app/providers";
 import { geistMono, geistSans } from "@/app/ui";
 import "@/app/ui/main.css";
 import { routing } from "@/shared/i18n";
-import { Layout } from "@/shared/ui";
+import { AddBoxIcon, IconButton, Layout, Stack, Typography } from "@/shared/ui";
 import { UserMenu } from "@/widgets/menu";
-import { Typography } from "@mui/material";
 import { hasLocale } from "next-intl";
 import { getLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -37,7 +36,18 @@ export default async function RootLayout({ children }: LayoutProps) {
                                 >
                                     {metadata.title?.toString()}
                                 </Typography>
-                                <UserMenu />
+                                <Stack direction="row">
+                                    <IconButton>
+                                        <AddBoxIcon
+                                            sx={{
+                                                color: "primary.contrastText",
+                                                width: 30,
+                                                height: 30,
+                                            }}
+                                        />
+                                    </IconButton>
+                                    <UserMenu />
+                                </Stack>
                             </>
                         }
                     >

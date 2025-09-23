@@ -1,6 +1,11 @@
-import type { AppBarProps, BoxProps, ContainerProps } from "@mui/material";
-import { AppBar, Box, Container } from "@mui/material";
 import { FC, PropsWithChildren, ReactNode } from "react";
+import {
+    AppBar,
+    type AppBarProps,
+    Box,
+    Container,
+    type ContainerProps,
+} from "./index";
 
 type Props = PropsWithChildren<{
     header: ReactNode;
@@ -8,8 +13,10 @@ type Props = PropsWithChildren<{
         wrapper?: AppBarProps;
         content?: ContainerProps;
     };
-    mainProps?: BoxProps;
+    mainProps?: ContainerProps;
 }>;
+
+const BREAK_POINT = "lg";
 
 export const Layout: FC<Props> = ({
     header,
@@ -17,25 +24,24 @@ export const Layout: FC<Props> = ({
     headerProps,
     mainProps,
 }) => (
-    <Box minHeight="100vh" display="flex" flexDirection="column" gap={2}>
+    <Box minHeight="100vh" display="flex" flexDirection="column" gap={4}>
         <AppBar
             position="sticky"
             sx={{
                 backgroundColor: "primary.main",
                 color: "primary.contrastText",
                 zIndex: 30,
-                p: 2,
                 ...headerProps?.wrapper?.sx,
             }}
             {...headerProps?.wrapper}
         >
             <Container
-                maxWidth="md"
+                maxWidth={BREAK_POINT}
                 sx={{
                     py: 1,
                     display: "flex",
                     gap: 4,
-                    justifyItems: "center",
+                    alignItems: "center",
                     justifyContent: "space-between",
                     ...headerProps?.content?.sx,
                 }}
@@ -45,15 +51,15 @@ export const Layout: FC<Props> = ({
             </Container>
         </AppBar>
 
-        <Box
+        <Container
             component="main"
             flex={1}
-            py={5}
+            sx={{ pb: 4 }}
             mx="auto"
-            maxWidth="md"
+            maxWidth={BREAK_POINT}
             {...mainProps}
         >
             {children}
-        </Box>
+        </Container>
     </Box>
 );

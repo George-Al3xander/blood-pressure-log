@@ -5,7 +5,7 @@ import {
     ReportRatingRange,
     ReportTextField,
 } from "@/features/report";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid } from "@/shared/ui";
 import { FC, ReactNode } from "react";
 
 import { useManageReport } from "./use-manage-report";

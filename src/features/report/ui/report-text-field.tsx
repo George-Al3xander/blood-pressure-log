@@ -1,7 +1,7 @@
 "use client";
 
 import { TReport } from "@/shared/model";
-import { TextField, TextFieldProps } from "@mui/material";
+import { TextField, type TextFieldProps } from "@/shared/ui";
 import { useTranslations } from "next-intl";
 import { FC } from "react";
 import { Control, Controller } from "react-hook-form";

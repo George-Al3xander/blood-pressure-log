@@ -1,8 +1,7 @@
 "use client";
 
 import { setUserLocale } from "@/shared/i18n";
-import CheckIcon from "@mui/icons-material/Check";
-import { ListItemIcon, ListItemText, MenuItem } from "@mui/material";
+import { CheckIcon, ListItemIcon, ListItemText, MenuItem } from "@/shared/ui";
 import { useLocale } from "next-intl";
 
 const LANGUAGE_LABELS = { en: "English", uk: "Українська" } as const;

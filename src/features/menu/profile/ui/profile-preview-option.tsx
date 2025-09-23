@@ -1,8 +1,7 @@
 "use client";
 
+import { Avatar, Box, MenuItem, Typography } from "@/shared/ui";
 import { UserResource } from "@clerk/types";
-import { Avatar, MenuItem, Typography } from "@mui/material";
-import Box from "@mui/material/Box";
 import { useTranslations } from "next-intl";
 import { FC } from "react";
 

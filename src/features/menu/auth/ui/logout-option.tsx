@@ -1,8 +1,9 @@
 "use client";
 
 import { useClerk } from "@clerk/nextjs";
-import HideSourceIcon from "@mui/icons-material/HideSource";
-import { ListItemIcon, ListItemText, MenuItem } from "@mui/material";
+
+import { ListItemIcon, ListItemText, MenuItem } from "@/shared/ui";
+import { HideSourceIcon } from "@/shared/ui/icons";
 import { useTranslations } from "next-intl";
 import { FC } from "react";
 

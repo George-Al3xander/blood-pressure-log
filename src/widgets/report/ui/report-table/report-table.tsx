@@ -5,10 +5,10 @@ import {
     Table,
     TableBody,
     TableCell,
+    TableContainer,
     TableHead,
     TableRow,
-} from "@mui/material";
-import TableContainer from "@mui/material/TableContainer";
+} from "@/shared/ui";
 import { useTranslations } from "next-intl";
 import { FC } from "react";
 import { ReportTableRow } from "./report-table-row";

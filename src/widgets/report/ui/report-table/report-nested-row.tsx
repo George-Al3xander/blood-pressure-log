@@ -1,14 +1,14 @@
 import { ReportTableCell } from "@/entities/report";
 import { TReport } from "@/shared/model";
 import {
+    Box,
     Collapse,
     Table,
     TableBody,
     TableCell,
     TableRow,
     Typography,
-} from "@mui/material";
-import Box from "@mui/material/Box";
+} from "@/shared/ui";
 import { FC } from "react";
 
 type Props = {

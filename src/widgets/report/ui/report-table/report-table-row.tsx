@@ -2,10 +2,13 @@
 
 import { ReportTableCell, ReportTableConfig } from "@/entities/report";
 import { TReport } from "@/shared/model";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { IconButton, TableCell } from "@mui/material";
-import TableRow from "@mui/material/TableRow";
+import {
+    IconButton,
+    KeyboardArrowDownIcon,
+    KeyboardArrowUpIcon,
+    TableCell,
+    TableRow,
+} from "@/shared/ui";
 import { useTranslations } from "next-intl";
 import { FC, useState } from "react";
 import { ReportNestedRow } from "./report-nested-row";

@@ -1,11 +1,15 @@
 "use client";
 
-import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import HomeIcon from "@mui/icons-material/Home";
-import LoginIcon from "@mui/icons-material/Login";
-import NoteAddIcon from "@mui/icons-material/NoteAdd";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import { ListItemIcon, ListItemText, MenuItem } from "@mui/material";
+import {
+    AssignmentIndIcon,
+    HomeIcon,
+    ListItemIcon,
+    ListItemText,
+    LoginIcon,
+    MenuItem,
+    NoteAddIcon,
+    PersonAddIcon,
+} from "@/shared/ui";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { ElementType, FC } from "react";

@@ -1,7 +1,7 @@
 "use client";
 
 import { TReport } from "@/shared/model";
-import { TextFieldProps } from "@mui/material";
+import type { TextFieldProps } from "@/shared/ui";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";

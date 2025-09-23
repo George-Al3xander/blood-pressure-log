@@ -1,5 +1,5 @@
 import { TReport } from "@/shared/model";
-import TableCell, { TableCellProps } from "@mui/material/TableCell";
+import { TableCell, type TableCellProps } from "@/shared/ui";
 import dayjs from "dayjs";
 import { useTranslations } from "next-intl";
 import { FC } from "react";
