@@ -6,6 +6,7 @@ import { FormEvent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 const defaultReport: TReport = {
+    _id: "id",
     sys: 0,
     dia: 0,
     pulse: 0,

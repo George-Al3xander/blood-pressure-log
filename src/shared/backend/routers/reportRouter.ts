@@ -17,7 +17,14 @@ export const reportRouter = createTRPCRouter({
             return data as TReport;
         })
         .mutation(async ({ input, ctx: { auth } }) => {
-            const reportData = { ...input, userId: auth.userId };
+            const reportData: Omit<TReport, "_id"> &
+                Partial<Pick<TReport, "_id">> = {
+                ...input,
+                userId: auth.userId,
+            };
+
+            delete reportData._id;
+
             await new reportModel(reportData).save();
         }),
 });

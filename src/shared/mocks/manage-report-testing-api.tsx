@@ -53,7 +53,8 @@ export const manageReportTestingApi: ManageReportTestingApi = {
     },
 
     getInput: (key) => {
-        const matcher = key === "date" ? "Month" : new RegExp(vitals[key]);
+        const matcher =
+            key === "date" ? "Month" : new RegExp(vitals[key as "pulse"]);
         return screen.getByLabelText(matcher);
     },
 
