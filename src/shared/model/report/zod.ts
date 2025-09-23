@@ -9,6 +9,7 @@ export const reportSchema = (t: Translator) => {
 
     return z.object({
         userId: z.string().optional(),
+        _id: z.string(),
         date: z.coerce.date({ message: t("invalid_date") }),
         sys: withTranslator({
             fieldName: "sys",
