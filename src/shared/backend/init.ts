@@ -2,6 +2,7 @@ import { connectMongo } from "@/shared/api";
 import { auth } from "@clerk/nextjs/server";
 import { initTRPC, TRPCError } from "@trpc/server";
 import { cache } from "react";
+import superjson from "superjson";
 
 export type TRPCContext = Awaited<ReturnType<typeof createTRPCContext>>;
 
@@ -11,7 +12,9 @@ export const createTRPCContext = cache(async () => {
     return { auth: await auth() };
 });
 
-const t = initTRPC.context<TRPCContext>().create({});
+const t = initTRPC.context<TRPCContext>().create({
+    transformer: superjson,
+});
 
 const isAuthed = t.middleware(({ next, ctx }) => {
     if (!ctx.auth.userId) {

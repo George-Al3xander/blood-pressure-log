@@ -5,6 +5,7 @@ import { env } from "@/shared/config";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
 import { FC, PropsWithChildren, useState } from "react";
+import superjson from "superjson";
 
 const HTTP_BATCH_LINK = `${env.NEXT_PUBLIC_BASE_URL}/api/trpc`;
 
@@ -14,6 +15,7 @@ export const TRPCProvider: FC<PropsWithChildren> = ({ children }) => {
             links: [
                 httpBatchLink({
                     url: HTTP_BATCH_LINK,
+                    transformer: superjson,
                 }),
             ],
         }),
