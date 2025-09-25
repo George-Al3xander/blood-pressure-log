@@ -23,7 +23,7 @@ export const ReportTableCell: FC<Props> = ({
     if (displayVariant === "data") {
         content = value;
 
-        if (value instanceof Date) {
+        if (field === "date" || value instanceof Date) {
             content = dayjs(content).format("DD/MM/YYYY H:mm");
         } else if (field === "rating") {
             content = t(`rating.range.${content}`);
