@@ -12,7 +12,7 @@
         "lint": "next lint",
         "format": "pnpm exec prettier --write",
         "prepare": "husky",
-        "pre-commit": "lint-staged"
+        "pre-commit": "lint-staged && pnpm test"
     },
     "dependencies": {
         "@clerk/localizations": "^3.23.0",

@@ -1,4 +1,4 @@
-import { renderWithNextIntl } from "@/shared/mocks/render-with-next-intl";
+import { renderWithNextIntl } from "@/shared/mocks";
 import { TReport } from "@/shared/model";
 import { ManageReportForm } from "@/widgets/report";
 import { screen } from "@testing-library/react";

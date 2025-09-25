@@ -8,6 +8,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 const DATE_FORMAT = "MM/DD/YYYY hh:mm A";
 
 const sampleReport: TReport = {
+    _id: "ID_VALUE",
     sys: 220,
     dia: 240,
     pulse: 80,
@@ -53,7 +54,9 @@ describe("Manage report", () => {
     it("should populate form fields with initial report values", () => {
         setup(sampleReport);
 
-        Object.values(sampleReport).forEach((value) => {
+        inputs.forEach((input) => {
+            const value = sampleReport[input];
+
             const displayValue =
                 value instanceof Date
                     ? dayjs(value).format(DATE_FORMAT)
@@ -71,13 +74,16 @@ describe("Manage report", () => {
 
     it("should submit valid input and trigger success handler", async () => {
         const { submitButton } = setup();
+        const report = Object.fromEntries(
+            inputs.map((k) => [k, sampleReport[k]]),
+        ) as TReport;
 
-        await fillFormFields(sampleReport);
+        await fillFormFields(report);
         await userEvent.click(submitButton);
 
         const callArg = onSubmitAction.mock.calls[0]?.[0];
 
-        const { date, ...partialSampleReport } = sampleReport;
+        const { date, ...partialSampleReport } = report;
 
         expect(dayjs(callArg.date).format(DATE_FORMAT)).toBe(
             dayjs(date).format(DATE_FORMAT),
