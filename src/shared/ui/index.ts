@@ -32,3 +32,4 @@ export { default as TextField } from "@mui/material/TextField";
 export { default as Typography } from "@mui/material/Typography";
 export * from "./icons";
 export { Layout } from "./layout";
+export { PaginationControls } from "./pagination-controls";

@@ -69,5 +69,12 @@
       "show": "Show details for this row",
       "hide": "Hide details for this row"
     }
+  },
+  "pagination": {
+    "page": "Go to page {page}{selected, select, 1 {, current page} other {}}",
+    "first": "Go to first page",
+    "previous": "Go to previous page",
+    "next": "Go to next page",
+    "last": "Go to last page"
   }
 }
