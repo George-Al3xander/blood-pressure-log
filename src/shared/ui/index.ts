@@ -5,6 +5,7 @@ export type {
     GridProps,
     MenuProps,
     TableCellProps,
+    TableContainerProps,
     TextFieldProps,
 } from "@mui/material";
 export { default as AppBar } from "@mui/material/AppBar";
@@ -21,6 +22,7 @@ export { default as ListItemText } from "@mui/material/ListItemText";
 export { default as Menu } from "@mui/material/Menu";
 export { default as MenuItem } from "@mui/material/MenuItem";
 export { default as Paper } from "@mui/material/Paper";
+export { default as Skeleton } from "@mui/material/Skeleton";
 export { default as Stack } from "@mui/material/Stack";
 export { default as Table } from "@mui/material/Table";
 export { default as TableBody } from "@mui/material/TableBody";
