@@ -13,6 +13,10 @@ export default defineConfig({
                 inline: ["next-intl"],
             },
         },
-        setupFiles: ["src/shared/mocks"]
+        setupFiles: [
+            "src/shared/mocks/next-navigation.ts",
+            "src/shared/mocks/shared.ts",
+            "src/shared/mocks",
+        ],
     },
 });
