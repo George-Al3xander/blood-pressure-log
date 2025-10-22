@@ -40,7 +40,8 @@
         "react-hot-toast": "^2.6.0",
         "server-only": "^0.0.1",
         "superjson": "^2.2.2",
-        "zod": "^3.25.57"
+        "zod": "^3.25.57",
+        "zustand": "^5.0.8"
     },
     "devDependencies": {
         "@clerk/types": "^4.83.0",
