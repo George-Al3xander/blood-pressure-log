@@ -1,4 +1,6 @@
-import { ReportTableCell, type ReportTableConfig } from "@/entities/report";
+"use client";
+
+import { ReportTableCell } from "@/entities/report";
 import { TReport } from "@/shared/model";
 import {
     Skeleton,
@@ -11,45 +13,30 @@ import {
     TableRow,
 } from "@/shared/ui";
 import { useTranslations } from "next-intl";
-import { FC, useMemo } from "react";
+import { FC } from "react";
 import { ReportTableRow } from "./report-table-row";
+import { useTableLayout } from "./use-table-layout";
 
-type Props = ReportTableConfig<{
+type Props = {
     reports: TReport[];
     isLoading?: boolean;
     containerProps?: TableContainerProps;
-}>;
-
-const SKELETON_ROW_COUNT = 15;
+};
 
 export const ReportTable: FC<Props> = ({
     reports,
-    mainColumns,
-    nestedColumns = [],
     containerProps,
     isLoading = false,
 }) => {
     const t = useTranslations("reportTable");
-    const hasNestedColumns = nestedColumns.length > 0;
-
-    const skeletonRows = useMemo(() => {
-        return Array.from({ length: SKELETON_ROW_COUNT }).map((_, index) => (
-            <TableRow key={`skeleton-row-${index}`}>
-                {mainColumns.map((columnKey) => (
-                    <TableCell key={`skeleton-cell-${columnKey}`}>
-                        <Skeleton variant="text" />
-                    </TableCell>
-                ))}
-            </TableRow>
-        ));
-    }, [mainColumns.length]);
+    const { mainColumns, nestedColumns, skeletonRows } = useTableLayout();
 
     return (
         <TableContainer {...containerProps}>
             <Table aria-label={t("title")} stickyHeader>
                 <TableHead>
                     <TableRow>
-                        {!isLoading && hasNestedColumns && <TableCell />}
+                        {!isLoading && nestedColumns && <TableCell />}
                         {mainColumns.map((columnKey) => (
                             <ReportTableCell
                                 key={`table-head-${columnKey}`}
@@ -63,7 +50,15 @@ export const ReportTable: FC<Props> = ({
 
                 <TableBody>
                     {isLoading
-                        ? skeletonRows
+                        ? skeletonRows.map((key) => (
+                              <TableRow key={key}>
+                                  {mainColumns.map((columnKey) => (
+                                      <TableCell key={`${key}-${columnKey}`}>
+                                          <Skeleton variant="text" />
+                                      </TableCell>
+                                  ))}
+                              </TableRow>
+                          ))
                         : reports.map((report) => (
                               <ReportTableRow
                                   key={`row-${report._id}`}
