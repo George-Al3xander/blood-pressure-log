@@ -23,7 +23,7 @@ type Props = {
     containerProps?: TableContainerProps;
 };
 
-export const ReportTable: FC<Props> = ({
+export const ReportsTable: FC<Props> = ({
     reports,
     containerProps,
     isLoading = false,

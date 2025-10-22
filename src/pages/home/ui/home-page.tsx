@@ -2,7 +2,7 @@ import { serverTrpc } from "@/shared/backend";
 import { normalizePageNumber } from "@/shared/lib";
 import { TReport } from "@/shared/model";
 import { PaginationControls, Paper, Stack } from "@/shared/ui";
-import { ReportTable } from "@/widgets/report";
+import { ReportsTable } from "@/widgets/reports-table";
 import { FC } from "react";
 
 type Props = {
@@ -22,7 +22,7 @@ export const HomePage: FC<Props> = async ({ page: rawPage }) => {
 
     return (
         <Stack direction="column" gap={4}>
-            <ReportTable
+            <ReportsTable
                 reports={serializedReports}
                 containerProps={{
                     component: Paper,

@@ -2,7 +2,7 @@
 
 import { clientTrpc } from "@/shared/api";
 import { TReport } from "@/shared/model";
-import { ManageReportForm } from "@/widgets/report";
+import { ManageReportForm } from "@/widgets/manage-report-form";
 import { TRPCError } from "@trpc/server";
 import { useTranslations } from "next-intl";
 import toast from "react-hot-toast";

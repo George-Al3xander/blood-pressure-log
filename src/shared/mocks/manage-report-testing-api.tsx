@@ -1,6 +1,6 @@
 import { renderWithNextIntl } from "@/shared/mocks";
 import { TReport } from "@/shared/model";
-import { ManageReportForm } from "@/widgets/report";
+import { ManageReportForm } from "@/widgets/manage-report-form";
 import { screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import dayjs from "dayjs";
