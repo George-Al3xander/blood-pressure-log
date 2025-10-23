@@ -1,4 +1,5 @@
 import { reportModel, reportSchema, TReport } from "@/shared/model";
+import { TRPCError } from "@trpc/server";
 import { getTranslations } from "next-intl/server";
 import { z } from "zod";
 import { baseProcedure, createTRPCRouter } from "../init";
@@ -67,5 +68,30 @@ export const reportRouter = createTRPCRouter({
             delete reportData._id;
 
             await new reportModel(reportData).save();
+        }),
+    update: baseProcedure
+        .input(async (data): Promise<TReport> => {
+            const t = await getTranslations("validation");
+            reportSchema(t).parse(data);
+            return data as TReport;
+        })
+        .mutation(async ({ input }) => {
+            const { _id, ...update } = input;
+            const updated = await reportModel.findOneAndUpdate(
+                { _id },
+                update,
+                {
+                    new: true,
+                },
+            );
+
+            if (!updated) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "Report not found.",
+                });
+            }
+
+            return updated;
         }),
 });
