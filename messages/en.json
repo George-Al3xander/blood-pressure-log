@@ -64,7 +64,12 @@
                 "fail": "Failed creating report"
             }
         },
-        "closeDialogButton": "Close dialog"
+        "dialog": {
+            "button": {
+                "close": "Close dialog",
+                "open": "Open dialog"
+            }
+        }
     },
     "reportTable": {
         "title": "Reports overview table",

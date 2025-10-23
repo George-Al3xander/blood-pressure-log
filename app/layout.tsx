@@ -3,6 +3,7 @@ import { LayoutProps } from "@/app/model";
 import { Providers } from "@/app/providers";
 import { geistMono, geistSans } from "@/app/ui";
 import "@/app/ui/main.css";
+import { OpenReportModalButton } from "@/features/open-report-modal";
 import { routing } from "@/shared/i18n";
 import { Layout, Stack, Typography } from "@/shared/ui";
 import { ManageReportModal } from "@/widgets/manage-report";
@@ -39,6 +40,7 @@ export default async function RootLayout({ children }: LayoutProps) {
                                     {metadata.title?.toString()}
                                 </Typography>
                                 <Stack direction="row">
+                                    <OpenReportModalButton />
                                     <UserMenu />
                                 </Stack>
                             </>

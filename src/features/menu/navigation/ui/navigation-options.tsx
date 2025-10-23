@@ -7,7 +7,6 @@ import {
     ListItemText,
     LoginIcon,
     MenuItem,
-    NoteAddIcon,
     PersonAddIcon,
 } from "@/shared/ui";
 import { useTranslations } from "next-intl";
@@ -23,7 +22,6 @@ type NavigationOption = {
 const AUTHORIZED_OPTIONS: NavigationOption[] = [
     { id: "home", href: "/", icon: HomeIcon },
     { id: "profile", href: "/profile", icon: AssignmentIndIcon },
-    { id: "create", href: "/create", icon: NoteAddIcon },
 ];
 const UNAUTHORIZED_OPTIONS: NavigationOption[] = [
     { id: "sign-in", href: "sign-in", icon: LoginIcon },
