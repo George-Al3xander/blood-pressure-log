@@ -4,7 +4,8 @@ import { Providers } from "@/app/providers";
 import { geistMono, geistSans } from "@/app/ui";
 import "@/app/ui/main.css";
 import { routing } from "@/shared/i18n";
-import { AddBoxIcon, IconButton, Layout, Stack, Typography } from "@/shared/ui";
+import { Layout, Stack, Typography } from "@/shared/ui";
+import { ManageReportModal } from "@/widgets/manage-report";
 import { UserMenu } from "@/widgets/menu";
 import { hasLocale } from "next-intl";
 import { getLocale } from "next-intl/server";
@@ -26,6 +27,7 @@ export default async function RootLayout({ children }: LayoutProps) {
         >
             <body className="font-geist-mono">
                 <Providers>
+                    <ManageReportModal />
                     <Layout
                         header={
                             <>
@@ -37,15 +39,6 @@ export default async function RootLayout({ children }: LayoutProps) {
                                     {metadata.title?.toString()}
                                 </Typography>
                                 <Stack direction="row">
-                                    <IconButton>
-                                        <AddBoxIcon
-                                            sx={{
-                                                color: "primary.contrastText",
-                                                width: 30,
-                                                height: 30,
-                                            }}
-                                        />
-                                    </IconButton>
                                     <UserMenu />
                                 </Stack>
                             </>

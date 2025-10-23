@@ -16,3 +16,14 @@ vi.mock("@/shared/lib", async () => {
         useHandleSearchParams: handleSearchParamsMock,
     };
 });
+
+vi.mock("@t3-oss/env-nextjs", async () => {
+    const actual = await vi.importActual("@t3-oss/env-nextjs");
+
+    return {
+        ...actual,
+        createEnv: vi.fn(({ runtimeEnv }) =>
+            Object.keys(runtimeEnv).map((key) => [key, "string"]),
+        ),
+    };
+});

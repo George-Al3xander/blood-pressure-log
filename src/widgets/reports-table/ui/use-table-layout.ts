@@ -2,7 +2,6 @@
 
 import { ReportTableConfig } from "@/entities/report";
 import { useMediaQuery } from "@/shared/lib";
-import { useMemo } from "react";
 
 const SKELETON_ROW_COUNT = 15;
 
@@ -26,17 +25,11 @@ export const useTableLayout = (): ReportTableConfig<{
         nestedColumns = ["sys", "dia", "pulse", "rating", "notes"];
     }
 
-    const skeletonRows = useMemo(
-        () =>
-            Array.from({ length: SKELETON_ROW_COUNT }).map(
-                (_, index) => `report-table-row-${index}`,
-            ),
-        [mainColumns.length],
-    );
-
     return {
         mainColumns,
         nestedColumns,
-        skeletonRows,
+        skeletonRows: Array.from({ length: SKELETON_ROW_COUNT }).map(
+            (_, index) => `report-table-row-${index}`,
+        ),
     };
 };

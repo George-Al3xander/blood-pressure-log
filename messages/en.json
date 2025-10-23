@@ -1,80 +1,84 @@
 {
-  "HomePage": {
-    "title": "Hello world!"
-  },
-  "menu": {
-    "sign-in": "Sign in",
-    "sign-up": "Sign up",
-    "logout": "Logout",
-    "accountStatus": {
-      "private": "Private Account",
-      "signInRequired": "Sign in to view"
+    "HomePage": {
+        "title": "Hello world!"
     },
-    "home": "Home page",
-    "profile": "Profile",
-    "create": "Create a report"
-  },
-  "validation": {
-    "number": {
-      "min": "{title} must be at least {length}",
-      "max": "{title} must not exceed {length}",
-      "type": "{title} must be a number",
-      "int": "{title} must be an integer"
+    "menu": {
+        "sign-in": "Sign in",
+        "sign-up": "Sign up",
+        "logout": "Logout",
+        "accountStatus": {
+            "private": "Private Account",
+            "signInRequired": "Sign in to view"
+        },
+        "home": "Home page",
+        "profile": "Profile",
+        "create": "Create a report"
     },
-    "string": {
-      "min": "{title} must be at least {length} characters long",
-      "max": "{title} must not exceed {length} characters",
-      "validFormat": "Enter a valid {title}",
-      "type": "{title} must be a string"
+    "validation": {
+        "number": {
+            "min": "{title} must be at least {length}",
+            "max": "{title} must not exceed {length}",
+            "type": "{title} must be a number",
+            "int": "{title} must be an integer"
+        },
+        "string": {
+            "min": "{title} must be at least {length} characters long",
+            "max": "{title} must not exceed {length} characters",
+            "validFormat": "Enter a valid {title}",
+            "type": "{title} must be a string"
+        },
+        "invalid_date": "Invalid date",
+        "range": "{title} must be between {min} and {max}",
+        "date_range": {
+            "from": "'From' date must be earlier than 'To'",
+            "to": "'To' date must be later than 'From'"
+        },
+        "clear": "Clear"
     },
-    "invalid_date": "Invalid date",
-    "range": "{title} must be between {min} and {max}",
-    "date_range": {
-      "from": "'From' date must be earlier than 'To'",
-      "to": "'To' date must be later than 'From'"
+    "vitals": {
+        "sys": "Systolic",
+        "dia": "Diastolic",
+        "pulse": "Heart rate",
+        "rating": {
+            "title": "Rating",
+            "range": {
+                "1": "Poor",
+                "2": "Fair",
+                "3": "Good",
+                "4": "Very Good",
+                "5": "Excellent"
+            }
+        },
+        "notes": "Notes / Observation",
+        "date": "Date"
     },
-    "clear": "Clear"
-  },
-  "vitals": {
-    "sys": "Systolic",
-    "dia": "Diastolic",
-    "pulse": "Heart rate",
-    "rating": {
-      "title": "Rating",
-      "range": {
-        "1": "Poor",
-        "2": "Fair",
-        "3": "Good",
-        "4": "Very Good",
-        "5": "Excellent"
-      }
+    "manageReport": {
+        "create": {
+            "title": "Create report",
+            "button": {
+                "default": "Create",
+                "process": "Creating..."
+            },
+            "action": {
+                "success": "Report created",
+                "fail": "Failed creating report"
+            }
+        },
+        "closeDialogButton": "Close dialog"
     },
-    "notes": "Notes / Observation",
-    "date": "Date"
-  },
-  "createReport": {
-    "button": {
-      "default": "Create",
-      "process": "Creating..."
+    "reportTable": {
+        "title": "Reports overview table",
+        "nestedTableTitle": "Report details",
+        "expandButton": {
+            "show": "Show details for this row",
+            "hide": "Hide details for this row"
+        }
     },
-    "action": {
-      "success": "Report created",
-      "fail": "Failed creating report"
+    "pagination": {
+        "page": "Go to page {page}{selected, select, 1 {, current page} other {}}",
+        "first": "Go to first page",
+        "previous": "Go to previous page",
+        "next": "Go to next page",
+        "last": "Go to last page"
     }
-  },
-  "reportTable": {
-    "title": "Reports overview table",
-    "nestedTableTitle": "Report details",
-    "expandButton": {
-      "show": "Show details for this row",
-      "hide": "Hide details for this row"
-    }
-  },
-  "pagination": {
-    "page": "Go to page {page}{selected, select, 1 {, current page} other {}}",
-    "first": "Go to first page",
-    "previous": "Go to previous page",
-    "next": "Go to next page",
-    "last": "Go to last page"
-  }
 }

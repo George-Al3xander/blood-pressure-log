@@ -1,11 +1,11 @@
 export { default as AddBoxIcon } from "@mui/icons-material/AddBox";
 export { default as AssignmentIndIcon } from "@mui/icons-material/AssignmentInd";
 export { default as CheckIcon } from "@mui/icons-material/Check";
+export { default as CloseIcon } from "@mui/icons-material/Close";
 export { default as HideSourceIcon } from "@mui/icons-material/HideSource";
 export { default as HomeIcon } from "@mui/icons-material/Home";
 export { default as KeyboardArrowDownIcon } from "@mui/icons-material/KeyboardArrowDown";
 export { default as KeyboardArrowUpIcon } from "@mui/icons-material/KeyboardArrowUp";
-export { default as LanguageIcon } from "@mui/icons-material/Language";
 export { default as LoginIcon } from "@mui/icons-material/Login";
 export { default as MenuIcon } from "@mui/icons-material/Menu";
 export { default as NoteAddIcon } from "@mui/icons-material/NoteAdd";
