@@ -1,1 +1,1 @@
-export { OpenReportModalButton } from "./ui";
+export { CreationModalTrigger, EditingModalTrigger } from "./ui";

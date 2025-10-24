@@ -1,1 +1,2 @@
-export { OpenReportModalButton } from "./open-report-modal-button";
+export { CreationModalTrigger } from "./creation-modal-trigger";
+export { EditingModalTrigger } from "./editing-modal-trigger";

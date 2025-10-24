@@ -1,6 +1,7 @@
 "use client";
 
 import { ReportTableCell, ReportTableConfig } from "@/entities/report";
+import { EditingModalTrigger } from "@/features/open-report-modal";
 import { TReport } from "@/shared/model";
 import {
     IconButton,
@@ -11,7 +12,6 @@ import {
 } from "@/shared/ui";
 import { useTranslations } from "next-intl";
 import { FC, useState } from "react";
-import { EditReportButton } from "./edit-report-button";
 import { ReportNestedRow } from "./report-nested-row";
 
 type Props = ReportTableConfig<{ report: TReport }>;
@@ -56,7 +56,9 @@ export const ReportTableRow: FC<Props> = ({
                         key={`table-cell-${field}`}
                     />
                 ))}
-                <EditReportButton report={report} />
+                <TableCell sx={{ display: "flex", justifyContent: "flex-end" }}>
+                    <EditingModalTrigger report={report} />
+                </TableCell>
             </TableRow>
             {hasNestedColumns && (
                 <ReportNestedRow
