@@ -1,5 +1,5 @@
-import { TReport } from "@/shared/model/report";
 import { create } from "zustand";
+import { TReport } from "./parse-as-report";
 
 export type ReportModalActions = {
     setOpen: (open: boolean) => void;

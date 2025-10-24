@@ -4,7 +4,7 @@ import { z } from "zod";
 
 type Translator = ReturnType<typeof useTranslations>;
 
-export const reportSchema = (t: Translator) => {
+export const parseAsReport = (t: Translator) => {
     const withTranslator = createLocalizedSchema(t);
 
     return z.object({
@@ -44,4 +44,4 @@ export const reportSchema = (t: Translator) => {
     });
 };
 
-export type TReport = z.infer<ReturnType<typeof reportSchema>>;
+export type TReport = z.infer<ReturnType<typeof parseAsReport>>;

@@ -1,4 +1,5 @@
-import { reportModel, reportSchema, TReport } from "@/shared/model";
+import { reportModel } from "@/shared/api";
+import { parseAsReport, TReport } from "@/shared/model";
 import { TRPCError } from "@trpc/server";
 import { getTranslations } from "next-intl/server";
 import { z } from "zod";
@@ -55,7 +56,7 @@ export const reportRouter = createTRPCRouter({
     create: baseProcedure
         .input(async (data): Promise<TReport> => {
             const t = await getTranslations("validation");
-            reportSchema(t).parse(data);
+            parseAsReport(t).parse(data);
             return data as TReport;
         })
         .mutation(async ({ input, ctx: { auth } }) => {
@@ -72,7 +73,7 @@ export const reportRouter = createTRPCRouter({
     update: baseProcedure
         .input(async (data): Promise<TReport> => {
             const t = await getTranslations("validation");
-            reportSchema(t).parse(data);
+            parseAsReport(t).parse(data);
             return data as TReport;
         })
         .mutation(async ({ input }) => {

@@ -1,5 +1,5 @@
+import { TReport } from "@/shared/model";
 import mongoose, { Model } from "mongoose";
-import { TReport } from "./zod";
 
 const Schema = mongoose.Schema;
 

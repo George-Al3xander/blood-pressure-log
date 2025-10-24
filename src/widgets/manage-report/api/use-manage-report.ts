@@ -1,4 +1,4 @@
-import { reportSchema, TReport } from "@/shared/model";
+import { parseAsReport, TReport } from "@/shared/model";
 import type { GridProps, TextFieldProps } from "@/shared/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
@@ -77,7 +77,7 @@ export const useManageReport = ({
         handleSubmit,
         formState: { isSubmitting: isLoading },
     } = useForm<TReport>({
-        resolver: zodResolver(reportSchema(t)),
+        resolver: zodResolver(parseAsReport(t)),
         defaultValues: report,
     });
 

@@ -1,4 +1,4 @@
-export { reportModel, reportSchema, type TReport } from "./report";
+export { parseAsReport, type TReport } from "./parse-as-report";
 export {
     useModalReport,
     useReportModalActions,
