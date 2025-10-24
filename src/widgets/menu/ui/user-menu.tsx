@@ -1,14 +1,12 @@
 "use client";
 
-import {
-    LanguageOptions,
-    LogoutOption,
-    NavigationOptions,
-    ProfilePreviewOption,
-} from "@/features/menu";
 import { useMuiMenuController } from "@/shared/lib";
 import { Divider, IconButton, Menu, MenuIcon } from "@/shared/ui";
 import { useUser } from "@clerk/nextjs";
+import { LanguageOptions } from "./language-options";
+import { LogoutOption } from "./logout-option";
+import { NavigationOptions } from "./navigation-options";
+import { ProfilePreviewOption } from "./profile-preview-option";
 
 const ARIA_BASE_NAME = "profile-menu";
 
