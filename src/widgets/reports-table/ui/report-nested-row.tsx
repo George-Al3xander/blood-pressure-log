@@ -1,4 +1,3 @@
-import { ReportTableCell } from "@/entities/report";
 import { TReport } from "@/shared/model";
 import {
     Box,
@@ -10,6 +9,7 @@ import {
     Typography,
 } from "@/shared/ui";
 import { FC } from "react";
+import { ReportTableCell } from "./report-table-cell";
 
 type Props = {
     open: boolean;

@@ -1,6 +1,5 @@
 "use client";
 
-import { ReportTableCell } from "@/entities/report";
 import { TReport } from "@/shared/model";
 import {
     Skeleton,
@@ -14,6 +13,7 @@ import {
 } from "@/shared/ui";
 import { useTranslations } from "next-intl";
 import { FC } from "react";
+import { ReportTableCell } from "./report-table-cell";
 import { ReportTableRow } from "./report-table-row";
 import { useTableLayout } from "./use-table-layout";
 

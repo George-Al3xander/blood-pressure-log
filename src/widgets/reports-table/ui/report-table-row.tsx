@@ -1,6 +1,5 @@
 "use client";
 
-import { ReportTableCell, ReportTableConfig } from "@/entities/report";
 import { EditingModalTrigger } from "@/features/open-report-modal";
 import { TReport } from "@/shared/model";
 import {
@@ -12,7 +11,9 @@ import {
 } from "@/shared/ui";
 import { useTranslations } from "next-intl";
 import { FC, useState } from "react";
+import { ReportTableConfig } from "../model/report-table-config";
 import { ReportNestedRow } from "./report-nested-row";
+import { ReportTableCell } from "./report-table-cell";
 
 type Props = ReportTableConfig<{ report: TReport }>;
 

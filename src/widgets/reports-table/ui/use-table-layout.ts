@@ -1,7 +1,7 @@
 "use client";
 
-import { ReportTableConfig } from "@/entities/report";
 import { useMediaQuery } from "@/shared/lib";
+import { ReportTableConfig } from "../model/report-table-config";
 
 const SKELETON_ROW_COUNT = 15;
 
