@@ -1,14 +1,12 @@
 "use client";
 
-import {
-    ReportDatePicker,
-    ReportRatingRange,
-    ReportTextField,
-} from "@/features/report";
 import { Button, Grid } from "@/shared/ui";
 import { FC, ReactNode } from "react";
 
-import { useManageReport } from "./use-manage-report";
+import { useManageReport } from "../api/use-manage-report";
+import { ReportDatePicker } from "./report-date-picker";
+import { ReportRatingRange } from "./report-rating-range";
+import { ReportTextField } from "./report-text-field";
 
 type Props = {
     submitButtonChildren: ReactNode;
