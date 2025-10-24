@@ -45,6 +45,7 @@ export const ReportsTable: FC<Props> = ({
                                 sx={{ fontWeight: 800 }}
                             />
                         ))}
+                        <TableCell />
                     </TableRow>
                 </TableHead>
 
@@ -57,6 +58,7 @@ export const ReportsTable: FC<Props> = ({
                                           <Skeleton variant="text" />
                                       </TableCell>
                                   ))}
+                                  <TableCell />
                               </TableRow>
                           ))
                         : reports.map((report) => (

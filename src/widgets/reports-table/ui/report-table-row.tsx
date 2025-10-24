@@ -11,6 +11,7 @@ import {
 } from "@/shared/ui";
 import { useTranslations } from "next-intl";
 import { FC, useState } from "react";
+import { EditReportButton } from "./edit-report-button";
 import { ReportNestedRow } from "./report-nested-row";
 
 type Props = ReportTableConfig<{ report: TReport }>;
@@ -55,6 +56,7 @@ export const ReportTableRow: FC<Props> = ({
                         key={`table-cell-${field}`}
                     />
                 ))}
+                <EditReportButton report={report} />
             </TableRow>
             {hasNestedColumns && (
                 <ReportNestedRow

@@ -64,6 +64,17 @@
                 "fail": "Failed creating report"
             }
         },
+        "update": {
+            "title": "Edit report",
+            "button": {
+                "default": "Save",
+                "process": "Saving..."
+            },
+            "action": {
+                "success": "Report updated",
+                "fail": "Failed updating report"
+            }
+        },
         "dialog": {
             "button": {
                 "close": "Close dialog",
